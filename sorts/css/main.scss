@@ -1,0 +1,425 @@
+// https://colorhunt.co/palette/131842
+$bg-color: #fbf9fa;
+$pr-color: #fd0054;
+$sc-color: #2b2024;
+$tr-color: #a80038;
+
+$tx-color: $bg-color;
+
+$nav-bg-color: $pr-color;
+$nav-height-min: 40px;
+$nav-height-max: 60px;
+$nav-trans: 400ms;
+
+$sld-rg-color: #404040;
+$sld-th-color: $tr-color;
+$sld-bg-color: $bg-color;
+$sld-height: 20px;
+$sld-txt-height: 30px;
+
+$btn-bg-color: $pr-color;
+
+$chk-bg-color: $bg-color;
+
+html {
+  background-color: $bg-color;
+  font-family: sans-serif;
+}
+
+body {
+  transition: 500ms;
+
+  padding: 0;
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: $nav-height-min auto;
+  grid-template-areas:
+    'nav nav'
+    'canvas sidebar';
+
+  opacity: 0;
+}
+
+
+
+nav {
+  height: $nav-height-min;
+  width: 100%;
+
+  transition: $nav-trans;
+
+  grid-area: nav;
+
+  position: fixed;
+  z-index: 1;
+}
+
+nav:hover {
+  grid-template-rows: $nav-height-max 300px;
+  height: $nav-height-max;
+
+  li {
+    transform: translateY(10px);
+  }
+
+  #home {
+    svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  #options {
+    svg {
+      width: 39px;
+      height: 39px;
+    }
+  }
+}
+
+
+ul {
+  transition: $nav-trans;
+
+  list-style-type: none;
+
+  background-color: $nav-bg-color;
+
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 130px) auto 45px 10px;
+  grid-template-rows: $nav-height-min;
+  grid-template-areas:
+    'home asort insertion bubble . options .';
+}
+
+li {
+  transition: $nav-trans;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $tx-color;
+  background-color: $pr-color;
+  font-size: 16px;
+
+  cursor: default;
+}
+
+li:hover {
+  background-color: $bg-color;
+  color: $pr-color;
+
+  svg {
+    fill: $pr-color;
+  }
+}
+
+li:active {
+  background-color: $pr-color;
+  color: $bg-color;
+
+  svg {
+    fill: $bg-color;
+  }
+}
+
+#home {
+  grid-area: home;
+}
+
+#asort {
+  grid-area: asort;
+}
+
+#Insertion-sort {
+  grid-area: insertion;
+}
+
+#options {
+  grid-area: options;
+  display: inline-block;
+  padding-top: 3px;
+}
+
+#options:hover {
+  #options-dropdown {
+    height: auto;
+  }
+}
+
+#Bubble-sort {
+  grid-area: bubble;
+}
+
+canvas {
+  transition: 600ms;
+  grid-area: canvas;
+  opacity: 0;
+}
+
+.nav-active {
+  background-color: $bg-color;
+  color: $pr-color;
+}
+
+#sidebar {
+  grid-area: sidebar;
+
+  padding: 10px;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
+  grid-template-areas:
+    'shuffle sort'
+    'start stop'
+    'speed speed'
+    'size size'
+    'color color'
+    'track track'
+    'reset reset';
+
+  align-content: center;
+  justify-content: stretch;
+}
+
+button {
+  transition: 500ms;
+
+  border: none;
+  border-color: $pr-color;
+  border-width: 4px;
+  border-style: solid;
+
+  background-color: $btn-bg-color;
+  color: $tx-color;
+
+  width: 100%;
+  height: 50px;
+
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: $bg-color;
+  color: $pr-color;
+
+  .triangle {
+    border-left: 24px solid $pr-color;
+  }
+
+  .square {
+    background-color: $pr-color;
+  }
+
+  svg {
+    padding-top: 0;
+    fill: $pr-color;
+  }
+}
+
+button:active {
+  background-color: $btn-bg-color;
+  color: $tx-color;
+
+  .triangle {
+    border-left: 24px solid $bg-color;
+  }
+
+  .square {
+    background-color: $bg-color;
+  }
+
+  svg {
+    fill: $bg-color;
+  }
+}
+
+input[type="range"] {
+  transition: 300ms;
+
+  -webkit-appearance: none;
+
+  margin: 0;
+
+  height: $sld-height;
+  width: 100%;
+
+  background-color: $sld-bg-color;
+  opacity: 0.8;
+
+}
+
+input:hover {
+  opacity: 1;
+}
+
+input::-webkit-slider-thumb {
+  transition: 300ms;
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  background-color: $pr-color;
+
+  width: $sld-height;
+  height: $sld-height;
+
+  border-style: solid;
+  border-color: $bg-color;
+  border-width: 2px;
+}
+
+input::-webkit-slider-thumb:hover {
+  border-style: solid;
+  border-color: $bg-color;
+  border-width: 0px;
+}
+
+label {
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider {
+  padding: 5px 5px;
+  background-color: $pr-color;
+  color: $tx-color;
+  text-align: center;
+}
+
+#shuffle-btn {
+  grid-area: shuffle;
+}
+
+#sort-btn {
+  grid-area: sort;
+}
+
+#start-btn {
+  grid-area: start;
+}
+
+#stop-btn {
+  grid-area: stop;
+}
+
+#speed-sld {
+  grid-area: speed;
+}
+
+#size-sld {
+  grid-area: size;
+}
+
+#reset-btn {
+  grid-area: reset;
+}
+
+#color {
+  grid-area: color;
+}
+
+#track {
+  grid-area: track;
+}
+
+.checkbox {
+  background-color: $pr-color;
+  color: $tx-color;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+input[type="checkbox"] {
+  transition: 500ms;
+  appearance: none;
+  width: 50px;
+  height: 20px;
+
+  background-color: $chk-bg-color;
+
+  border-radius: 20px;
+
+  opacity: 0.8;
+}
+
+input[type="checkbox"]::before {
+  transition: 300ms;
+  display: inline-block;
+  content: "";
+  width: 16px;
+  height: 16px;
+
+  border-radius: 100%;
+
+  background-color: $pr-color;
+
+  border-style: solid;
+  border-color: $bg-color;
+  border-width: 2px;
+
+  transform: translateX(0);
+}
+
+input[type="checkbox"]:hover {
+  opacity: 1;
+}
+
+input[type="checkbox"]:checked {
+  &:before {
+    display: inline-block;
+    transform: translateX(30px);
+  }
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-left: 24px solid $bg-color;
+  border-bottom: 12px solid transparent;
+  margin: auto;
+}
+
+.square {
+  height: 24px;
+  width: 24px;
+  background-color: $bg-color;
+  margin: auto;
+}
+
+svg {
+  transition: $nav-trans;
+  fill: $bg-color;
+}
+
+#options-dropdown {
+  transition: 300ms;
+
+  height: 0px;
+  width: 160px;
+
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  overflow: hidden;
+
+  background-color: $pr-color;
+}
+
+.dropdown-text {
+  height: 100px;
+}
