@@ -8,11 +8,11 @@ export class Visualize {
    * @param  {Array<Number>} arr The array that is visulized
    */
   constructor (algorithm, array) {
-    this.barWidth = 11
+    this.barWidth = 12
     this.barHeight = 5
 
     this.array = array
-    this.canvas = new Canvas(3 * window.innerWidth / 4, ((3 * window.innerWidth / 4) / this.barWidth) * this.barHeight)
+    this.canvas = new Canvas(3 * window.innerWidth / 4, ((3 * window.innerWidth / 4) / this.barWidth) * (this.barHeight) + 10)
     this.canvas.background()
     this.canvas.canvasElement.style.opacity = 1
     this.algorithm = new Algorithms[algorithm]()
@@ -98,6 +98,7 @@ export class Visualize {
     const track = document.getElementById('tracked').checked
 
     this.canvas.color = '#2b2024'
+    // this.canvas.color = '#fbf9fa'
     this.canvas.background()
 
     this.array.forEach((element, index) => {
@@ -106,6 +107,7 @@ export class Visualize {
         color = `hsl( ${hue}, 100%, 50% )`
       } else {
         color = '#dbd9da'
+        // color = '#fd0054'
       }
 
       if (this.algorithm.index === index && track) {
@@ -150,7 +152,7 @@ export class Visualize {
       this.array.push(index)
     }
 
-    this.barHeight = this.canvas.height / ((this.canvas.width / this.barWidth))
+    this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
   }
 
   /**

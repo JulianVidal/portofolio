@@ -38,7 +38,7 @@ body {
   grid-template-areas:
     'nav nav'
     'canvas sidebar';
-
+  grid-row-gap: 25px;
   opacity: 0;
 }
 

@@ -1,12 +1,17 @@
 import { Visualize } from './Visualize.js'
-import { Insertion } from '../algorithms/Algorithms.js'
 
 document.getElementById('Bubble-sort').addEventListener('click', () => { changeAlgorithm('Bubble') })
 document.getElementById('Insertion-sort').addEventListener('click', () => { changeAlgorithm('Insertion') })
 
-const visualize = new Visualize('Bubble')
+const algorithm = 'Insertion'
 
-window.test = new Insertion('Insertion')
+const visualize = new Visualize(algorithm)
+
+const actives = [...document.getElementsByClassName('nav-active')]
+actives.forEach(element => {
+  element.classList.remove('nav-active')
+})
+document.getElementById(algorithm + '-sort').classList.add('nav-active')
 
 visualize.state()
 console.log(visualize.array)

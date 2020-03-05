@@ -4,6 +4,9 @@ export class Insertion extends Algorithm {
   constructor () {
     super()
     this.rIndex = this.index
+
+    this.isRegressing = false
+    this.isProgressing = true
   }
 
   /**
@@ -57,6 +60,54 @@ export class Insertion extends Algorithm {
       // Updates to the next values that are going to be comapred
       left = array[index]
       right = array[index + 1]
+    }
+
+    return array
+  }
+
+  /**
+   * It does the first or next step for sorting (Used when drawing)
+   * @param  {Array<Number>} arr The array that is going to be partially sorted
+   * @returns The partially sorted array
+   */
+  stepSort (arr) {
+    let array = [...arr]
+
+    if (this.index < array.length - 1 && !this.isSorted(array) && this.isProgressing) {
+      const left = array[this.index]
+      const right = array[this.index + 1]
+      if (left > right) {
+        array = this.swap(array, this.index, this.index + 1)
+        this.index++
+        this.isProgressing = false
+        this.isRegressing = true
+        return array
+      } else {
+        this.index++
+        return this.stepSort(array)
+      }
+    } else {
+      this.index = 0
+    }
+
+    this.rIndex = this.index - 1
+
+    if (this.rIndex > 0 && !this.isSorted(array) && this.isRegressing) {
+      const right = array[this.index]
+      const left = array[this.index - 1]
+      if (right < left) {
+        array = this.swap(array, this.index, this.index + 1)
+        this.rIndex--
+        return array
+      } else {
+        this.isProgressing = true
+        this.isRegressing = false
+        return this.stepSort(array)
+      }
+    } else {
+      this.isProgressing = true
+      this.isRegressing = false
+      return this.stepSort(array)
     }
 
     return array

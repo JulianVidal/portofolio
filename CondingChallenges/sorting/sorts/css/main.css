@@ -15,6 +15,7 @@ body {
   -ms-grid-rows: 40px auto;
       grid-template-rows: 40px auto;
       grid-template-areas: 'nav nav' 'canvas sidebar';
+  grid-row-gap: 25px;
   opacity: 0;
 }
 
