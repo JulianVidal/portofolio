@@ -1,9 +1,12 @@
 import { Visualize } from './Visualize.js'
+import { Insertion } from '../algorithms/Algorithms.js'
 
 document.getElementById('Bubble-sort').addEventListener('click', () => { changeAlgorithm('Bubble') })
 document.getElementById('Insertion-sort').addEventListener('click', () => { changeAlgorithm('Insertion') })
 
 const visualize = new Visualize('Bubble')
+
+window.test = new Insertion('Insertion')
 
 visualize.state()
 console.log(visualize.array)
