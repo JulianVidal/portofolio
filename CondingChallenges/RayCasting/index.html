@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ray Casting</title>
+</head>
+<body>
+    <h1>Ray Casting</h1>
+
+    <div style="display: flex">
+        <canvas id="Map"></canvas>
+    </div>
+    <canvas id="Game" style="position: absolute; z-index: 1;"></canvas>
+    <canvas id="HUD_HUDCase" style="position: absolute; z-index: 2;"></canvas>
+
+    <img hidden id="greyStone"         src="Texture/walls/greystone/greystone.png"         height="64" width="64"/>
+    <img hidden id="greyStoneBanner"   src="Texture/walls/greystone/greystonebanner.png"   height="64" width="64"/>
+    <img hidden id="greyStoneEagle"    src="Texture/walls/greystone/greystoneeagle.png"    height="64" width="64"/>
+    <img hidden id="greyStonePortrait" src="Texture/walls/greystone/greystoneportrait.png" height="64" width="64"/>
+
+    <img hidden id="blueBrick"         src="Texture/walls/bluestone/bluestone.png"         height="64" width="64"/>
+    <img hidden id="blueBrickCell"     src="Texture/walls/bluestone/bluestonecell.png"     height="64" width="64"/>
+    <img hidden id="blueBrickCellBone" src="Texture/walls/bluestone/bluestonecellbone.png" height="64" width="64"/>
+
+    <img hidden id="wood"         src="Texture/walls/wood/wood.png"         height="64" width="64"/>
+    <img hidden id="woodEagle"    src="Texture/walls/wood/woodeagle.png"    height="64" width="64"/>
+    <img hidden id="woodPortrait" src="Texture/walls/wood/woodprotrait.png" height="64" width="64"/>
+
+    <img hidden id="door"     src="Texture/walls/door.png"     height="128" width="128"/>
+    <img hidden id="doorSide" src="Texture/walls/doorside.png" height="64" width="64"/>
+
+    <img hidden id="doorElevator"      src="Texture/walls/elevator/doorElevator.png"   height="64" width="64"/>
+    <img hidden id="elevatorHandle"    src="Texture/walls/elevator/elevatorhandle.png" height="64" width="64"/>
+    <img hidden id="elevatorSwitchOn"  src="Texture/walls/elevator/elevatorswitchon.png" height="64" width="64"/>
+    <img hidden id="elevatorSwitchOff" src="Texture/walls/elevator/elevatorswitchoff.png" height="64" width="64"/>
+
+    <img hidden id="pistol_1" src="sprites/guns/pistol/pistol_1.png" height="64" width="64"/>
+    <img hidden id="pistol_2" src="sprites/guns/pistol/pistol_2.png" height="64" width="64"/>
+    <img hidden id="pistol_3" src="sprites/guns/pistol/pistol_3.png" height="64" width="64"/>
+    <img hidden id="pistol_4" src="sprites/guns/pistol/pistol_4.png" height="64" width="64"/>
+    <img hidden id="pistol_5" src="sprites/guns/pistol/pistol_5.png" height="64" width="64"/>
+
+    <img hidden id="smg_1" src="sprites/guns/smg/smg_1.png" height="64" width="64"/>
+    <img hidden id="smg_2" src="sprites/guns/smg/smg_2.png" height="64" width="64"/>
+    <img hidden id="smg_3" src="sprites/guns/smg/smg_3.png" height="64" width="64"/>
+    <img hidden id="smg_4" src="sprites/guns/smg/smg_4.png" height="64" width="64"/>
+    <img hidden id="smg_5" src="sprites/guns/smg/smg_5.png" height="64" width="64"/>
+
+    <img hidden id="knife_1" src="sprites/guns/knife/knife_1.png" height="64" width="64"/>
+    <img hidden id="knife_2" src="sprites/guns/knife//knife_2.png" height="64" width="64"/>
+    <img hidden id="knife_3" src="sprites/guns/knife//knife_3.png" height="64" width="64"/>
+    <img hidden id="knife_4" src="sprites/guns/knife//knife_4.png" height="64" width="64"/>
+    <img hidden id="knife_5" src="sprites/guns/knife//knife_5.png" height="64" width="64"/>
+
+    <img hidden id="dead"  src="sprites/enemies/Guard/dying/EnemyDead.png"   height="59" width="59"/>
+    <img hidden id="stand" src="sprites/enemies/Guard/standing/guard.png"    height="64" width="64"/>
+
+    <img hidden id="skeletonPile"   src="sprites/objects/skeleton/skeletonPile.png"      height="64" width="64"/>
+    <img hidden id="skeletonLaying" src="sprites/objects/skeleton/skeletonLaying.png"    height="64" width="64"/>
+
+
+    <img hidden id="medPack"   src="sprites/pickups/medpack.png"  height="64" width="64"/>
+    <img hidden id="ammoPack"  src="sprites/pickups/ammopack.png" height="64" width="64"/>
+    <img hidden id="foodPack"  src="sprites/pickups/foodpack.png" height="64" width="64"/>
+    <img hidden id="stew"      src="sprites/pickups/stew.png"     height="64" width="64"/>
+
+    <img hidden id="orb" src="sprites/objects/orb.png" height="64" width="64"/>
+
+    <img hidden id="barrel"       src="sprites/objects/barrel.png"      height="64" width="64"/>
+    <img hidden  id="barrelGreen" src="sprites/objects/barrelGreen.png" height="64" width="64"/>
+
+    <img hidden id="pot"        src="sprites/objects/pot.png"        height="64" width="64"/>
+    <img hidden id="armor"      src="sprites/objects/armor.png"      height="64" width="64"/>
+    <img hidden id="bluePot"    src="sprites/objects/bluepot.png"    height="64" width="64"/>
+    <img hidden id="tableChair" src="sprites/objects/tablechair.png" height="64" width="64"/>
+    <img hidden id="flag"        src="sprites/objects/flag.png"        height="64" width="64"/>
+
+    <img hidden id="bluePlant"   src="sprites/objects/blueplant.png"   height="64" width="64"/>
+    <img hidden id="yellowPlant" src="sprites/objects/yellowplant.png" height="64" width="64"/>
+
+    <img hidden id="greenLight" src="sprites/objects/greenlight.png" height="64" width="64"/>
+    <img hidden id="chandelier" src="sprites/objects/chandelier.png" height="64" width="64"/>
+    <img hidden id="greenLamp"  src="sprites/objects/greenlamp.png"  height="64" width="64"/>
+
+    <img hidden id="smg"   src="sprites/guns/smg/smg.png"  height="64" width="64"/>
+
+    <img hidden id="table" src="sprites/objects/table.png" height="64" width="64"/>
+
+    <img hidden id="pond"      src="sprites/objects/pond.png"      height="64" width="64"/>
+    <img hidden id="wellEmpty" src="sprites/objects/wellempty.png" height="64" width="64"/>
+    <img hidden id="wellFill"  src="sprites/objects/wellfill.png"   height="64" width="64"/>
+
+
+    <img hidden id="chalice" src="sprites/objects/treasure/chalice.png" height="64" width="64"/>
+    <img hidden id="cross"   src="sprites/objects/treasure/cross.png"   height="64" width="64"/>
+    <img hidden id="crown"   src="sprites/objects/treasure/crown.png"   height="64" width="64"/>
+    <img hidden id="chest"   src="sprites/objects/treasure/chest.png"   height="64" width="64"/>
+
+    <img hidden id="guardStandBack"        src="sprites/enemies/Guard/standing/guardstandback.png"        height="64" width="64"/>
+    <img hidden id="guardStandBackLeft"    src="sprites/enemies/Guard/standing/guardstandbackleft.png"    height="64" width="64"/>
+    <img hidden id="guardStandBackRight"   src="sprites/enemies/Guard/standing/guardstandbackright.png"   height="64" width="64"/>
+    <img hidden id="guardStandFront"       src="sprites/enemies/Guard/standing/guardstandfront.png"       height="64" width="64"/>
+    <img hidden id="guardStandFrontLeft"   src="sprites/enemies/Guard/standing/guardstandfrontleft.png"   height="64" width="64"/>
+    <img hidden id="guardStandFrontRight"  src="sprites/enemies/Guard/standing/guardstandfrontright.png"  height="64" width="64"/>
+    <img hidden id="guardStandLeft"        src="sprites/enemies/Guard/standing/guardstandleft.png"        height="64" width="64"/>
+    <img hidden id="guardStandRight"       src="sprites/enemies/Guard/standing/guardstandright.png"       height="64" width="64"/>
+
+    <img hidden id="guardWalk_1_Back"       src="sprites/enemies/Guard/walking/left/guardwalkback_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_BackLeft"   src="sprites/enemies/Guard/walking/left/guardwalkbackleft_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_BackRight"  src="sprites/enemies/Guard/walking/left/guardwalkbackright_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_Front"      src="sprites/enemies/Guard/walking/left/guardwalkfront_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_FrontLeft"  src="sprites/enemies/Guard/walking/left/guardwalkfrontleft_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_FrontRight" src="sprites/enemies/Guard/walking/left/guardwalkfrontright_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_Left"       src="sprites/enemies/Guard/walking/left/guardwalkleft_1.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_1_Right"      src="sprites/enemies/Guard/walking/left/guardwalkright_1.png"   height="64" width="64"/>
+
+    <img hidden id="guardWalk_2_Back"       src="sprites/enemies/Guard/walking/right/guardwalkback_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_BackLeft"   src="sprites/enemies/Guard/walking/right/guardwalkbackleft_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_BackRight"  src="sprites/enemies/Guard/walking/right/guardwalkbackright_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_Front"      src="sprites/enemies/Guard/walking/right/guardwalkfront_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_FrontLeft"  src="sprites/enemies/Guard/walking/right/guardwalkfrontleft_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_FrontRight" src="sprites/enemies/Guard/walking/right/guardwalkfrontright_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_Left"       src="sprites/enemies/Guard/walking/right//guardwalkleft_2.png"   height="64" width="64"/>
+    <img hidden id="guardWalk_2_Right"      src="sprites/enemies/Guard/walking/right/guardwalkright_2.png"   height="64" width="64"/>
+
+
+    <img hidden id="guardDeath_1"  src="sprites/enemies/Guard/dying/death_1.png"   height="64" width="64"/>
+    <img hidden id="guardDeath_2"  src="sprites/enemies/Guard/dying/death_2.png"   height="64" width="64"/>
+    <img hidden id="guardDeath_3"  src="sprites/enemies/Guard/dying/death_3.png"   height="64" width="64"/>
+    <img hidden id="guardDeath_4"  src="sprites/enemies/Guard/dying/death_4.png"   height="64" width="64"/>
+    <img hidden id="guardDeath_5"  src="sprites/enemies/Guard/dying/death_5.png"   height="64" width="64"/>
+
+    <img hidden id="guardShoot_1"  src="sprites/enemies/Guard/shooting/guardshoot_1.png"   height="64" width="64"/>
+    <img hidden id="guardShoot_2"  src="sprites/enemies/Guard/shooting/guardshoot_2.png"   height="64" width="64"/>
+    <img hidden id="guardShoot_3"  src="sprites/enemies/Guard/shooting/guardshoot_3.png"   height="64" width="64"/>
+
+
+    <img hidden id="dogWalk_1_Back"        src="sprites/enemies/Dog/walking/back/dogwalkback_1.png"         height="64" width="64"/>
+    <img hidden id="dogWalk_1_BackLeft"    src="sprites/enemies/Dog/walking/back/dogwalkbackleft_1.png"     height="64" width="64"/>
+    <img hidden id="dogWalk_1_BackRight"   src="sprites/enemies/Dog/walking/back/dogwalkbackright_1.png"    height="64" width="64"/>
+    <img hidden id="dogWalk_1_Front"       src="sprites/enemies/Dog/walking/back/dogwalkfront_1.png"        height="64" width="64"/>
+    <img hidden id="dogWalk_1_FrontLeft"   src="sprites/enemies/Dog/walking/back/dogwalkfrontleft_1.png"    height="64" width="64"/>
+    <img hidden id="dogWalk_1_FrontRight"  src="sprites/enemies/Dog/walking/back/dogwalkfrontright_1.png"   height="64" width="64"/>
+    <img hidden id="dogWalk_1_Left"        src="sprites/enemies/Dog/walking/back/dogwalkleft_1.png"         height="64" width="64"/>
+    <img hidden id="dogWalk_1_Right"       src="sprites/enemies/Dog/walking/back/dogwalkright_1.png"         height="64" width="64"/>
+
+    <img hidden id="dogWalk_2_Back"        src="sprites/enemies/Dog/walking/front/dogwalkback_2.png"         height="64" width="64"/>
+    <img hidden id="dogWalk_2_BackLeft"    src="sprites/enemies/Dog/walking/front/dogwalkbackleft_2.png"     height="64" width="64"/>
+    <img hidden id="dogWalk_2_BackRight"   src="sprites/enemies/Dog/walking/front/dogwalkbackright_2.png"    height="64" width="64"/>
+    <img hidden id="dogWalk_2_Front"       src="sprites/enemies/Dog/walking/front/dogwalkfront_2.png"        height="64" width="64"/>
+    <img hidden id="dogWalk_2_FrontLeft"   src="sprites/enemies/Dog/walking/front/dogwalkfrontleft_2.png"    height="64" width="64"/>
+    <img hidden id="dogWalk_2_FrontRight"  src="sprites/enemies/Dog/walking/front/dogwalkfrontright_2.png"   height="64" width="64"/>
+    <img hidden id="dogWalk_2_Left"        src="sprites/enemies/Dog/walking/front/dogwalkleft_2.png"         height="64" width="64"/>
+    <img hidden id="dogWalk_2_Right"       src="sprites/enemies/Dog/walking/front/dogwalkright_2.png"         height="64" width="64"/>
+
+    <img hidden id="dogDeath_1"  src="sprites/enemies/Dog/dying/dogdeath_1.png"   height="64" width="64"/>
+    <img hidden id="dogDeath_2"  src="sprites/enemies/Dog/dying/dogdeath_2.png"   height="64" width="64"/>
+    <img hidden id="dogDeath_3"  src="sprites/enemies/Dog/dying/dogdeath_3.png"   height="64" width="64"/>
+    <img hidden id="dogDeath_4"  src="sprites/enemies/Dog/dying/dogdeath_4.png"   height="64" width="64"/>
+
+    <img hidden id="dogShoot_1"  src="sprites/enemies/Dog/shooting/dogbite_1.png"   height="64" width="64"/>
+    <img hidden id="dogShoot_2"  src="sprites/enemies/Dog/shooting/dogbite_2.png"   height="64" width="64"/>
+    <img hidden id="dogShoot_3"  src="sprites/enemies/Dog/shooting/dogbite_3.png"   height="64" width="64"/>
+
+
+    <img hidden id="HUD"     src="HUD/HUD.png"     height="79" width="604"/>
+    <img hidden id="HUDCase" src="HUD/HUDCase.png" height="480" width="640"/>
+
+    <img hidden id="0" src="HUD/numbers/0.png" height="16" width="8"/>
+    <img hidden id="1" src="HUD/numbers/1.png" height="16" width="8"/>
+    <img hidden id="2" src="HUD/numbers/2.png" height="16" width="8"/>
+    <img hidden id="3" src="HUD/numbers/3.png" height="16" width="8"/>
+    <img hidden id="4" src="HUD/numbers/4.png" height="16" width="8"/>
+    <img hidden id="5" src="HUD/numbers/5.png" height="16" width="8"/>
+    <img hidden id="6" src="HUD/numbers/6.png" height="16" width="8"/>
+    <img hidden id="7" src="HUD/numbers/7.png" height="16" width="8"/>
+    <img hidden id="8" src="HUD/numbers/8.png" height="16" width="8"/>
+    <img hidden id="9" src="HUD/numbers/9.png" height="16" width="8"/>
+
+    <img hidden id="pistol_HUD" src="HUD/guns/pistol_HUD.png" height="24" width="48"/>
+    <img hidden id="smg_HUD"    src="HUD/guns/smg_HUD.png"    height="24" width="48"/>
+    <img hidden id="knife_HUD"  src="HUD/guns/knife_HUD.png"  height="24" width="48"/>
+
+    <img hidden id="face_1"  src="HUD/face/face_1.png"  height="75" width="60"/>
+    <img hidden id="face_2"  src="HUD/face/face_2.png"  height="75" width="60"/>
+    <img hidden id="face_3"  src="HUD/face/face_3.png"  height="75" width="60"/>
+
+
+
+    <audio id="pistolShot"    src="sound/guns/Pistol.wav" preload="auto"/>
+    <audio id="smgShot"       src="sound/guns/smg.wav" preload="auto"/>
+    <audio id="knifeSwing"    src="sound/guns/knife.wav" preload="auto"/>
+
+    <audio id="doorOpen"   src="sound/interacting/Door.wav" preload="auto"/>
+    <audio id="secretPush" src="sound/interacting/Secret_Entrance.wav" preload="auto"/>
+    <audio id="flipSwitch" src="sound/interacting/Switch.wav" preload="auto"/>
+
+    <audio id="pickup"     src="sound/pickup.wav" preload="auto"/>
+
+    <audio id="guardDeathSound" src="sound/enemy/guard/guardDeath.wav" preload="auto"/>
+    <audio id="guardSound" src="sound/enemy/guard/guard.wav" preload="auto"/>
+    <audio id="guardPaint" src="sound/enemy/guard/guardPain.wav" preload="auto"/>
+
+
+    <audio id="dogDeathSound" src="sound/enemy/dog/dogDeath.wav" preload="auto"/>
+    <audio id="dogSound" src="sound/enemy/dog/dog.wav" preload="auto"/>
+
+    <audio id="step" src="sound/step.wav" preload="auto"/>
+    <audio id="playerDeath" src="sound/player/playerDeath.wav" preload="auto"/>
+    <audio id="playerPain" src="sound/player/playerPain.wav" preload="auto"/>
+
+
+    <audio id="backgroundMusic" src="sound/music/Get_Them.mp3" loop preload="auto"/>
+
+
+
+    <script src="Enemy.js"></script>
+    <script src="WolfensteinMap.js"></script>
+    <script src="Screen.js"></script>
+    <script src="Hud.js"></script>
+    <script src="Ray.js"></script>
+    <script src="Game.js"></script>
+    <script src="Map.js"></script>
+    <script src="Player.js"></script>
+    <script src="Main.js"></script>
+</body>
+</html>
