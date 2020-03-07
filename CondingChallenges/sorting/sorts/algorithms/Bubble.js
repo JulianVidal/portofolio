@@ -1,6 +1,7 @@
 import { Algorithm } from './Algorithm.js'
 
 export class Bubble extends Algorithm {
+
   /**
    * Sorts the array with bubble sort
    * @param  {Array<Number>} arr The array that is going to be sorted
@@ -51,20 +52,22 @@ export class Bubble extends Algorithm {
    */
   stepSort (arr) {
     let array = [...arr]
-
-    if (this.index < array.length - 1 && !this.isSorted(array)) {
+    if (this.index < array.length - 1 && !this.isSorted(array) && !this.isSwapping) {
       const left = array[this.index]
       const right = array[this.index + 1]
 
       if (left > right) {
-        array = this.swap(array, this.index, this.index + 1)
-        this.index++
+        this.stepSwap(array, this.index, this.index + 1)
       } else {
         this.index++
         return this.stepSort(array)
       }
-    } else {
+    } else if (this.index >= array.length - 1) {
       this.index = 0
+    }
+
+    if (this.isSwapping) {
+      array = this.stepSwap(array, this.index, this.index + 1)
     }
 
     return array

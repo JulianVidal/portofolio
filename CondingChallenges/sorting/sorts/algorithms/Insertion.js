@@ -81,22 +81,21 @@ export class Insertion extends Algorithm {
         this.index++
         this.isProgressing = false
         this.isRegressing = true
+        this.rIndex = this.index - 1
         return array
       } else {
         this.index++
         return this.stepSort(array)
       }
-    } else {
+    } else if (this.index >= array.length - 1) {
       this.index = 0
     }
 
-    this.rIndex = this.index - 1
-
     if (this.rIndex > 0 && !this.isSorted(array) && this.isRegressing) {
-      const right = array[this.index]
-      const left = array[this.index - 1]
+      const right = array[this.rIndex]
+      const left = array[this.rIndex - 1]
       if (right < left) {
-        array = this.swap(array, this.index, this.index + 1)
+        array = this.swap(array, this.rIndex, this.rIndex - 1)
         this.rIndex--
         return array
       } else {
@@ -104,7 +103,7 @@ export class Insertion extends Algorithm {
         this.isRegressing = false
         return this.stepSort(array)
       }
-    } else {
+    } else if (this.rIndex <= 0) {
       this.isProgressing = true
       this.isRegressing = false
       return this.stepSort(array)

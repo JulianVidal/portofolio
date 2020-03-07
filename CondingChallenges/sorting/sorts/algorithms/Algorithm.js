@@ -1,6 +1,9 @@
 export class Algorithm {
   constructor () {
     this.index = 0
+    this.isSwapping = false
+    this.swapOff = 0
+    this.barWidth = parseInt(document.getElementById('size').value)
   }
 
   /**
@@ -52,6 +55,26 @@ export class Algorithm {
     const value2 = array[j]
     array[i] = value2
     array[j] = value1
+
+    return array
+  }
+
+  stepSwap (array, i, j) {
+    this.isSwapping = true
+
+    if (this.isSwapping && this.swapOff < this.barWidth) {
+      this.swapOff += 1
+    } else if (this.swapOff >= this.barWidth) {
+      array = this.swap(array, i, j)
+      if (i < j) {
+        this.index++
+      } else {
+        this.rIndex--
+      }
+
+      this.swapOff = 0
+      this.isSwapping = false
+    }
 
     return array
   }

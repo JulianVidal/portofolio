@@ -6,6 +6,7 @@ document.getElementById('Insertion-sort').addEventListener('click', () => { chan
 const algorithm = 'Insertion'
 
 const visualize = new Visualize(algorithm)
+visualize.array = visualize.algorithm.shuffle(visualize.array)
 
 const actives = [...document.getElementsByClassName('nav-active')]
 actives.forEach(element => {

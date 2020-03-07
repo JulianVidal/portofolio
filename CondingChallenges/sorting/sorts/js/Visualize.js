@@ -28,7 +28,7 @@ export class Visualize {
     this.loop = 0
     this.loopMax = 1
 
-    this.speed = 10
+    this.speed = parseInt(document.getElementById('speed').value)
 
     this.isSorting = false
     this.isShuffling = false
@@ -114,8 +114,24 @@ export class Visualize {
         color = '#f00'
       }
 
+      let swapOff = 0
+
+      if (this.algorithm.index === index) {
+        swapOff = this.algorithm.swapOff
+      } else if (this.algorithm.index + 1 === index) {
+        swapOff = -this.algorithm.swapOff
+      }
+
+      if (this.algorithm.isRegressing) {
+        if (this.algorithm.rIndex - 1 === index) {
+          swapOff = this.algorithm.swapOff
+        } else if (this.algorithm.rIndex === index) {
+          swapOff = -this.algorithm.swapOff
+        }
+      }
+
       Bar.draw(
-        index * this.barWidth,
+        (index * this.barWidth) + swapOff,
         this.canvas.height - (this.barHeight * element),
         this.barWidth,
         this.barHeight * element,
@@ -129,7 +145,6 @@ export class Visualize {
    * Changes the size of the canvas
    */
   resize () {
-    console.log(this.canvas)
     this.canvas.setSize(window.innerWidth, window.innerHeight)
   }
 
@@ -145,6 +160,8 @@ export class Visualize {
     }
 
     this.algorithm.index = 0
+    this.algorithm.swapOff = 0
+    this.algorithm.isSwapping = false
 
     this.array = []
 
@@ -175,6 +192,7 @@ export class Visualize {
    */
   changeSize (size) {
     this.barWidth = size
+    this.algorithm.barWidth = size
     this.reset()
     this.state()
   }
