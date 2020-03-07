@@ -52,7 +52,10 @@ export class Bubble extends Algorithm {
    */
   stepSort (arr) {
     let array = [...arr]
-    if (this.index < array.length - 1 && !this.isSorted(array) && !this.isSwapping) {
+
+    if (this.isSorted(array)) return array
+
+    if (this.index < array.length - 1 && !this.isSwapping) {
       const left = array[this.index]
       const right = array[this.index + 1]
 

@@ -122,17 +122,19 @@ export class Visualize {
 
       let swapOff = 0
 
-      if (this.algorithm.index === index) {
-        swapOff = this.algorithm.swapOff
-      } else if (this.algorithm.index + 1 === index) {
-        swapOff = -this.algorithm.swapOff
+      if (!this.algorithm.isRSwapping) {
+        if (this.algorithm.index === index) {
+          swapOff = this.algorithm.swapOff
+        } else if (this.algorithm.index + 1 === index) {
+          swapOff = -this.algorithm.swapOff
+        }
       }
 
-      if (this.algorithm.isRegressing) {
-        if (this.algorithm.rIndex - 1 === index) {
-          swapOff = this.algorithm.swapOff
-        } else if (this.algorithm.rIndex === index) {
+      if (this.algorithm.isRSwapping) {
+        if (this.algorithm.rIndex === index) {
           swapOff = -this.algorithm.swapOff
+        } else if (this.algorithm.rIndex - 1 === index) {
+          swapOff = this.algorithm.swapOff
         }
       }
 

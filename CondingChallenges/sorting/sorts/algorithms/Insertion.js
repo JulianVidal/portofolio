@@ -7,6 +7,8 @@ export class Insertion extends Algorithm {
 
     this.isRegressing = false
     this.isProgressing = true
+
+    this.isRSwapping = false
   }
 
   /**
@@ -72,41 +74,55 @@ export class Insertion extends Algorithm {
    */
   stepSort (arr) {
     let array = [...arr]
-
-    if (this.index < array.length - 1 && !this.isSorted(array) && this.isProgressing) {
-      const left = array[this.index]
-      const right = array[this.index + 1]
-      if (left > right) {
-        array = this.swap(array, this.index, this.index + 1)
-        this.index++
-        this.isProgressing = false
-        this.isRegressing = true
-        this.rIndex = this.index - 1
-        return array
-      } else {
-        this.index++
-        return this.stepSort(array)
+    if (this.isSorted(array)) return array
+    if (!this.isSwapping) {
+      if (this.index < array.length - 1 && this.isProgressing) {
+        const left = array[this.index]
+        const right = array[this.index + 1]
+        if (left > right) {
+          this.stepSwap(array, this.index, this.index + 1)
+          // remove this.index++
+          // array = this.swap(array, this.index, this.index + 1)
+          // this.index++
+          this.isProgressing = false
+          this.isRegressing = true
+          this.rIndex = this.index
+          return array
+        } else {
+          this.index++
+          return this.stepSort(array)
+        }
+      } else if (this.index >= array.length - 1) {
+        this.index = 0
       }
-    } else if (this.index >= array.length - 1) {
-      this.index = 0
-    }
 
-    if (this.rIndex > 0 && !this.isSorted(array) && this.isRegressing) {
-      const right = array[this.rIndex]
-      const left = array[this.rIndex - 1]
-      if (right < left) {
-        array = this.swap(array, this.rIndex, this.rIndex - 1)
-        this.rIndex--
-        return array
-      } else {
+      if (this.rIndex > 0 && this.isRegressing) {
+        const right = array[this.rIndex]
+        const left = array[this.rIndex - 1]
+        if (right < left) {
+          this.stepSwap(array, this.rIndex, this.rIndex - 1)
+          this.isRSwapping = true
+          // remove this.rIndex--
+          // array = this.swap(array, this.rIndex, this.rIndex - 1)
+          // this.rIndex--
+          return array
+        } else {
+          this.isProgressing = true
+          this.isRegressing = false
+          return this.stepSort(array)
+        }
+      } else if (this.rIndex <= 0) {
         this.isProgressing = true
         this.isRegressing = false
         return this.stepSort(array)
       }
-    } else if (this.rIndex <= 0) {
-      this.isProgressing = true
-      this.isRegressing = false
-      return this.stepSort(array)
+    } else {
+
+      if (this.isRSwapping) {
+        array = this.stepSwap(array, this.rIndex, this.rIndex - 1)
+      } else {
+        array = this.stepSwap(array, this.index, this.index + 1)
+      }
     }
 
     return array

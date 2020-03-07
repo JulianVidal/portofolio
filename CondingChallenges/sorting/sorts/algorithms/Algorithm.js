@@ -67,10 +67,9 @@ export class Algorithm {
    */
   stepSwap (array, i, j) {
     this.isSwapping = true
-
-    if (this.isSwapping && this.swapOff < this.barWidth) {
+    if (this.swapOff <= this.barWidth) {
       this.swapOff += 1
-    } else if (this.swapOff >= this.barWidth) {
+    } else if (this.swapOff > this.barWidth) {
       array = this.swap(array, i, j)
       if (i < j) {
         this.index++
@@ -81,6 +80,7 @@ export class Algorithm {
 
       this.swapOff = 0
       this.isSwapping = false
+      this.isRSwapping = false
     }
 
     return array
