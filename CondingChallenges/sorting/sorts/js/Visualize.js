@@ -5,16 +5,20 @@ import { Bar } from './Bar.js'
 export class Visualize {
   /**
    * Creates a space for drawing onto the canvas
-   * @param  {Array<Number>} arr The array that is visulized
+   * @param algorithm The algorithm name that will be used
+   * @param array The array to be visualised
    */
   constructor (algorithm, array) {
     this.barWidth = 12
-    this.barHeight = 5
+    this.barHeight = 7
 
     this.array = array
-    this.canvas = new Canvas(3 * window.innerWidth / 4, ((3 * window.innerWidth / 4) / this.barWidth) * (this.barHeight) + 10)
+    this.canvas = new Canvas(window.innerWidth - 333, 370)
+
+    this.barHeight = 370 / ((window.innerWidth - 333) / this.barWidth)
+
     this.canvas.background()
-    this.canvas.canvasElement.style.opacity = 1
+    this.canvas.canvasElement.style.opacity = '1'
     this.algorithm = new Algorithms[algorithm]()
 
     if (array === undefined) {
@@ -33,6 +37,9 @@ export class Visualize {
     this.isSorting = false
     this.isShuffling = false
     this.isStopped = false
+
+    this.bgColor = '#f7f9fb'
+    this.barColor = '#2F6CD0'
   }
 
   /**
@@ -97,16 +104,15 @@ export class Visualize {
     const rainbow = document.getElementById('rainbow').checked
     const track = document.getElementById('tracked').checked
 
-    this.canvas.color = '#2b2024'
     // this.canvas.color = '#fbf9fa'
-    this.canvas.background()
+    this.canvas.background(this.bgColor)
 
     this.array.forEach((element, index) => {
       const hue = (360 / this.array.length) * element
       if (rainbow) {
         color = `hsl( ${hue}, 100%, 50% )`
       } else {
-        color = '#dbd9da'
+        color = this.barColor
         // color = '#fd0054'
       }
 
@@ -133,7 +139,7 @@ export class Visualize {
       Bar.draw(
         (index * this.barWidth) + swapOff,
         this.canvas.height - (this.barHeight * element),
-        this.barWidth,
+        this.barWidth / 1.1,
         this.barHeight * element,
         color,
         this.canvas

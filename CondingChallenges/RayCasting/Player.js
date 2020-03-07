@@ -34,7 +34,7 @@ class Player {
   }
 
   draw() {
-    this.screen.circle(this.pos.x, this.pos.y, scale / 6, '#DDD')
+    this.screen.circle(this.pos.x, this.pos.y, scale / 6)
 
     // this.ray.draw();
 

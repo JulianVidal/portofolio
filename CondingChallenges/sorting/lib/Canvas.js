@@ -32,23 +32,23 @@ export class Canvas {
 
   /**
    * Changes the background color to the given color
-   * @param  {Color} color Color can be a string, number, rgb, check canvas context fill documentation
+   * @param {String} color
    */
-  background (color) {
+  background(color = '#000') {
     this.color = color || this.color
     this.rectangle(0, 0, this.width, this.height)
   }
 
   /**
-   * Creates a loop of the callback given, the functin will loop at 60fps
-   * @param  {Callback} callback The functin that will be looped
+   * Creates a loop of the callback given, the function will loop at 60fps
+   * @param  {Function} callback The function that will be looped
    */
   loop (callback) {
     this.drawLoop = setInterval(callback, 1000 / this.fps)
   }
 
   /**
-   * Stopds the function that has been looped and saved in this.draw_loop
+   * Stops the function that has been looped and saved in this.draw_loop
    */
   noLoop () {
     clearInterval(this.drawLoop)
@@ -68,39 +68,38 @@ export class Canvas {
 
   /**
    * Draws a rectangle on the canvas
-   * @param  {Number} x The x-cordinate of the top-left corner of the rectangle
-   * @param  {Number} y The y-cordinate of the top-left corner of the rectangle
+   * @param  {Number} x The x-coordinate of the top-left corner of the rectangle
+   * @param  {Number} y The y-coordinate of the top-left corner of the rectangle
    * @param  {Number} width The width of the rectangle from the top-left corner
    * @param  {Number} height The height of the rectangle from the top-left corner
-   * @param  {Boolean} noFill Whether or not the rectangle should be filled
+   * @param  {Boolean} noFill1 If the shape will be filled
    */
-  rectangle (x, y, width, height, noFill) {
+  rectangle(x, y, width, height, noFill1 = false) {
     this.ctx.beginPath()
     this.ctx.rect(x, y, width, height)
     this.ctx.fillStyle = this.color
-    if (!noFill) this.ctx.fill()
+    if (!noFill1) this.ctx.fill()
   }
 
   /**
    * Draws a circle on the canvas
-   * @param  {Number} x The x-cordinate of the center of the circle
-   * @param  {Number} y The y-cordinate of the center of the circle
+   * @param  {Number} x The x-coordinate of the center of the circle
+   * @param  {Number} y The y-coordinate of the center of the circle
    * @param  {Number} radius The radius of the circle
-   * @param  {Boolean} noFill Whether or not the rectangle should be filled
-   * @param  {Color} stroke Color can be a string, number, rgb, check canvas context fill documentation
+   * @param  {Boolean} noFill1 If the shape will be filled
    */
-  circle (x, y, radius, noFill) {
+  circle(x, y, radius, noFill1 = false) {
     this.ctx.beginPath()
     this.ctx.arc(x, y, radius, 0, 2 * Math.PI)
     this.ctx.fillStyle = this.color
-    if (!noFill) this.ctx.fill()
+    if (!noFill1) this.ctx.fill()
   }
 
   /**
    * Draws an image on the canvas
-   * @param  {Number} x The x-cordinate of the top-left corner of the image
-   * @param  {Number} y The y-cordinate of the top-left corner of the image
-   * @param  {ImageElement} image The element of the image to be drawn
+   * @param  {Number} x The x-coordinate of the top-left corner of the image
+   * @param  {Number} y The y-coordinate of the top-left corner of the image
+   * @param  {HTMLImageElement} image The element of the image to be drawn
    */
   image (image, x, y) {
     this.ctx.drawImage(image, x, y)
@@ -108,10 +107,10 @@ export class Canvas {
 
   /**
    * Draws a lune on the canvas
-   * @param  {Number} x1 The x-cordinate of the first point of the line
-   * @param  {Number} y1 The y-cordinate of the first point of the line
-   * @param  {Number} x2 The x-cordinate of the second point of the line
-   * @param  {Number} y2 2The y-cordinate of the second point of the line
+   * @param  {Number} x1 The x-coordinate of the first point of the line
+   * @param  {Number} y1 The y-coordinate of the first point of the line
+   * @param  {Number} x2 The x-coordinate of the second point of the line
+   * @param  {Number} y2 2The y-coordinate of the second point of the line
    */
   line (x1, y1, x2, y2) {
     this.ctx.beginPath()
@@ -123,8 +122,8 @@ export class Canvas {
 
   /**
    * Draws a heart on the canvas
-   * @param  {Number} x The x-cordinate of the center of the heart
-   * @param  {Number} y The y-cordinate of the center of the heart
+   * @param  {Number} x The x-coordinate of the center of the heart
+   * @param  {Number} y The y-coordinate of the center of the heart
    * @param  {Number} radius The radius of the heart
    * @param  {Boolean} noFill Whether or not the rectangle should be filled
    */

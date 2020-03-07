@@ -1,45 +1,53 @@
 // https://colorhunt.co/palette/131842
-$bg-color: #fbf9fa;
-$pr-color: #fd0054;
-$sc-color: #2b2024;
+$bg-color: #f7f9fb;
+$pr-color: #2F6CD0;
+$sc-color: #5889DA;
 $tr-color: #a80038;
 
-$tx-color: $bg-color;
+$tx-color: #f7f9fb;
 
-$nav-bg-color: $pr-color;
+$nav-bg-color: #5889DA;
 $nav-height-min: 40px;
 $nav-height-max: 60px;
 $nav-trans: 400ms;
 
+$sidebar-bg-color: #2F6CD0;
+$sidebar-tx-color: #f7f9fb;
+
 $sld-rg-color: #404040;
 $sld-th-color: $tr-color;
-$sld-bg-color: $bg-color;
+$sld-bg-color: $sidebar-tx-color;
 $sld-height: 20px;
 $sld-txt-height: 30px;
 
-$btn-bg-color: $pr-color;
+$btn-bg-color: $sidebar-bg-color;
 
-$chk-bg-color: $bg-color;
+$chk-bg-color: $tx-color;
+
 
 html {
-  background-color: $bg-color;
   font-family: sans-serif;
 }
 
 body {
+  background-color: $bg-color;
+
   transition: 500ms;
 
   padding: 0;
   margin: 0;
 
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 15px auto 303px 15px;
   grid-template-rows: $nav-height-min auto;
   grid-template-areas:
-    'nav nav'
-    'canvas sidebar';
-  grid-row-gap: 25px;
+    'nav nav nav nav'
+    '. canvas sidebar .';
+  grid-row-gap: 20px;
+  grid-column-gap: 15px;
   opacity: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -107,7 +115,7 @@ li {
   align-items: center;
 
   color: $tx-color;
-  background-color: $pr-color;
+  background-color: $nav-bg-color;
   font-size: 16px;
 
   cursor: default;
@@ -118,7 +126,7 @@ li:hover {
   color: $pr-color;
 
   svg {
-    fill: $pr-color;
+    fill: $nav-bg-color;
   }
 }
 
@@ -135,7 +143,7 @@ li:active {
   grid-area: home;
 }
 
-#asort {
+#Quick-sort {
   grid-area: asort;
 }
 
@@ -173,7 +181,7 @@ canvas {
 #sidebar {
   grid-area: sidebar;
 
-  padding: 10px;
+  padding-right: 15px;
 
   display: grid;
   grid-template-columns: 50% 50%;
@@ -192,42 +200,43 @@ canvas {
 }
 
 button {
+  outline: none;
   transition: 500ms;
 
   border: none;
-  border-color: $pr-color;
+  border-color: $sidebar-bg-color;
   border-width: 4px;
   border-style: solid;
 
-  background-color: $btn-bg-color;
-  color: $tx-color;
+  background-color:  $sidebar-bg-color;
+  color: $sidebar-tx-color;
 
   width: 100%;
   height: 50px;
 
-  font-size: 14px;
+  font-size: 16px;
 }
 
 button:hover {
-  background-color: $bg-color;
-  color: $pr-color;
+  background-color:  $sidebar-tx-color;
+  color: $sidebar-bg-color;
 
   .triangle {
-    border-left: 24px solid $pr-color;
+    border-left: 24px solid $sidebar-bg-color;
   }
 
   .square {
-    background-color: $pr-color;
+    background-color: $sidebar-bg-color;
   }
 
   svg {
     padding-top: 0;
-    fill: $pr-color;
+    fill: $sidebar-bg-color;
   }
 }
 
 button:active {
-  background-color: $btn-bg-color;
+  background-color: $sidebar-bg-color;
   color: $tx-color;
 
   .triangle {
@@ -247,6 +256,8 @@ input[type="range"] {
   transition: 300ms;
 
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 
   margin: 0;
 
@@ -263,24 +274,25 @@ input:hover {
 }
 
 input::-webkit-slider-thumb {
-  transition: 300ms;
+  transition: 100ms;
 
   -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
 
-  background-color: $pr-color;
+  background-color: $sidebar-bg-color;
 
   width: $sld-height;
   height: $sld-height;
 
   border-style: solid;
-  border-color: $bg-color;
+  border-color: $sidebar-tx-color;
   border-width: 2px;
 }
 
 input::-webkit-slider-thumb:hover {
   border-style: solid;
-  border-color: $bg-color;
+  border-color:  $sidebar-tx-color;
   border-width: 0px;
 }
 
@@ -293,7 +305,7 @@ label {
 
 .slider {
   padding: 5px 5px;
-  background-color: $pr-color;
+  background-color:  $sidebar-bg-color;
   color: $tx-color;
   text-align: center;
 }
@@ -335,8 +347,8 @@ label {
 }
 
 .checkbox {
-  background-color: $pr-color;
-  color: $tx-color;
+  background-color: $sidebar-bg-color;
+  color: $sidebar-tx-color;
 
   display: flex;
   justify-content: space-around;
@@ -344,7 +356,10 @@ label {
 
 input[type="checkbox"] {
   transition: 500ms;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
+  outline: none;
   width: 50px;
   height: 20px;
 
@@ -364,10 +379,10 @@ input[type="checkbox"]::before {
 
   border-radius: 100%;
 
-  background-color: $pr-color;
+  background-color: $sidebar-bg-color;
 
   border-style: solid;
-  border-color: $bg-color;
+  border-color: $sidebar-tx-color;
   border-width: 2px;
 
   transform: translateX(0);
@@ -388,7 +403,7 @@ input[type="checkbox"]:checked {
   width: 0;
   height: 0;
   border-top: 12px solid transparent;
-  border-left: 24px solid $bg-color;
+  border-left: 24px solid $sidebar-tx-color;
   border-bottom: 12px solid transparent;
   margin: auto;
 }
@@ -396,13 +411,13 @@ input[type="checkbox"]:checked {
 .square {
   height: 24px;
   width: 24px;
-  background-color: $bg-color;
+  background-color: $sidebar-tx-color;
   margin: auto;
 }
 
 svg {
   transition: $nav-trans;
-  fill: $bg-color;
+  fill: $sidebar-tx-color;
 }
 
 #options-dropdown {

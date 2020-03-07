@@ -24,21 +24,21 @@ function changeAlgorithm (algorithm) {
   })
   document.getElementById(algorithm + '-sort').classList.add('nav-active')
 
-  document.getElementsByTagName('canvas')[0].style.opacity = 0
+  document.getElementsByTagName('canvas')[0].style.opacity = '0'
 
   setTimeout(() => {
     visualize.changeAlgorithm(algorithm)
     console.log(visualize.array, visualize.algorithm)
-    document.getElementsByTagName('canvas')[0].style.opacity = 1
+    document.getElementsByTagName('canvas')[0].style.opacity = '1'
   }, 600)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.style.opacity = 1
+  document.body.style.opacity = '1'
 })
 
 window.onresize = () => {
-  visualize.canvas.setSize((3 * window.innerWidth / 4), visualize.canvas.height)
+  visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
   visualize.reset()
   visualize.state()
 }

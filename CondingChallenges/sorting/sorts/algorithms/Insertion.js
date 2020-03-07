@@ -12,14 +12,14 @@ export class Insertion extends Algorithm {
   /**
    * Sorts the array with insertion sort
    * @param  {Array<Number>} arr The array that is going to be sorted
-   * @returns The sorted array
+   * @returns Number[] sorted array
    */
   sort (arr) {
     // Copies the array to make function more pure
-    // The arrays won't be references to eachother
+    // The arrays won't be references to each other
     let array = [...arr]
 
-    // Starts at the begining of the array
+    // Starts at the beginning of the array
     let index = 0
 
     // The two values that are going to be compared
@@ -49,7 +49,7 @@ export class Insertion extends Algorithm {
 
           // Previous bar regardless of swap
           rIndex--
-          // Updates to the next values that are going to be comapred
+          // Updates to the next values that are going to be compared
           right = array[rIndex]
           left = array[rIndex - 1]
         }
@@ -57,7 +57,7 @@ export class Insertion extends Algorithm {
 
       // Next bar regardless of swap
       index++
-      // Updates to the next values that are going to be comapred
+      // Updates to the next values that are going to be compared
       left = array[index]
       right = array[index + 1]
     }
@@ -68,7 +68,7 @@ export class Insertion extends Algorithm {
   /**
    * It does the first or next step for sorting (Used when drawing)
    * @param  {Array<Number>} arr The array that is going to be partially sorted
-   * @returns The partially sorted array
+   * @returns Number[] partially sorted array
    */
   stepSort (arr) {
     let array = [...arr]
