@@ -9,13 +9,13 @@ export class Visualize {
    * @param array The array to be visualised
    */
   constructor (algorithm, array) {
-    this.barWidth = 12
+    this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = 7
 
     this.array = array
     this.canvas = new Canvas(window.innerWidth - 333, 370)
 
-    this.barHeight = 370 / ((window.innerWidth - 333) / this.barWidth)
+    this.barHeight = 370 / ((this.canvas.width) / this.barWidth)
 
     this.canvas.background()
     this.canvas.canvasElement.style.opacity = '1'
@@ -24,7 +24,7 @@ export class Visualize {
     if (array === undefined) {
       this.array = []
 
-      for (let index = 1; index < (this.canvas.width / this.barWidth) + 1; index++) {
+      for (let index = 1; index < Math.floor(this.canvas.width / this.barWidth) + 1; index++) {
         this.array.push(index)
       }
     }
@@ -39,7 +39,7 @@ export class Visualize {
     this.isStopped = false
 
     this.bgColor = '#f7f9fb'
-    this.barColor = '#2F6CD0'
+    this.barColor = '#2F6CD0EE'
   }
 
   /**
@@ -91,6 +91,7 @@ export class Visualize {
     if (this.algorithm.isSorted(this.array)) {
       console.log(this.array)
       clearInterval(this.loop)
+      this.algorithm.index = 0
       this.loopMax += this.loop + 1
       this.isSorting = false
     }
@@ -116,10 +117,6 @@ export class Visualize {
         // color = '#fd0054'
       }
 
-      if (this.algorithm.index === index && track) {
-        color = '#f00'
-      }
-
       let swapOff = 0
 
       if (!this.algorithm.isRSwapping) {
@@ -136,6 +133,14 @@ export class Visualize {
         } else if (this.algorithm.rIndex - 1 === index) {
           swapOff = this.algorithm.swapOff
         }
+      }
+
+      if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
+        color = '#f00'
+      }
+
+      if (this.algorithm.pivotIndex) {
+        if (this.algorithm.pivotIndex === index) color = '#0f0'
       }
 
       Bar.draw(
@@ -181,22 +186,30 @@ export class Visualize {
   }
 
   /**
-   * Changes how quickly, stepsorted is called, increases speed on animation
+   * Changes how quickly, step sorted is called, increases speed on animation
    * @param {Number} speed The speed of the animation in fps
    */
   changeSpeed (speed) {
+    this.speed = speed
+
     if (this.isSorting) {
-      this.speed = speed
       clearInterval(this.loop)
       this.loopMax += this.loop + 1
       this.isSorting = false
       this.animate('sorting', this.speed)
     }
+
+    if (this.isShuffling) {
+      clearInterval(this.loop)
+      this.loopMax += this.loop + 1
+      this.isShuffling = false
+      this.animate( 'shuffling', this.speed)
+    }
   }
 
   /**
    * Changes the width of the bars, will be made to fit the canvas
-   * @param {Number} size The widht of the bar in px
+   * @param {Number} size The width of the bar in px
    */
   changeSize (size) {
     this.barWidth = size

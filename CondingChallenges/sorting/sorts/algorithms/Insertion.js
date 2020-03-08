@@ -18,11 +18,9 @@ export class Insertion extends Algorithm {
    */
   sort (arr) {
     // Copies the array to make function more pure
-    // The arrays won't be references to each other
-    let array = [...arr]
+    let array = [...arr]    // The arrays won't be references to each other
 
-    // Starts at the beginning of the array
-    let index = 0
+    let index = 0  // Starts at the beginning of the array
 
     // The two values that are going to be compared
     let left = array[index]
@@ -31,11 +29,11 @@ export class Insertion extends Algorithm {
     while (index < array.length - 1) {
       // If the left value is bigger than the right value
       if (left > right) {
-        // Swap left and right
-        array = this.swap(array, index, index + 1)
 
-        // Sets index that is going backwards
-        let rIndex = index
+        array = this.swap(array, index, index + 1) // Swap left and right
+
+
+        let rIndex = index // Sets index that is going backwards
 
         // If the bar you swapped with is smaller than the one before
         right = array[rIndex]
@@ -49,16 +47,17 @@ export class Insertion extends Algorithm {
             array = this.swap(array, rIndex, rIndex - 1)
           }
 
-          // Previous bar regardless of swap
-          rIndex--
+
+          rIndex-- // Previous bar regardless of swap
           // Updates to the next values that are going to be compared
           right = array[rIndex]
           left = array[rIndex - 1]
         }
       }
 
-      // Next bar regardless of swap
-      index++
+
+      index++ // Next bar regardless of swap
+
       // Updates to the next values that are going to be compared
       left = array[index]
       right = array[index + 1]
@@ -80,13 +79,13 @@ export class Insertion extends Algorithm {
         const left = array[this.index]
         const right = array[this.index + 1]
         if (left > right) {
-          this.stepSwap(array, this.index, this.index + 1)
+          // this.stepSwap(array, this.index, this.jIndex)
           // remove this.index++
-          // array = this.swap(array, this.index, this.index + 1)
-          // this.index++
+          array = this.swap(array, this.index, this.index + 1)
+          this.rIndex = this.index
+          this.index++
           this.isProgressing = false
           this.isRegressing = true
-          this.rIndex = this.index
           return array
         } else {
           this.index++
@@ -100,11 +99,11 @@ export class Insertion extends Algorithm {
         const right = array[this.rIndex]
         const left = array[this.rIndex - 1]
         if (right < left) {
-          this.stepSwap(array, this.rIndex, this.rIndex - 1)
+          // this.stepSwap(array, this.rIndex, this.rIndex - 1)
           this.isRSwapping = true
           // remove this.rIndex--
-          // array = this.swap(array, this.rIndex, this.rIndex - 1)
-          // this.rIndex--
+          array = this.swap(array, this.rIndex, this.rIndex - 1)
+          this.rIndex--
           return array
         } else {
           this.isProgressing = true
@@ -121,7 +120,8 @@ export class Insertion extends Algorithm {
       if (this.isRSwapping) {
         array = this.stepSwap(array, this.rIndex, this.rIndex - 1)
       } else {
-        array = this.stepSwap(array, this.index, this.index + 1)
+        this.jIndex = this.index + 1
+        array = this.stepSwap(array, this.index, this.jIndex)
       }
     }
 

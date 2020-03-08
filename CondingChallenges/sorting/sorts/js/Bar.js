@@ -33,7 +33,7 @@ export class Bar extends Vector {
  * @param  {Canvas} canvas The canvas were the bar will be draw
  */
   draw (canvas) {
-    canvas.color = '#fff'
+    canvas.color = '#ffffff'
     canvas.rectangle(this.x, this.y, this.width, this.height)
   }
 }

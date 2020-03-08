@@ -1,4 +1,5 @@
 import { Bubble } from './Bubble.js'
 import { Insertion } from './Insertion.js'
+import { Quick } from "./Quick.js";
 
-export { Bubble, Insertion }
+export { Bubble, Insertion, Quick }

@@ -18,6 +18,23 @@ body {
   justify-content: center;
 }
 
+@media screen and (max-width: 635px) {
+  body {
+    background-color: #f7f9fb;
+    transition: 500ms;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 15px auto 303px 15px;
+    grid-template-rows: 40px auto auto;
+    grid-template-areas: "nav nav nav nav" ". canvas canvas ." ". sidebar sidebar .";
+    grid-row-gap: 20px;
+    grid-column-gap: 15px;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+  }
+}
 nav {
   height: 40px;
   width: 100%;
@@ -52,9 +69,9 @@ ul {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 130px) auto 45px 10px;
+  grid-template-columns: repeat(5, 130px) auto 45px 10px;
   grid-template-rows: 40px;
-  grid-template-areas: "home asort insertion bubble . options .";
+  grid-template-areas: "home merge quick insertion bubble . options .";
 }
 
 li {
@@ -88,8 +105,12 @@ li:active svg {
   grid-area: home;
 }
 
+#Merge-sort {
+  grid-area: merge;
+}
+
 #Quick-sort {
-  grid-area: asort;
+  grid-area: quick;
 }
 
 #Insertion-sort {

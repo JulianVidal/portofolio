@@ -1,9 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-document.getElementById('Bubble-sort').addEventListener('click', () => { changeAlgorithm('Bubble') })
-document.getElementById('Insertion-sort').addEventListener('click', () => { changeAlgorithm('Insertion') })
-
-const algorithm = 'Insertion'
+const algorithm = 'Quick'
 
 const visualize = new Visualize(algorithm)
 visualize.array = visualize.algorithm.shuffle(visualize.array)
@@ -43,16 +40,61 @@ window.onresize = () => {
   visualize.state()
 }
 
-document.getElementById('shuffle-btn').addEventListener('click', () => { visualize.animate('shuffling', 60) })
-document.getElementById('sort-btn').addEventListener('click', () => { visualize.animate('sorting', visualize.speed) })
+function handleClick({target}) {
+  let element = target
 
-document.getElementById('color').addEventListener('click', () => { visualize.state() })
-document.getElementById('track').addEventListener('click', () => { visualize.state() })
+  while (!element.id) {
+    element = element.parentNode
+    if (element === null) return;
+  }
 
-document.getElementById('reset-btn').addEventListener('click', () => { visualize.reset(); visualize.state() })
+  switch (element.id) {
+    case 'shuffle-btn':
+      visualize.animate('shuffling', visualize.speed)
+      break
+    case 'sort-btn':
+      visualize.animate('sorting', visualize.speed)
+      break
+    case 'rainbow':
+      visualize.state()
+      break
+    case 'tracked':
+      visualize.state()
+      break
+    case 'reset-btn':
+      visualize.reset()
+      visualize.state()
+      break
+    case 'start-btn':
+      visualize.resume()
+      break
+    case 'stop-btn':
+      visualize.stop()
+      break
+    case 'Bubble-sort':
+      changeAlgorithm('Bubble')
+      break
+    case 'Insertion-sort':
+      changeAlgorithm('Insertion')
+      break
+    case 'Quick-sort':
+      changeAlgorithm('Quick')
+      break
+  }
+}
 
-document.getElementById('speed').addEventListener('input', e => { visualize.changeSpeed(e.target.value) })
-document.getElementById('size').addEventListener('input', e => { visualize.changeSize(e.target.value) })
+function handleInput(event) {
+  const element = event.target
 
-document.getElementById('start-btn').addEventListener('click', () => { visualize.resume() })
-document.getElementById('stop-btn').addEventListener('click', () => { visualize.stop() })
+  switch (element.id) {
+    case 'speed':
+      visualize.changeSpeed(element.value)
+      break
+    case 'size':
+      visualize.changeSize(element.value)
+      break
+  }
+}
+
+document.addEventListener('click', event => {handleClick(event)})
+document.addEventListener('input', event => {handleInput(event)})

@@ -50,6 +50,29 @@ body {
   justify-content: center;
 }
 
+@media screen and (max-width: 635px) {
+  body {
+    background-color: $bg-color;
+
+    transition: 500ms;
+
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: 15px auto 303px 15px;
+    grid-template-rows: $nav-height-min auto auto;
+    grid-template-areas:
+            'nav nav nav nav'
+            '. canvas canvas .'
+            '. sidebar sidebar .';
+    grid-row-gap: 20px;
+    grid-column-gap: 15px;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+  }
+}
 
 
 nav {
@@ -101,10 +124,10 @@ ul {
   height: 100%;
 
   display: grid;
-  grid-template-columns: repeat(4, 130px) auto 45px 10px;
+  grid-template-columns: repeat(5, 130px) auto 45px 10px;
   grid-template-rows: $nav-height-min;
   grid-template-areas:
-    'home asort insertion bubble . options .';
+    'home merge quick insertion bubble . options .';
 }
 
 li {
@@ -143,8 +166,12 @@ li:active {
   grid-area: home;
 }
 
+#Merge-sort {
+  grid-area: merge;
+}
+
 #Quick-sort {
-  grid-area: asort;
+  grid-area: quick;
 }
 
 #Insertion-sort {

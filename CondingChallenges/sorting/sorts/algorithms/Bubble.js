@@ -9,11 +9,11 @@ export class Bubble extends Algorithm {
    */
   sort (arr) {
     // Copies the array to make function more pure
-    // The arrays won't be references to each other
-    let array = [...arr]
 
-    // Starts at the beginning of the array
-    let index = 0
+    let array = [...arr] // The arrays won't be references to each other
+
+
+    let index = 0 // Starts at the beginning of the array
 
     // The two values that are going to be compared
     let left = array[index]
@@ -24,12 +24,11 @@ export class Bubble extends Algorithm {
     while (index < array.length - 1) {
       // If the left value is bigger than the right value
       if (left > right) {
-        // Swap left and right
-        array = this.swap(array, index, index + 1)
+        array = this.swap(array, index, index + 1)  // Swap left and right
       }
 
-      // Next bar regardless of swap
-      index++
+      index++ // Next bar regardless of swap
+
       // Updates to the next values that are going to be compared
       left = array[index]
       right = array[index + 1]
@@ -54,23 +53,26 @@ export class Bubble extends Algorithm {
     let array = [...arr]
 
     if (this.isSorted(array)) return array
+    if (!this.isSwapping) {
+      if (this.index < array.length - 1) {
+        const left = array[this.index]
+        const right = array[this.index + 1]
 
-    if (this.index < array.length - 1 && !this.isSwapping) {
-      const left = array[this.index]
-      const right = array[this.index + 1]
-
-      if (left > right) {
-        this.stepSwap(array, this.index, this.index + 1)
-      } else {
-        this.index++
-        return this.stepSort(array)
+        if (left > right) {
+          array = this.swap(array, this.index, this.index + 1)
+          this.index++
+          // this.stepSwap(array, this.index, this.jIndex)
+        } else {
+          this.index++
+          return this.stepSort(array)
+        }
+      } else if (this.index >= array.length - 1) {
+        this.index = 0
       }
-    } else if (this.index >= array.length - 1) {
-      this.index = 0
-    }
 
-    if (this.isSwapping) {
-      array = this.stepSwap(array, this.index, this.index + 1)
+    } else {
+      this.jIndex = this.index + 1
+      array = this.stepSwap(array, this.index, this.jIndex)
     }
 
     return array

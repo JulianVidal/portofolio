@@ -1,9 +1,11 @@
 export class Algorithm {
   constructor () {
     this.index = 0
+    this.jIndex = 0
     this.isSwapping = false
     this.swapOff = 0
     this.barWidth = parseInt(document.getElementById('size').value)
+    this.arrayLength = -Infinity
   }
 
   /**
@@ -60,17 +62,20 @@ export class Algorithm {
 
   /**
    * Swaps two elements of an array one pixel at a time
-   * @param  {Number[]} array The array that is going to be sorted
+   * @param  {Number[]} arr The array that is going to be sorted
    * @param  {Number} i The index of the element that is going to be swapped
    * @param  {Number} j The index of the other element that is going to be swapped
    * @returns Number[] array with the swap
    */
-  stepSwap (array, i, j) {
+  stepSwap (arr, i, j) {
+    let array = [...arr]
+
     this.isSwapping = true
     if (this.swapOff <= this.barWidth) {
       this.swapOff += 1
     } else if (this.swapOff > this.barWidth) {
       array = this.swap(array, i, j)
+
       if (i < j) {
         this.index++
       } else {
