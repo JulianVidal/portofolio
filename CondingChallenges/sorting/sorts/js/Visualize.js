@@ -58,6 +58,8 @@ export class Visualize {
    * Shuffles the array given at the constructor and draws it
    */
   shuffling () {
+    if (!this.isShuffling) this.algorithm.animateShuffle(this.algorithm.array)
+
     this.isShuffling = true
 
     this.state()
@@ -106,14 +108,18 @@ export class Visualize {
         color = this.barColor
       }
 
-      if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
+      if (this.algorithm.index === index) {
         color = '#f00'
       }
+
+      // if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
+      //   color = '#f00'
+      // }
 
       if (this.algorithm.pivotIndex) {
         if (this.algorithm.pivotIndex === index) color = '#0f0'
       }
-// Rianbow option
+
       let x = index * this.barWidth
       let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
       let width = this.barWidth / 1.1
@@ -123,28 +129,20 @@ export class Visualize {
   }
 
   /**
-   * Changes the size of the canvas
-   */
-  resize () {
-    this.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
-    this.reset()
-    this.state()
-  }
-
-  /**
    * Stops all animations and makes an ordered array
    */
   reset () {
     if (this.isShuffling || this.isSorting) {
+      this.algorithm.isStopped = !this.stopped
       clearInterval(this.loop)
-      this.loopMax += this.loop + 1
-      this.isShuffling = false
-      this.isSorting = false
     }
 
-    this.algorithm.index = 0
-    this.algorithm.swapOff = 0
-    this.algorithm.isSwapping = false
+    this.isShuffling = false
+    this.isSorting = false
+    this.stopped = false
+
+    this.barWidth = parseInt(document.getElementById('size').value)
+    this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
 
     this.algorithm.array = []
 
@@ -152,39 +150,6 @@ export class Visualize {
       this.algorithm.array.push(index)
     }
 
-    this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
-  }
-
-  /**
-   * Changes how quickly, step sorted is called, increases speed on animation
-   * @param {Number} speed The speed of the animation in fps
-   */
-  changeSpeed (speed) {
-    this.speed = speed
-
-    if (this.isSorting) {
-      clearInterval(this.loop)
-      this.loopMax += this.loop + 1
-      this.isSorting = false
-      this.animate('sorting', this.speed)
-    }
-
-    if (this.isShuffling) {
-      clearInterval(this.loop)
-      this.loopMax += this.loop + 1
-      this.isShuffling = false
-      this.animate( 'shuffling', this.speed)
-    }
-  }
-
-  /**
-   * Changes the width of the bars, will be made to fit the canvas
-   * @param {Number} size The width of the bar in px
-   */
-  changeSize (size) {
-    this.barWidth = size
-    this.algorithm.barWidth = size
-    this.reset()
     this.state()
   }
 
@@ -192,25 +157,27 @@ export class Visualize {
    * Stops all animations
    */
   stop () {
+    if ((!this.isSorting && !this.isShuffling) || this.stopped) return
     clearInterval(this.loop)
-    this.loopMax += this.loop + 1
-    this.isStopped = true
+    this.algorithm.isStopped = true
+    this.stopped = true
   }
 
   /**
    * Resumes animation based on what function was stopped
    */
   resume () {
-    if (!this.isStopped) return
+    if (!this.stopped) return
+    else this.stopped = false
+
     if (this.isSorting) {
       this.isSorting = false
       this.animate('sorting', this.speed)
-      this.isStopped = false
     }
+
     if (this.isShuffling) {
       this.isShuffling = false
       this.animate('shuffling', 60)
-      this.isStopped = false
     }
   }
 
@@ -221,6 +188,5 @@ export class Visualize {
   changeAlgorithm (algorithm) {
     this.algorithm = new Algorithms[algorithm]()
     this.reset()
-    this.state()
   }
 }

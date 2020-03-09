@@ -4,6 +4,7 @@ export class Algorithm {
     this.jIndex = 0
     this.arrayLength = -Infinity
     this.array = []
+    this.isStopped = false
   }
 
   /**
@@ -31,13 +32,19 @@ export class Algorithm {
     let array = [...arr]
 
     for (this.index = 0; this.index < array.length; this.index++) {
+      if (this.isStopped){
+        this.isStopped = false
+        return
+      }
       const randomIndex = Math.round(Math.random() * (array.length - 1))
-      array = await this.animateSwap(array, this.index, randomIndex)
+      array = this.animateSwap(array, this.index, randomIndex)
+      await this.sleep(10)
     }
 
-
-
-    return array
+    if (this.isStopped){
+      this.isStopped = false
+      return
+    }
   }
 
   /**

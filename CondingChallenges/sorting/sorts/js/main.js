@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1'
 })
 
-window.onresize = visualize.resize
+window.onresize = () => {
+  visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
+  visualize.reset()
+}
 
 function handleClick({target}) {
   let element = target
@@ -47,7 +50,6 @@ function handleClick({target}) {
   switch (element.id) {
     case 'shuffle-btn':
       visualize.animate('shuffling', visualize.speed)
-      if (!visualize.isShuffling) visualize.algorithm.animateShuffle(visualize.algorithm.array)
       break
     case 'sort-btn':
       visualize.animate('sorting', visualize.speed)
@@ -60,7 +62,6 @@ function handleClick({target}) {
       break
     case 'reset-btn':
       visualize.reset()
-      visualize.state()
       break
     case 'start-btn':
       visualize.resume()
@@ -88,10 +89,10 @@ function handleInput(event) {
 
   switch (element.id) {
     case 'speed':
-      visualize.changeSpeed(element.value)
+      visualize.speed = element.value
       break
     case 'size':
-      visualize.changeSize(element.value)
+      visualize.reset()
       break
   }
 }

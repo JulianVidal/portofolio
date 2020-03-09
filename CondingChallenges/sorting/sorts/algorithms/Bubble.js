@@ -48,7 +48,7 @@ export class Bubble extends Algorithm {
   async animateSort (arr, passes) {
     let array = [...arr]
 
-    if (this.isSorted(array)) return array
+    if (this.isSorted(array)) return
 
     let index = 0
 
@@ -56,18 +56,26 @@ export class Bubble extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1 - (passes || 0)) {
-
+      if (this.isStopped){
+        this.isStopped = false
+        return
+      }
       if (left > right) {
-        await this.sleep(10)
         array = this.animateSwap(array, index, index + 1)
+        await this.sleep(10)
       }
 
       index++
+      this.index = index + 1
 
       left = array[index]
       right = array[index + 1]
     }
 
+    if (this.isStopped){
+      this.isStopped = false
+      return
+    }
 
     this.animateSort(array, passes ? passes + 1 : 1)
   }
