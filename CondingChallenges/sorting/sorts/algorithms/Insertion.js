@@ -1,7 +1,7 @@
 import { Algorithm } from './Algorithm.js'
 
 export class Insertion extends Algorithm {
-  constructor () {
+  constructor() {
     super()
     this.rIndex = this.index
 
@@ -16,7 +16,7 @@ export class Insertion extends Algorithm {
    * @param  {Array<Number>} arr The array that is going to be sorted
    * @returns Number[] sorted array
    */
-  sort (arr) {
+  sort(arr) {
     // Copies the array to make function more pure
     let array = [...arr]    // The arrays won't be references to each other
 
@@ -71,60 +71,62 @@ export class Insertion extends Algorithm {
    * @param  {Array<Number>} arr The array that is going to be partially sorted
    * @returns Number[] partially sorted array
    */
-  stepSort (arr) {
+  async animateSort(arr) {
     let array = [...arr]
-    if (this.isSorted(array)) return array
-    if (!this.isSwapping) {
-      if (this.index < array.length - 1 && this.isProgressing) {
-        const left = array[this.index]
-        const right = array[this.index + 1]
-        if (left > right) {
-          // this.stepSwap(array, this.index, this.jIndex)
-          // remove this.index++
-          array = this.swap(array, this.index, this.index + 1)
-          this.rIndex = this.index
-          this.index++
-          this.isProgressing = false
-          this.isRegressing = true
-          return array
-        } else {
-          this.index++
-          return this.stepSort(array)
-        }
-      } else if (this.index >= array.length - 1) {
-        this.index = 0
+
+    if (this.isSorted(array)) return
+
+    let index = 0
+    this.index = index
+
+    let left = array[index]
+    let right = array[index + 1]
+
+    while (index < array.length - 1) {
+      if (this.isStopped){
+        this.isStopped = false
+        return
       }
 
-      if (this.rIndex > 0 && this.isRegressing) {
-        const right = array[this.rIndex]
-        const left = array[this.rIndex - 1]
-        if (right < left) {
-          // this.stepSwap(array, this.rIndex, this.rIndex - 1)
-          this.isRSwapping = true
-          // remove this.rIndex--
-          array = this.swap(array, this.rIndex, this.rIndex - 1)
-          this.rIndex--
-          return array
-        } else {
-          this.isProgressing = true
-          this.isRegressing = false
-          return this.stepSort(array)
-        }
-      } else if (this.rIndex <= 0) {
-        this.isProgressing = true
-        this.isRegressing = false
-        return this.stepSort(array)
-      }
-    } else {
+      if (left > right) {
+        array = this.animateSwap(array, index, index + 1)
+        await this.sleep(100)
 
-      if (this.isRSwapping) {
-        array = this.stepSwap(array, this.rIndex, this.rIndex - 1)
-      } else {
-        this.jIndex = this.index + 1
-        array = this.stepSwap(array, this.index, this.jIndex)
+        let rIndex = index
+        this.rIndex = rIndex
+
+        right = array[rIndex]
+        left = array[rIndex - 1]
+
+        while (rIndex > 0) {
+          if (this.isStopped){
+            this.isStopped = false
+            return
+          }
+
+          if (right < left) {
+            array = this.animateSwap(array, rIndex, rIndex - 1)
+            await this.sleep(100)
+          }
+
+          rIndex--
+          this.rIndex = rIndex - 1
+
+          right = array[rIndex]
+          left = array[rIndex - 1]
+        }
       }
+
+      index++
+      this.index = index + 1
+
+      left = array[index]
+      right = array[index + 1]
     }
 
-    return array
+    if (this.isStopped){
+      this.isStopped = false
+      return
+    }
   }
 }

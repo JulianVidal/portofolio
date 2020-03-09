@@ -1,6 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Bubble'
+const algorithm = 'Insertion'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)

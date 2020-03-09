@@ -112,6 +112,10 @@ export class Visualize {
         color = '#f00'
       }
 
+      if (this.algorithm.rIndex === index) {
+        color = '#f00'
+      }
+
       // if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
       //   color = '#f00'
       // }
@@ -188,5 +192,6 @@ export class Visualize {
   changeAlgorithm (algorithm) {
     this.algorithm = new Algorithms[algorithm]()
     this.reset()
+    this.algorithm.isStopped = false
   }
 }
