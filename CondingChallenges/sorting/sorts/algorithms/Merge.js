@@ -54,7 +54,7 @@ export class Merge extends Algorithm {
 
 
     async stepCombine (arr1, arr2, index, jIndex) {
-         await this.sleep(100)
+         await this.sleep(10)
         let array1 = [...arr1]
         let array2 = [...arr2]
         let array3 = []
@@ -82,18 +82,22 @@ export class Merge extends Algorithm {
         } else if (j < array2.length) {
             array3 = array3.concat((array2.slice(j)))
         }
-        console.log(array3, index, jIndex)
         this.array.forEach((element, elIndex) => {
-            if (elIndex >= i && elIndex <= j) {
-                element = array3[elIndex - i]
+            if (elIndex >= index && elIndex <= jIndex) {
+                this.array[elIndex] = array3[elIndex - index]
+            } else if (!index && !jIndex) {
+                this.array = array3
             }
         })
+
         return array3
     }
 
     /**
      * Sorts the array with merge sort
      * @param  {Array<Number>} arr The array that is going to be sorted
+     * @param {Number} i Keeps track of the start index, for recursion
+     * @param {Number} j Keeps track of the end index, for recursion
      * @returns Number[] sorted array
      */
     async stepSort (arr, i, j) {
@@ -112,9 +116,4 @@ export class Merge extends Algorithm {
 
         return await this.stepCombine(left, right, i, j)
     }
-
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
 }

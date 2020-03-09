@@ -7,11 +7,13 @@ export class Bubble extends Algorithm {
    * @param  {Array<Number>} arr The array that is going to be sorted
    * @returns Number[] sorted array
    */
-  sort (arr) {
+  sort (arr, passes) {
     // Copies the array to make function more pure
 
     let array = [...arr] // The arrays won't be references to each other
 
+    // Checks if the array is sorted
+    if (this.isSorted(array)) return array
 
     let index = 0 // Starts at the beginning of the array
 
@@ -21,7 +23,7 @@ export class Bubble extends Algorithm {
 
     // While index hasn't gone outside the array length + one
     // because of right needs the next index
-    while (index < array.length - 1) {
+    while (index < array.length - 1 - (passes || 0)) {
       // If the left value is bigger than the right value
       if (left > right) {
         array = this.swap(array, index, index + 1)  // Swap left and right
@@ -34,14 +36,8 @@ export class Bubble extends Algorithm {
       right = array[index + 1]
     }
 
-    // Checks if the array is sorted
-    if (!this.isSorted(array)) {
-      // If no, keep sorting
-      return this.sort(array)
-    } else {
-      // If yes, return the array
-      return array
-    }
+      // Keep sorting
+      return this.sort(array, passes ? passes + 1 : 1)
   }
 
   /**
@@ -49,32 +45,30 @@ export class Bubble extends Algorithm {
    * @param  {Array<Number>} arr The array that is going to be partially sorted
    * @returns Number[] partially sorted array
    */
-  stepSort (arr) {
+  async animateSort (arr, passes) {
     let array = [...arr]
 
     if (this.isSorted(array)) return array
-    if (!this.isSwapping) {
-      if (this.index < array.length - 1) {
-        const left = array[this.index]
-        const right = array[this.index + 1]
 
-        if (left > right) {
-          array = this.swap(array, this.index, this.index + 1)
-          this.index++
-          // this.stepSwap(array, this.index, this.jIndex)
-        } else {
-          this.index++
-          return this.stepSort(array)
-        }
-      } else if (this.index >= array.length - 1) {
-        this.index = 0
+    let index = 0
+
+    let left = array[index]
+    let right = array[index + 1]
+
+    while (index < array.length - 1 - (passes || 0)) {
+
+      if (left > right) {
+        await this.sleep(10)
+        array = this.animateSwap(array, index, index + 1)
       }
 
-    } else {
-      this.jIndex = this.index + 1
-      array = this.stepSwap(array, this.index, this.jIndex)
+      index++
+
+      left = array[index]
+      right = array[index + 1]
     }
 
-    return array
+
+    this.animateSort(array, passes ? passes + 1 : 1)
   }
 }

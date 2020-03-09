@@ -1,18 +1,18 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Merge'
+const algorithm = 'Bubble'
 
 const visualize = new Visualize(algorithm)
-visualize.array = visualize.algorithm.shuffle(visualize.array)
+visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
+
+visualize.state()
+console.log(visualize.algorithm.array)
 
 const actives = [...document.getElementsByClassName('nav-active')]
 actives.forEach(element => {
   element.classList.remove('nav-active')
 })
 document.getElementById(algorithm + '-sort').classList.add('nav-active')
-
-visualize.state()
-console.log(visualize.array)
 
 function changeAlgorithm (algorithm) {
   const actives = [...document.getElementsByClassName('nav-active')]
@@ -25,7 +25,7 @@ function changeAlgorithm (algorithm) {
 
   setTimeout(() => {
     visualize.changeAlgorithm(algorithm)
-    console.log(visualize.array, visualize.algorithm)
+    console.log(visualize.algorithm.array, visualize.algorithm)
     document.getElementsByTagName('canvas')[0].style.opacity = '1'
   }, 600)
 }
@@ -34,11 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1'
 })
 
-window.onresize = () => {
-  visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
-  visualize.reset()
-  visualize.state()
-}
+window.onresize = visualize.resize
 
 function handleClick({target}) {
   let element = target
@@ -51,11 +47,10 @@ function handleClick({target}) {
   switch (element.id) {
     case 'shuffle-btn':
       visualize.animate('shuffling', visualize.speed)
+      if (!visualize.isShuffling) visualize.algorithm.animateShuffle(visualize.algorithm.array)
       break
     case 'sort-btn':
-      // visualize.animate('sorting', visualize.speed)
-      visualize.algorithm.stepSort(visualize.array)
-      visualize.state()
+      visualize.animate('sorting', visualize.speed)
       break
     case 'rainbow':
       visualize.state()

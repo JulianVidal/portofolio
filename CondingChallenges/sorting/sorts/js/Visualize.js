@@ -9,37 +9,31 @@ export class Visualize {
    * @param array The array to be visualised
    */
   constructor (algorithm, array) {
-    this.barWidth = parseInt(document.getElementById('size').value)
-    this.barHeight = 7
+    this.bgColor = '#f7f9fb'
+    this.barColor = '#2F6CD0EE'
 
-    this.array = array
     this.canvas = new Canvas(window.innerWidth - 333, 370)
+    this.canvas.background(this.bgColor)
+    this.canvas.canvasElement.style.opacity = '1'
 
+    this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = 370 / ((this.canvas.width) / this.barWidth)
 
-    this.canvas.background()
-    this.canvas.canvasElement.style.opacity = '1'
+    this.speed = parseInt(document.getElementById('speed').value)
+
     this.algorithm = new Algorithms[algorithm]()
+    this.algorithm.array = array
 
     if (array === undefined) {
-      this.array = []
-
-      for (let index = 1; index < Math.floor(this.canvas.width / this.barWidth) + 1; index++) {
-        this.array.push(index)
+      this.algorithm.array = []
+      for (let i = 1; i < Math.floor(this.canvas.width / this.barWidth) + 1; i++) {
+        this.algorithm.array.push(i)
       }
     }
-
-    this.loop = 0
-    this.loopMax = 1
-
-    this.speed = parseInt(document.getElementById('speed').value)
 
     this.isSorting = false
     this.isShuffling = false
     this.isStopped = false
-
-    this.bgColor = '#f7f9fb'
-    this.barColor = '#2F6CD0EE'
   }
 
   /**
@@ -48,7 +42,7 @@ export class Visualize {
    * @param  {Number} fps The frames per second that it should be looping at
    */
   animate (method, fps) {
-    if (this.loop < this.loopMax && !this.isShuffling && !this.isSorting) {
+    if (!this.isShuffling && !this.isSorting) {
       this.loop = setInterval(
         (function (self) {
           return function () {
@@ -68,12 +62,9 @@ export class Visualize {
 
     this.state()
 
-    if (this.algorithm.index < this.array.length - 1) {
-      this.array = this.algorithm.stepShuffle(this.array)
-    } else {
-      console.log(this.array)
+    if (this.algorithm.index >= this.algorithm.array.length) {
+      console.log(this.algorithm.array)
       this.algorithm.index = 0
-      this.loopMax += this.loop + 1
       clearInterval(this.loop)
       this.isShuffling = false
     }
@@ -83,16 +74,16 @@ export class Visualize {
    * Sorts the array given at the constructor and draws it
    */
   sorting () {
+    if (!this.isSorting) this.algorithm.animateSort(this.algorithm.array)
+
     this.isSorting = true
-    this.array = this.algorithm.stepSort(this.array)
 
     this.state()
 
-    if (this.algorithm.isSorted(this.array)) {
-      console.log(this.array)
+    if (this.algorithm.isSorted(this.algorithm.array)) {
+      console.log(this.algorithm.array)
       clearInterval(this.loop)
       this.algorithm.index = 0
-      this.loopMax += this.loop + 1
       this.isSorting = false
     }
   }
@@ -105,34 +96,14 @@ export class Visualize {
     const rainbow = document.getElementById('rainbow').checked
     const track = document.getElementById('tracked').checked
 
-    // this.canvas.color = '#fbf9fa'
     this.canvas.background(this.bgColor)
 
-    this.array.forEach((element, index) => {
-      const hue = (360 / this.array.length) * element
+    this.algorithm.array.forEach((element, index) => {
+      const hue = (360 / this.algorithm.array.length) * element
       if (rainbow) {
         color = `hsl( ${hue}, 100%, 50% )`
       } else {
         color = this.barColor
-        // color = '#fd0054'
-      }
-
-      let swapOff = 0
-
-      if (!this.algorithm.isRSwapping) {
-        if (this.algorithm.index === index) {
-          swapOff = this.algorithm.swapOff
-        } else if (this.algorithm.index + 1 === index) {
-          swapOff = -this.algorithm.swapOff
-        }
-      }
-
-      if (this.algorithm.isRSwapping) {
-        if (this.algorithm.rIndex === index) {
-          swapOff = -this.algorithm.swapOff
-        } else if (this.algorithm.rIndex - 1 === index) {
-          swapOff = this.algorithm.swapOff
-        }
       }
 
       if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
@@ -142,15 +113,12 @@ export class Visualize {
       if (this.algorithm.pivotIndex) {
         if (this.algorithm.pivotIndex === index) color = '#0f0'
       }
-
-      Bar.draw(
-        (index * this.barWidth) + swapOff,
-        this.canvas.height - (this.barHeight * element),
-        this.barWidth / 1.1,
-        this.barHeight * element,
-        color,
-        this.canvas
-      )
+// Rianbow option
+      let x = index * this.barWidth
+      let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
+      let width = this.barWidth / 1.1
+      let height = rainbow ? this.canvas.height : this.barHeight * element
+      Bar.draw(x, y, width, height, color, this.canvas)
     })
   }
 
@@ -158,7 +126,9 @@ export class Visualize {
    * Changes the size of the canvas
    */
   resize () {
-    this.canvas.setSize(window.innerWidth, window.innerHeight)
+    this.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
+    this.reset()
+    this.state()
   }
 
   /**
@@ -176,10 +146,10 @@ export class Visualize {
     this.algorithm.swapOff = 0
     this.algorithm.isSwapping = false
 
-    this.array = []
+    this.algorithm.array = []
 
     for (let index = 1; index < (this.canvas.width / this.barWidth) + 1; index++) {
-      this.array.push(index)
+      this.algorithm.array.push(index)
     }
 
     this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
