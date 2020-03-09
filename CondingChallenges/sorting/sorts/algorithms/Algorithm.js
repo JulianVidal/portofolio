@@ -6,6 +6,7 @@ export class Algorithm {
     this.swapOff = 0
     this.barWidth = parseInt(document.getElementById('size').value)
     this.arrayLength = -Infinity
+    this.array = []
   }
 
   /**

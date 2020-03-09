@@ -1,6 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Quick'
+const algorithm = 'Merge'
 
 const visualize = new Visualize(algorithm)
 visualize.array = visualize.algorithm.shuffle(visualize.array)
@@ -53,7 +53,9 @@ function handleClick({target}) {
       visualize.animate('shuffling', visualize.speed)
       break
     case 'sort-btn':
-      visualize.animate('sorting', visualize.speed)
+      // visualize.animate('sorting', visualize.speed)
+      visualize.algorithm.stepSort(visualize.array)
+      visualize.state()
       break
     case 'rainbow':
       visualize.state()
@@ -79,6 +81,9 @@ function handleClick({target}) {
       break
     case 'Quick-sort':
       changeAlgorithm('Quick')
+      break
+    case 'Merge-sort':
+      changeAlgorithm('Merge')
       break
   }
 }
