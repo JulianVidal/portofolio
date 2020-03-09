@@ -53,9 +53,7 @@ function handleClick({target}) {
       visualize.animate('shuffling', visualize.speed)
       break
     case 'sort-btn':
-      // visualize.animate('sorting', visualize.speed)
-      visualize.algorithm.stepSort(visualize.array)
-      visualize.state()
+      visualize.animate('sorting', visualize.speed)
       break
     case 'rainbow':
       visualize.state()
