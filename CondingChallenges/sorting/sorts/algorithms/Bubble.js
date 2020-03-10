@@ -61,7 +61,8 @@ export class Bubble extends Algorithm {
         return
       }
       if (left > right) {
-        array = this.animateSwap(array, index, index + 1)
+        array = this.swap(array, index, index + 1)
+        this.array = [...array]
         await this.sleep(10)
       }
 

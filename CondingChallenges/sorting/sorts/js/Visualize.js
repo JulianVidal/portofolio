@@ -108,11 +108,11 @@ export class Visualize {
         color = this.barColor
       }
 
-      if (this.algorithm.index === index) {
+      if (this.algorithm.index === index && track) {
         color = '#f00'
       }
 
-      if (this.algorithm.rIndex === index) {
+      if (this.algorithm.rIndex === index && track) {
         color = '#f00'
       }
 

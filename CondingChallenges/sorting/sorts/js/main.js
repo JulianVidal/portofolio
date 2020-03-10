@@ -1,6 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Insertion'
+const algorithm = 'Quick'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
@@ -52,7 +52,10 @@ function handleClick({target}) {
       visualize.animate('shuffling', visualize.speed)
       break
     case 'sort-btn':
-      visualize.animate('sorting', visualize.speed)
+      // visualize.animate('sorting', visualize.speed)
+      // console.log(visualize.algorithm.sort(visualize.algorithm.array))
+        visualize.algorithm.animateSort(visualize.algorithm.array)
+        visualize.state()
       break
     case 'rainbow':
       visualize.state()

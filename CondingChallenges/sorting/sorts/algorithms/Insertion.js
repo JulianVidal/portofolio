@@ -4,11 +4,6 @@ export class Insertion extends Algorithm {
   constructor() {
     super()
     this.rIndex = this.index
-
-    this.isRegressing = false
-    this.isProgressing = true
-
-    this.isRSwapping = false
   }
 
   /**
@@ -89,7 +84,8 @@ export class Insertion extends Algorithm {
       }
 
       if (left > right) {
-        array = this.animateSwap(array, index, index + 1)
+        array = this.swap(array, index, index + 1)
+        this.array = [...array]
         await this.sleep(100)
 
         let rIndex = index
@@ -105,7 +101,8 @@ export class Insertion extends Algorithm {
           }
 
           if (right < left) {
-            array = this.animateSwap(array, rIndex, rIndex - 1)
+            array = this.swap(array, rIndex, rIndex - 1)
+            this.array = [...array]
             await this.sleep(100)
           }
 

@@ -37,7 +37,8 @@ export class Algorithm {
         return
       }
       const randomIndex = Math.round(Math.random() * (array.length - 1))
-      array = this.animateSwap(array, this.index, randomIndex)
+      array = this.swap(array, this.index, randomIndex)
+      this.array = [...array]
       await this.sleep(10)
     }
 
@@ -84,26 +85,6 @@ export class Algorithm {
 
     return inOrder
   }
-
-  /**
-   * Swaps two elements of an array
-   * @param  {Array<Number>} arr The array that is going to be sorted
-   * @param  {Number} i The index of the element that is going to be swapped
-   * @param  {Number} j The index of the other element that is going to be swapped
-   * @returns Number[] array with the swap
-   */
-  animateSwap (arr, i, j) {
-    const array = [...arr]
-
-    const value1 = array[i]
-    array[i] = array[j]
-    array[j] = value1
-
-    this.array = [...array]
-
-    return array
-  }
-
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
