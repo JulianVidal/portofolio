@@ -120,13 +120,13 @@ export class Visualize {
       //   color = '#f00'
       // }
 
-      if (this.algorithm.pivotIndex) {
-        if (this.algorithm.pivotIndex === index) color = '#0f0'
+      if (this.algorithm.pivotIndex === index && track){
+        color = '#0f0'
       }
 
       let x = index * this.barWidth
       let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
-      let width = this.barWidth / 1.1
+      let width =  rainbow ? this.barWidth : this.barWidth / 1.1
       let height = rainbow ? this.canvas.height : this.barHeight * element
       Bar.draw(x, y, width, height, color, this.canvas)
     })
