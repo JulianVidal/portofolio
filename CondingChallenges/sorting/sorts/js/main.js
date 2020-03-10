@@ -2,6 +2,8 @@
 ui trends
 box shadow
 svg animation
+Color scheme trends
+Seacrh trends
  */
 
 import { Visualize } from './Visualize.js'
