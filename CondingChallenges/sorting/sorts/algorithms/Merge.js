@@ -76,28 +76,33 @@ export class Merge extends Algorithm {
                 value2 = array2[j]
             }
 
-            await this.sleep(this.speed)
 
             this.array.forEach((element, elIndex) => {
-                if (elIndex >= relI && elIndex <= (relJ || arr1.length + arr2.length) && elIndex - relI < array3.length) {
+                if (elIndex >= relI && elIndex <= (relJ || (arr1.length + arr2.length)) && (elIndex - relI) < array3.length) {
                     this.index = elIndex
                     this.array[elIndex] = array3[elIndex - relI]
                 }
             })
+
+            await this.sleep(this.speed)
         }
+        await this.sleep(this.speed)
 
         if (i < array1.length) {
             array3 = array3.concat((array1.slice(i)))
         } else if (j < array2.length) {
             array3 = array3.concat((array2.slice(j)))
         }
-        await this.sleep(this.speed)
         this.array.forEach((element, elIndex) => {
             if (elIndex >= relI && elIndex <= relJ) {
                 this.index = elIndex
                 this.array[elIndex] = array3[elIndex - relI]
             }
         })
+
+        if (!relJ) {
+            this.done = true
+        }
 
         return array3
     }

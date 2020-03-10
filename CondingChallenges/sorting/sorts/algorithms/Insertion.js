@@ -68,8 +68,10 @@ export class Insertion extends Algorithm {
   async animateSort(arr) {
     let array = [...arr]
 
-    if (this.isSorted(array)) return
-
+    if (this.isSorted(array)) {
+      this.done = true
+      return array
+    }
     let index = 0
     this.index = index
 

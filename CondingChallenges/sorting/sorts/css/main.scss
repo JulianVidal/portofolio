@@ -5,6 +5,7 @@ $sc-color: #5889DA;
 $tr-color: #a80038;
 
 $tx-color: #f7f9fb;
+$tx-size: 16px;
 
 $nav-bg-color: #5889DA;
 $nav-height-min: 40px;
@@ -139,7 +140,7 @@ li {
 
   color: $tx-color;
   background-color: $nav-bg-color;
-  font-size: 16px;
+  font-size: $tx-size;
 
   cursor: default;
 }
@@ -211,6 +212,7 @@ canvas {
 
 #sidebar {
   grid-area: sidebar;
+  place-self: center stretch;
 
   padding-right: 15px;
 
@@ -219,15 +221,12 @@ canvas {
   grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
   grid-template-areas:
     'shuffle sort'
-    'start stop'
+    'reset reset'
     'speed speed'
     'size size'
     'color color'
     'track track'
-    'reset reset';
-
-  align-content: center;
-  justify-content: stretch;
+    'swap count';
 }
 
 button {
@@ -245,7 +244,7 @@ button {
   width: 100%;
   height: 50px;
 
-  font-size: 16px;
+  font-size: $tx-size;
 }
 
 button:hover {
@@ -377,12 +376,34 @@ label {
   grid-area: track;
 }
 
+#swap {
+  grid-area: swap;
+  background-color: $sidebar-bg-color;
+  color: $sidebar-tx-color;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#swap-counter {
+  grid-area: count;
+  background-color: $sidebar-bg-color;
+  color: $sidebar-tx-color;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: $tx-size;
+}
+
 .checkbox {
   background-color: $sidebar-bg-color;
   color: $sidebar-tx-color;
 
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 input[type="checkbox"] {

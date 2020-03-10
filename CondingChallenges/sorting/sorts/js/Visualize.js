@@ -12,7 +12,12 @@ export class Visualize {
     this.bgColor = '#f7f9fb'
     this.barColor = '#2F6CD0EE'
 
-    this.canvas = new Canvas(window.innerWidth - 333, 370)
+
+    if (window.innerWidth > 635) {
+      this.canvas = new Canvas(window.innerWidth - 333, 370)
+    } else {
+      this.canvas = new Canvas(303, 370)
+    }
     this.canvas.background(this.bgColor)
     this.canvas.canvasElement.style.opacity = '1'
 
@@ -73,7 +78,7 @@ export class Visualize {
 
     this.state()
 
-    if (this.algorithm.isSorted(this.algorithm.array) || this.isStopped) {
+    if ((this.algorithm.isSorted(this.algorithm.array) && this.algorithm.done) || this.isStopped) {
       console.log(this.algorithm.array)
       this.algorithm.index = -1
       this.algorithm.jIndex = -1
@@ -143,7 +148,7 @@ export class Visualize {
 
     this.algorithm.array = []
 
-    for (let index = 1; index < (this.canvas.width / this.barWidth) + 1; index++) {
+    for (let index = 1; index < Math.floor(this.canvas.width / this.barWidth) + 1; index++) {
       this.algorithm.array.push(index)
     }
 

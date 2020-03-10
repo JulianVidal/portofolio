@@ -48,8 +48,10 @@ export class Bubble extends Algorithm {
   async animateSort (arr, passes) {
     let array = [...arr]
 
-    if (this.isSorted(array)) return
-    
+    if (this.isSorted(array)) {
+      this.done = true
+      return array
+    }
     let index = 0
 
     let left = array[index]

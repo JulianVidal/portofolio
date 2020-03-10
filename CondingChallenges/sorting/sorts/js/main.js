@@ -37,7 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.onresize = () => {
-  visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
+
+  if (window.innerWidth > 635) {
+    visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
+  } else {
+    visualize.canvas.setSize(303, visualize.canvas.height)
+  }
+
   visualize.reset()
 }
 

@@ -81,7 +81,10 @@ export class Quick extends Algorithm {
     async animateSort (arr,relI = 0, i, j) {
         let array = [...arr]
 
-        if (this.isSorted(array)) return array
+        if (this.isSorted(array)) {
+            this.done = true
+            return array
+        }
 
         let pivotIndex = 0 // Index of the pivot
 

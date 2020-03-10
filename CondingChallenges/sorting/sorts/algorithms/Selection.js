@@ -54,8 +54,10 @@ export class Selection extends Algorithm {
         let array = [...arr] // The arrays won't be references to each other
 
         // Checks if the array is sorted
-        if (this.isSorted(array)) return array
-
+        if (this.isSorted(array)) {
+            this.done = true
+            return array
+        }
         let minimumIndex = passes // starts minimum at the left most index
         let minimum = array[minimumIndex] // The value of the minimum
 
