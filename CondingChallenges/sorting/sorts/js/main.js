@@ -1,3 +1,9 @@
+/*
+ui trends
+box shadow
+svg animation
+ */
+
 import { Visualize } from './Visualize.js'
 
 const algorithm = 'Merge'
