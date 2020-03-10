@@ -53,8 +53,7 @@ export class Merge extends Algorithm {
     }
 
 
-    async stepCombine (arr1, arr2, index, jIndex) {
-         await this.sleep(10)
+    async animateCombine (arr1, arr2, relI, relJ) {
         let array1 = [...arr1]
         let array2 = [...arr2]
         let array3 = []
@@ -66,6 +65,11 @@ export class Merge extends Algorithm {
         let value2 = array2[j]
 
         while (i < array1.length && j < array2.length) {
+            if (this.isStopped){
+                this.isStopped = false
+                return
+            }
+
             if (value1 < value2) {
                 array3.push(value1)
                 i++
@@ -75,6 +79,19 @@ export class Merge extends Algorithm {
                 j++
                 value2 = array2[j]
             }
+
+            await this.sleep(this.speed)
+
+            this.array.forEach((element, elIndex) => {
+                if (elIndex >= relI && elIndex <= (relJ || arr1.length + arr2.length) && elIndex - relI < array3.length) {
+                    this.array[elIndex] = array3[elIndex - relI]
+                }
+            })
+        }
+
+        if (this.isStopped){
+            this.isStopped = false
+            return
         }
 
         if (i < array1.length) {
@@ -82,11 +99,10 @@ export class Merge extends Algorithm {
         } else if (j < array2.length) {
             array3 = array3.concat((array2.slice(j)))
         }
+        await this.sleep(this.speed)
         this.array.forEach((element, elIndex) => {
-            if (elIndex >= index && elIndex <= jIndex) {
-                this.array[elIndex] = array3[elIndex - index]
-            } else if (!index && !jIndex) {
-                this.array = array3
+            if (elIndex >= relI && elIndex <= relJ) {
+                this.array[elIndex] = array3[elIndex - relI]
             }
         })
 
@@ -100,20 +116,20 @@ export class Merge extends Algorithm {
      * @param {Number} j Keeps track of the end index, for recursion
      * @returns Number[] sorted array
      */
-    async stepSort (arr, i, j) {
+    async animateSort (arr, i = 0, j) {
         let array = [...arr]
 
         let left, right
 
         if (array.length !== 1) {
             const halfIndex = array.length / 2
-            left = await this.stepSort(array.slice(0, Math.round(halfIndex)), i || 0, Math.round(halfIndex) - 1 + (i || 0))
-            right = await this.stepSort(array.slice(Math.round(halfIndex)), Math.round(halfIndex) + (i || 0), j || array.length - 1)
+            left = await this.animateSort(array.slice(0, Math.round(halfIndex)), i, Math.round(halfIndex) - 1 + i)
+            right = await this.animateSort(array.slice(Math.round(halfIndex)), Math.round(halfIndex) + i, j || array.length - 1)
 
         } else {
             return array
         }
 
-        return await this.stepCombine(left, right, i, j)
+        return await this.animateCombine(left, right, i, j)
     }
 }

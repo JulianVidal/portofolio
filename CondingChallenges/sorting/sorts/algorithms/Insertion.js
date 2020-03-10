@@ -3,7 +3,6 @@ import { Algorithm } from './Algorithm.js'
 export class Insertion extends Algorithm {
   constructor() {
     super()
-    this.rIndex = this.index
   }
 
   /**
@@ -86,10 +85,10 @@ export class Insertion extends Algorithm {
       if (left > right) {
         array = this.swap(array, index, index + 1)
         this.array = [...array]
-        await this.sleep(100)
+        await this.sleep(this.speed)
 
         let rIndex = index
-        this.rIndex = rIndex
+        this.jIndex = rIndex
 
         right = array[rIndex]
         left = array[rIndex - 1]
@@ -103,11 +102,11 @@ export class Insertion extends Algorithm {
           if (right < left) {
             array = this.swap(array, rIndex, rIndex - 1)
             this.array = [...array]
-            await this.sleep(100)
+            await this.sleep(this.speed)
           }
 
           rIndex--
-          this.rIndex = rIndex - 1
+          this.jIndex = rIndex - 1
 
           right = array[rIndex]
           left = array[rIndex - 1]

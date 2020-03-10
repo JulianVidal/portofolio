@@ -69,9 +69,9 @@ ul {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 130px) auto 45px 10px;
+  grid-template-columns: repeat(6, 130px) auto 45px 10px;
   grid-template-rows: 40px;
-  grid-template-areas: "home merge quick insertion bubble . options .";
+  grid-template-areas: "home selection merge quick insertion bubble . options .";
 }
 
 li {
@@ -103,6 +103,10 @@ li:active svg {
 
 #home {
   grid-area: home;
+}
+
+#Selection-sort {
+  grid-area: selection;
 }
 
 #Merge-sort {

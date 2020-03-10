@@ -124,10 +124,10 @@ ul {
   height: 100%;
 
   display: grid;
-  grid-template-columns: repeat(5, 130px) auto 45px 10px;
+  grid-template-columns: repeat(6, 130px) auto 45px 10px;
   grid-template-rows: $nav-height-min;
   grid-template-areas:
-    'home merge quick insertion bubble . options .';
+    'home selection merge quick insertion bubble . options .';
 }
 
 li {
@@ -164,6 +164,10 @@ li:active {
 
 #home {
   grid-area: home;
+}
+
+#Selection-sort {
+  grid-area: selection;
 }
 
 #Merge-sort {

@@ -56,14 +56,16 @@ export class Bubble extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1 - (passes || 0)) {
+
       if (this.isStopped){
         this.isStopped = false
         return
       }
+
       if (left > right) {
         array = this.swap(array, index, index + 1)
         this.array = [...array]
-        await this.sleep(10)
+        await this.sleep(this.speed)
       }
 
       index++

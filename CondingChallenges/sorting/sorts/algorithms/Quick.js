@@ -3,8 +3,6 @@ import { Algorithm } from "./Algorithm.js";
 export class Quick extends Algorithm {
     constructor() {
         super()
-        this.pivotIndex = 0
-        this.rIndex = 0
     }
 
     /**
@@ -80,54 +78,58 @@ export class Quick extends Algorithm {
      * @param jIndex
      * @returns Number[] partially sorted array
      */
-    async animateSort (arr,relI = 0, index, jIndex) {
+    async animateSort (arr,relI = 0, i, j) {
         let array = [...arr]
 
         if (this.isSorted(array)) return array
 
+        if (this.isStopped){
+            this.isStopped = false
+            return
+        }
+
         let pivotIndex = 0 // Index of the pivot
-        this.pivotIndex = relI
 
         const pivot = array[pivotIndex] // The value of the pivot
 
-        let i = index || pivotIndex + 1 // The index of the left most element
-        let j = jIndex || array.length - 1 // The index of the right most element
+        let index = i || pivotIndex + 1 // The index of the left most element
+        let jIndex = j || array.length - 1 // The index of the right most element
 
-        this.index = i + relI
-        this.rIndex = j + relI
+        this.index = index + relI
+        this.jIndex = jIndex + relI
 
         let left = array[1] // The value of the left element
-        let right = array[j] // The value of the right element
+        let right = array[jIndex] // The value of the right element
 
-        while (left < pivot && i < array.length - 1) {
-            i++
-            left = array[i]
+        while (left < pivot && index < array.length - 1) {
+            index++
+            left = array[index]
         }
 
-        while (right > pivot && j > 1) {
-            j--
-            right = array[j]
+        while (right > pivot && jIndex > 1) {
+            jIndex--
+            right = array[jIndex]
         }
 
-        if (i > j) {
-            array = this.swap(array, pivotIndex, j)
-            this.array = this.swap(this.array, pivotIndex + relI, j + relI)
-            await this.sleep(10)
-            pivotIndex = j
+        if (index > jIndex) {
+            array = this.swap(array, pivotIndex, jIndex)
+            this.array = this.swap(this.array, pivotIndex + relI, jIndex + relI)
+            await this.sleep(this.speed)
+            pivotIndex = jIndex
 
             const leftArray = await this.animateSort(array.slice(0, pivotIndex), relI) // Left side
             const rightArray = await this.animateSort(array.slice(pivotIndex + 1), pivotIndex + 1 + relI) // Right side
 
 
             return leftArray.concat(array[pivotIndex]).concat(rightArray)
-        } else if (i === j) {
+        } else if (index === jIndex) {
             // If both indexes are the same due to the
             // Pivot being the biggest value
             // Switch it to the last index of the array
             if (pivot > left) {
                 array = this.swap(array, pivotIndex, array.length - 1)
                 this.array = this.swap(this.array, pivotIndex + relI, array.length - 1 + relI)
-                await this.sleep(10)
+                await this.sleep(this.speed)
                 pivotIndex = array.length - 1
             }
 
@@ -139,11 +141,11 @@ export class Quick extends Algorithm {
         }
 
         if (left > pivot && right < pivot) {
-            array = this.swap(array, i, j)
-            this.array = this.swap(this.array, i + relI, j + relI)
-            await this.sleep(10)
+            array = this.swap(array, index, jIndex)
+            this.array = this.swap(this.array, index + relI, jIndex + relI)
+            await this.sleep(this.speed)
         }
 
-        return this.animateSort(array, relI, i, j,);
+        return this.animateSort(array, relI, index, jIndex,);
     }
 }

@@ -1,10 +1,11 @@
 export class Algorithm {
   constructor () {
-    this.index = 0
-    this.jIndex = 0
+    this.index = -1
+    this.jIndex = -1
     this.arrayLength = -Infinity
     this.array = []
     this.isStopped = false
+    this.speed = 1 / 50 * 1000
   }
 
   /**
@@ -39,7 +40,7 @@ export class Algorithm {
       const randomIndex = Math.round(Math.random() * (array.length - 1))
       array = this.swap(array, this.index, randomIndex)
       this.array = [...array]
-      await this.sleep(10)
+      await this.sleep(this.speed)
     }
 
     if (this.isStopped){

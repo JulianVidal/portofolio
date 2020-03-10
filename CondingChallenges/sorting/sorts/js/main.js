@@ -1,6 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Quick'
+const algorithm = 'Selection'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
@@ -25,6 +25,7 @@ function changeAlgorithm (algorithm) {
 
   setTimeout(() => {
     visualize.changeAlgorithm(algorithm)
+    visualize.algorithm.speed = 1 / parseInt(document.getElementById('speed').value) * 1000
     console.log(visualize.algorithm.array, visualize.algorithm)
     document.getElementsByTagName('canvas')[0].style.opacity = '1'
   }, 600)
@@ -49,10 +50,10 @@ function handleClick({target}) {
 
   switch (element.id) {
     case 'shuffle-btn':
-      visualize.animate('shuffling', visualize.speed)
+      visualize.shuffling()
       break
     case 'sort-btn':
-      visualize.animate('sorting', visualize.speed)
+        visualize.sorting()
       break
     case 'rainbow':
       visualize.state()
@@ -81,6 +82,8 @@ function handleClick({target}) {
     case 'Merge-sort':
       changeAlgorithm('Merge')
       break
+    case 'Selection-sort':
+      changeAlgorithm('Selection')
   }
 }
 
@@ -89,7 +92,7 @@ function handleInput(event) {
 
   switch (element.id) {
     case 'speed':
-      visualize.speed = element.value
+      visualize.algorithm.speed = 1 / element.value * 1000
       break
     case 'size':
       visualize.reset()
