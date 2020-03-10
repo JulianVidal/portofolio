@@ -450,22 +450,3 @@ svg {
   transition: $nav-trans;
   fill: $sidebar-tx-color;
 }
-
-#options-dropdown {
-  transition: 300ms;
-
-  height: 0px;
-  width: 160px;
-
-  position: absolute;
-  right: 0;
-  z-index: 1;
-
-  overflow: hidden;
-
-  background-color: $pr-color;
-}
-
-.dropdown-text {
-  height: 100px;
-}

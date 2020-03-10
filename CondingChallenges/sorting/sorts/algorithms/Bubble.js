@@ -50,17 +50,17 @@ export class Bubble extends Algorithm {
 
     if (this.isSorted(array)) return
 
+    // Checks if the sorting has been stopped
+    if (this.isStopped) {
+      return array
+    }
+
     let index = 0
 
     let left = array[index]
     let right = array[index + 1]
 
     while (index < array.length - 1 - (passes || 0)) {
-
-      if (this.isStopped){
-        this.isStopped = false
-        return
-      }
 
       if (left > right) {
         array = this.swap(array, index, index + 1)
@@ -73,11 +73,6 @@ export class Bubble extends Algorithm {
 
       left = array[index]
       right = array[index + 1]
-    }
-
-    if (this.isStopped){
-      this.isStopped = false
-      return
     }
 
     this.animateSort(array, passes ? passes + 1 : 1)

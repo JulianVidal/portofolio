@@ -349,19 +349,4 @@ svg {
   fill: #f7f9fb;
 }
 
-#options-dropdown {
-  transition: 300ms;
-  height: 0px;
-  width: 160px;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-  overflow: hidden;
-  background-color: #2F6CD0;
-}
-
-.dropdown-text {
-  height: 100px;
-}
-
 /*# sourceMappingURL=main.css.map */

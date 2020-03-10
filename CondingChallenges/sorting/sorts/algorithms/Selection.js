@@ -50,15 +50,16 @@ export class Selection extends Algorithm {
      * @returns Number[] sorted array
      */
     async animateSort (arr, passes = 0) {
-        // Remove start and stop, it doesnt work veryu nicely
-        // SHuffling request frame
-        // Remove array elngth
-
         // Copies the array to make function more pure
         let array = [...arr] // The arrays won't be references to each other
 
         // Checks if the array is sorted
         if (this.isSorted(array)) return array
+
+        // Checks if the sorting has been stopped
+        if (this.isStopped) {
+            return array
+        }
 
         let minimumIndex = passes // starts minimum at the left most index
         let minimum = array[minimumIndex] // The value of the minimum

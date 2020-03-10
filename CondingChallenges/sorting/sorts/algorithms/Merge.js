@@ -65,10 +65,6 @@ export class Merge extends Algorithm {
         let value2 = array2[j]
 
         while (i < array1.length && j < array2.length) {
-            if (this.isStopped){
-                this.isStopped = false
-                return
-            }
 
             if (value1 < value2) {
                 array3.push(value1)
@@ -87,11 +83,6 @@ export class Merge extends Algorithm {
                     this.array[elIndex] = array3[elIndex - relI]
                 }
             })
-        }
-
-        if (this.isStopped){
-            this.isStopped = false
-            return
         }
 
         if (i < array1.length) {
@@ -118,6 +109,11 @@ export class Merge extends Algorithm {
      */
     async animateSort (arr, i = 0, j) {
         let array = [...arr]
+
+        // Checks if the sorting has been stopped
+        if (this.isStopped) {
+            return array
+        }
 
         let left, right
 

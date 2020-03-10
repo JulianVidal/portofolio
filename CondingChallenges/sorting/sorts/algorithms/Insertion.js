@@ -70,6 +70,12 @@ export class Insertion extends Algorithm {
 
     if (this.isSorted(array)) return
 
+    // Checks if the sorting has been stopped
+    if (this.isStopped) {
+      this,this.isStopped = false
+      return array
+    }
+
     let index = 0
     this.index = index
 
@@ -77,10 +83,6 @@ export class Insertion extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1) {
-      if (this.isStopped){
-        this.isStopped = false
-        return
-      }
 
       if (left > right) {
         array = this.swap(array, index, index + 1)
@@ -94,10 +96,6 @@ export class Insertion extends Algorithm {
         left = array[rIndex - 1]
 
         while (rIndex > 0) {
-          if (this.isStopped){
-            this.isStopped = false
-            return
-          }
 
           if (right < left) {
             array = this.swap(array, rIndex, rIndex - 1)
@@ -120,9 +118,5 @@ export class Insertion extends Algorithm {
       right = array[index + 1]
     }
 
-    if (this.isStopped){
-      this.isStopped = false
-      return
-    }
   }
 }

@@ -64,12 +64,6 @@ function handleClick({target}) {
     case 'reset-btn':
       visualize.reset()
       break
-    case 'start-btn':
-      visualize.resume()
-      break
-    case 'stop-btn':
-      visualize.stop()
-      break
     case 'Bubble-sort':
       changeAlgorithm('Bubble')
       break

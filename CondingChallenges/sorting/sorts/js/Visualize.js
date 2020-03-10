@@ -33,6 +33,7 @@ export class Visualize {
 
     this.isSorting = false
     this.isShuffling = false
+    this.isStopped = false
   }
 
   /**
@@ -58,16 +59,18 @@ export class Visualize {
    */
   shuffling () {
     if (this.isSorting) return
-    if (!this.isShuffling) this.algorithm.animateShuffle(this.algorithm.array)
+    if (!this.isShuffling && !this.isStopped) this.algorithm.animateShuffle(this.algorithm.array)
 
     this.isShuffling = true
 
     this.state()
 
-    if (this.algorithm.index >= this.algorithm.array.length) {
+  console.log( this.algorithm.isStopped, this.isShuffling)
+    if (this.algorithm.index >= this.algorithm.array.length || this.isStopped) {
       console.log(this.algorithm.array)
       this.algorithm.index = 0
       this.isShuffling = false
+      this.isStopped = false
     } else {
       requestAnimationFrame((function (self) {
         return  function () {
@@ -88,12 +91,14 @@ export class Visualize {
 
     this.state()
 
-    if (this.algorithm.isSorted(this.algorithm.array)) {
+    if (this.algorithm.isSorted(this.algorithm.array) || this.isStopped) {
       console.log(this.algorithm.array)
       this.algorithm.index = 0
       this.algorithm.jIndex = 0
       this.isSorting = false
-    } else {
+      console.log('stopped')
+      this.isStopped = false
+    } else if (!this.algorithm.isStopped) {
       requestAnimationFrame((function (self) {
         return  function () {
           self.sorting()
@@ -144,14 +149,10 @@ export class Visualize {
    * Stops all animations and makes an ordered array
    */
   reset () {
-    if (this.isShuffling || this.isSorting) {
-      this.algorithm.isStopped = !this.stopped
-      clearInterval(this.loop)
-    }
-
+    this.algorithm.isStopped = true
+    this.isStopped = true
     this.isShuffling = false
     this.isSorting = false
-    this.stopped = false
 
     this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
@@ -166,40 +167,11 @@ export class Visualize {
   }
 
   /**
-   * Stops all animations
-   */
-  stop () {
-    if ((!this.isSorting && !this.isShuffling) || this.stopped) return
-    clearInterval(this.loop)
-    this.algorithm.isStopped = true
-    this.stopped = true
-  }
-
-  /**
-   * Resumes animation based on what function was stopped
-   */
-  resume () {
-    if (!this.stopped) return
-    else this.stopped = false
-
-    if (this.isSorting) {
-      this.isSorting = false
-      this.animate('sorting', 60)
-    }
-
-    if (this.isShuffling) {
-      this.isShuffling = false
-      this.animate('shuffling', 60)
-    }
-  }
-
-  /**
    * Changes the algorithm variable
    * @param {Algorithms} algorithm The algorithm that will be used in the animations
    */
   changeAlgorithm (algorithm) {
     this.algorithm = new Algorithms[algorithm]()
     this.reset()
-    this.algorithm.isStopped = false
   }
 }
