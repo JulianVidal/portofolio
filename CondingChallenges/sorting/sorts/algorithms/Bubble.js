@@ -49,12 +49,7 @@ export class Bubble extends Algorithm {
     let array = [...arr]
 
     if (this.isSorted(array)) return
-
-    // Checks if the sorting has been stopped
-    if (this.isStopped) {
-      return array
-    }
-
+    
     let index = 0
 
     let left = array[index]

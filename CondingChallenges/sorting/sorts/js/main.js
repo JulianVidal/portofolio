@@ -1,6 +1,6 @@
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Selection'
+const algorithm = 'Merge'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
@@ -15,6 +15,7 @@ actives.forEach(element => {
 document.getElementById(algorithm + '-sort').classList.add('nav-active')
 
 function changeAlgorithm (algorithm) {
+
   const actives = [...document.getElementsByClassName('nav-active')]
   actives.forEach(element => {
     element.classList.remove('nav-active')

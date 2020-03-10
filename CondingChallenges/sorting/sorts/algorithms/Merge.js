@@ -80,6 +80,7 @@ export class Merge extends Algorithm {
 
             this.array.forEach((element, elIndex) => {
                 if (elIndex >= relI && elIndex <= (relJ || arr1.length + arr2.length) && elIndex - relI < array3.length) {
+                    this.index = elIndex
                     this.array[elIndex] = array3[elIndex - relI]
                 }
             })
@@ -93,6 +94,7 @@ export class Merge extends Algorithm {
         await this.sleep(this.speed)
         this.array.forEach((element, elIndex) => {
             if (elIndex >= relI && elIndex <= relJ) {
+                this.index = elIndex
                 this.array[elIndex] = array3[elIndex - relI]
             }
         })
@@ -109,11 +111,6 @@ export class Merge extends Algorithm {
      */
     async animateSort (arr, i = 0, j) {
         let array = [...arr]
-
-        // Checks if the sorting has been stopped
-        if (this.isStopped) {
-            return array
-        }
 
         let left, right
 

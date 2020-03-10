@@ -83,11 +83,6 @@ export class Quick extends Algorithm {
 
         if (this.isSorted(array)) return array
 
-        // Checks if the sorting has been stopped
-        if (this.isStopped) {
-            return array
-        }
-
         let pivotIndex = 0 // Index of the pivot
 
         const pivot = array[pivotIndex] // The value of the pivot

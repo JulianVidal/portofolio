@@ -56,11 +56,6 @@ export class Selection extends Algorithm {
         // Checks if the array is sorted
         if (this.isSorted(array)) return array
 
-        // Checks if the sorting has been stopped
-        if (this.isStopped) {
-            return array
-        }
-
         let minimumIndex = passes // starts minimum at the left most index
         let minimum = array[minimumIndex] // The value of the minimum
 
@@ -84,6 +79,9 @@ export class Selection extends Algorithm {
 
         // Swaps the minimum with the left most index
         array = this.swap(array, minimumIndex, passes)
+
+        // Index that the track is going to show
+        this.index = minimumIndex
 
         // Updates the array that is being visualised
         this.array = array

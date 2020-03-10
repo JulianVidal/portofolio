@@ -23,6 +23,7 @@ export class Visualize {
     this.algorithm = new Algorithms[algorithm]()
     this.algorithm.array = array
     this.algorithm.speed = 1 / parseInt(document.getElementById('speed').value) * 1000
+    this.algorithmName = algorithm
 
     if (array === undefined) {
       this.algorithm.array = []
@@ -37,24 +38,6 @@ export class Visualize {
   }
 
   /**
-   * Loops a method in this class at the fps given
-   * @param  {String} method The string should be the name of the method
-   * @param  {Number} fps The frames per second that it should be looping at
-   */
-  animate (method, fps) {
-    if (!this.isShuffling && !this.isSorting) {
-      this.loop = setInterval(
-        (function (self) {
-          return function () {
-            self[method]()
-          }
-        })(this),
-        1000 / fps
-      )
-    }
-  }
-
-  /**
    * Shuffles the array given at the constructor and draws it
    */
   shuffling () {
@@ -65,10 +48,9 @@ export class Visualize {
 
     this.state()
 
-  console.log( this.algorithm.isStopped, this.isShuffling)
     if (this.algorithm.index >= this.algorithm.array.length || this.isStopped) {
       console.log(this.algorithm.array)
-      this.algorithm.index = 0
+      this.algorithm.index = -1
       this.isShuffling = false
       this.isStopped = false
     } else {
@@ -85,7 +67,7 @@ export class Visualize {
    */
   sorting () {
     if (this.isShuffling) return
-    if (!this.isSorting) this.algorithm.animateSort(this.algorithm.array)
+    if (!this.isSorting && !this.isStopped) this.algorithm.animateSort(this.algorithm.array)
 
     this.isSorting = true
 
@@ -93,12 +75,11 @@ export class Visualize {
 
     if (this.algorithm.isSorted(this.algorithm.array) || this.isStopped) {
       console.log(this.algorithm.array)
-      this.algorithm.index = 0
-      this.algorithm.jIndex = 0
+      this.algorithm.index = -1
+      this.algorithm.jIndex = -1
       this.isSorting = false
-      console.log('stopped')
       this.isStopped = false
-    } else if (!this.algorithm.isStopped) {
+    } else {
       requestAnimationFrame((function (self) {
         return  function () {
           self.sorting()
@@ -149,13 +130,16 @@ export class Visualize {
    * Stops all animations and makes an ordered array
    */
   reset () {
-    this.algorithm.isStopped = true
-    this.isStopped = true
+    if (this.isShuffling || this.isSorting) {
+      this.isStopped = true
+    }
     this.isShuffling = false
     this.isSorting = false
 
     this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
+
+    this.algorithm = new Algorithms[this.algorithmName]()
 
     this.algorithm.array = []
 
@@ -171,6 +155,7 @@ export class Visualize {
    * @param {Algorithms} algorithm The algorithm that will be used in the animations
    */
   changeAlgorithm (algorithm) {
+    this.algorithmName = algorithm
     this.algorithm = new Algorithms[algorithm]()
     this.reset()
   }

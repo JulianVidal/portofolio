@@ -3,7 +3,6 @@ export class Algorithm {
     this.index = -1
     this.jIndex = -1
     this.array = []
-    this.isStopped = false
     this.speed = 1 / 50 * 1000
   }
 
@@ -30,15 +29,8 @@ export class Algorithm {
    */
   async animateShuffle (arr) {
     let array = [...arr]
-
-    // Checks if the shuffling has been stopped
-    if (this.isStopped) {
-      this.isStopped = false
-      return array
-    }
-
+    this.jIndex = -1
     for (this.index = 0; this.index < array.length; this.index++) {
-
       const randomIndex = Math.round(Math.random() * (array.length - 1))
       array = this.swap(array, this.index, randomIndex)
       this.array = [...array]

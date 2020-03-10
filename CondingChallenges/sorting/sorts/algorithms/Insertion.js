@@ -70,12 +70,6 @@ export class Insertion extends Algorithm {
 
     if (this.isSorted(array)) return
 
-    // Checks if the sorting has been stopped
-    if (this.isStopped) {
-      this,this.isStopped = false
-      return array
-    }
-
     let index = 0
     this.index = index
 
