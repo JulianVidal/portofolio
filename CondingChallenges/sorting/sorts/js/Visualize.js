@@ -9,8 +9,8 @@ export class Visualize {
    * @param array The array to be visualised
    */
   constructor (algorithm, array) {
-    this.bgColor = '#f7f9fb'
-    this.barColor = '#2F6CD0EE'
+    this.bgColor = '#F2F2F2'
+    this.barColor = '#172DA6'
 
 
     if (window.innerWidth > 635) {

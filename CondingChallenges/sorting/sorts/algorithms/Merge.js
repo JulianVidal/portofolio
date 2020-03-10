@@ -94,13 +94,17 @@ export class Merge extends Algorithm {
             array3 = array3.concat((array2.slice(j)))
         }
         this.array.forEach((element, elIndex) => {
-            if (elIndex >= relI && elIndex <= relJ) {
+            if (elIndex >= relI && elIndex <= (relJ || (arr1.length + arr2.length)) && (elIndex - relI) < array3.length) {
                 this.index = elIndex
                 this.array[elIndex] = array3[elIndex - relI]
             }
         })
 
+        this.done = false
+
         if (!relJ) {
+            this.array = [...array3]
+            this.sleep(100)
             this.done = true
         }
 
@@ -116,6 +120,12 @@ export class Merge extends Algorithm {
      */
     async animateSort (arr, i = 0, j) {
         let array = [...arr]
+
+        // Checks if the array is sorted
+        if (this.isSorted(array)) {
+            this.done = true
+            return array
+        }
 
         let left, right
 
