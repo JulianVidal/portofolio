@@ -3,14 +3,14 @@ export class Algorithm {
     this.index = -1
     this.jIndex = -1
     this.array = []
-    this.speed = 1 / 50 * 1000
+    this.speed = (1 / 50) * 1000
   }
 
   /**
-  * Shuffles an array
-  * @param  {Array<Number>} arr The array that is going to be shuffled
-  * @returns Number[] shuffled array
-  */
+   * Shuffles an array
+   * @param  {Array<Number>} arr The array that is going to be shuffled
+   * @returns Number[] shuffled array
+   */
   shuffle (arr) {
     let array = [...arr]
 
@@ -36,7 +36,6 @@ export class Algorithm {
       this.array = [...array]
       await this.sleep(this.speed)
     }
-
   }
 
   /**
@@ -77,7 +76,7 @@ export class Algorithm {
     return inOrder
   }
 
-  sleep(ms) {
+  sleep (ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
 }

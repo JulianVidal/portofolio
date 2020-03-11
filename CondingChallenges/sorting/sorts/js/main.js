@@ -8,7 +8,7 @@ Seacrh trends
 
 import { Visualize } from './Visualize.js'
 
-const algorithm = 'Merge'
+const algorithm = 'Bubble'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
@@ -23,7 +23,6 @@ actives.forEach(element => {
 document.getElementById(algorithm + '-sort').classList.add('nav-active')
 
 function changeAlgorithm (algorithm) {
-
   const actives = [...document.getElementsByClassName('nav-active')]
   actives.forEach(element => {
     element.classList.remove('nav-active')
@@ -45,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.onresize = () => {
-
   if (window.innerWidth > 635) {
     visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
   } else {
@@ -55,12 +53,12 @@ window.onresize = () => {
   visualize.reset()
 }
 
-function handleClick({target}) {
+function handleClick ({ target }) {
   let element = target
 
   while (!element.id) {
     element = element.parentNode
-    if (element === null) return;
+    if (element === null) return
   }
 
   switch (element.id) {
@@ -68,7 +66,7 @@ function handleClick({target}) {
       visualize.shuffling()
       break
     case 'sort-btn':
-        visualize.sorting()
+      visualize.sorting()
       break
     case 'rainbow':
       visualize.state()
@@ -96,7 +94,7 @@ function handleClick({target}) {
   }
 }
 
-function handleInput(event) {
+function handleInput (event) {
   const element = event.target
 
   switch (element.id) {
@@ -109,5 +107,5 @@ function handleInput(event) {
   }
 }
 
-document.addEventListener('click', event => {handleClick(event)})
-document.addEventListener('input', event => {handleInput(event)})
+document.addEventListener('click', event => { handleClick(event) })
+document.addEventListener('input', event => { handleInput(event) })

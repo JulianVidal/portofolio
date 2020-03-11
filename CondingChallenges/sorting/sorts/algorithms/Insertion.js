@@ -1,20 +1,16 @@
 import { Algorithm } from './Algorithm.js'
 
 export class Insertion extends Algorithm {
-  constructor() {
-    super()
-  }
-
   /**
    * Sorts the array with insertion sort
    * @param  {Array<Number>} arr The array that is going to be sorted
    * @returns Number[] sorted array
    */
-  sort(arr) {
+  sort (arr) {
     // Copies the array to make function more pure
-    let array = [...arr]    // The arrays won't be references to each other
+    let array = [...arr] // The arrays won't be references to each other
 
-    let index = 0  // Starts at the beginning of the array
+    let index = 0 // Starts at the beginning of the array
 
     // The two values that are going to be compared
     let left = array[index]
@@ -23,9 +19,7 @@ export class Insertion extends Algorithm {
     while (index < array.length - 1) {
       // If the left value is bigger than the right value
       if (left > right) {
-
         array = this.swap(array, index, index + 1) // Swap left and right
-
 
         let rIndex = index // Sets index that is going backwards
 
@@ -41,14 +35,12 @@ export class Insertion extends Algorithm {
             array = this.swap(array, rIndex, rIndex - 1)
           }
 
-
           rIndex-- // Previous bar regardless of swap
           // Updates to the next values that are going to be compared
           right = array[rIndex]
           left = array[rIndex - 1]
         }
       }
-
 
       index++ // Next bar regardless of swap
 
@@ -65,7 +57,7 @@ export class Insertion extends Algorithm {
    * @param  {Array<Number>} arr The array that is going to be partially sorted
    * @returns Number[] partially sorted array
    */
-  async animateSort(arr) {
+  async animateSort (arr) {
     let array = [...arr]
 
     if (this.isSorted(array)) {
@@ -79,7 +71,6 @@ export class Insertion extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1) {
-
       if (left > right) {
         array = this.swap(array, index, index + 1)
         this.array = [...array]
@@ -92,7 +83,6 @@ export class Insertion extends Algorithm {
         left = array[rIndex - 1]
 
         while (rIndex > 0) {
-
           if (right < left) {
             array = this.swap(array, rIndex, rIndex - 1)
             this.array = [...array]
@@ -113,6 +103,5 @@ export class Insertion extends Algorithm {
       left = array[index]
       right = array[index + 1]
     }
-
   }
 }

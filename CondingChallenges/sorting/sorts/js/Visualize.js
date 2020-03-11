@@ -12,7 +12,6 @@ export class Visualize {
     this.bgColor = '#F2F2F2'
     this.barColor = '#172DA6'
 
-
     if (window.innerWidth > 635) {
       this.canvas = new Canvas(window.innerWidth - 333, 370)
     } else {
@@ -23,7 +22,6 @@ export class Visualize {
 
     this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = 370 / ((this.canvas.width) / this.barWidth)
-
 
     this.algorithm = new Algorithms[algorithm]()
     this.algorithm.array = array
@@ -60,7 +58,7 @@ export class Visualize {
       this.isStopped = false
     } else {
       requestAnimationFrame((function (self) {
-        return  function () {
+        return function () {
           self.shuffling()
         }
       })(this))
@@ -86,7 +84,7 @@ export class Visualize {
       this.isStopped = false
     } else {
       requestAnimationFrame((function (self) {
-        return  function () {
+        return function () {
           self.sorting()
         }
       })(this))
@@ -125,7 +123,7 @@ export class Visualize {
 
       let x = index * this.barWidth
       let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
-      let width =  rainbow ? this.barWidth : this.barWidth / 1.1
+      let width = rainbow ? this.barWidth : this.barWidth / 1.1
       let height = rainbow ? this.canvas.height : this.barHeight * element
       Bar.draw(x, y, width, height, color, this.canvas)
     })

@@ -1,7 +1,6 @@
 import { Algorithm } from './Algorithm.js'
 
 export class Bubble extends Algorithm {
-
   /**
    * Sorts the array with bubble sort
    * @param  {Array<Number>} arr The array that is going to be sorted
@@ -26,7 +25,7 @@ export class Bubble extends Algorithm {
     while (index < array.length - 1 - (passes || 0)) {
       // If the left value is bigger than the right value
       if (left > right) {
-        array = this.swap(array, index, index + 1)  // Swap left and right
+        array = this.swap(array, index, index + 1) // Swap left and right
       }
 
       index++ // Next bar regardless of swap
@@ -36,8 +35,8 @@ export class Bubble extends Algorithm {
       right = array[index + 1]
     }
 
-      // Keep sorting
-      return this.sort(array, passes ? passes + 1 : 1)
+    // Keep sorting
+    return this.sort(array, passes ? passes + 1 : 1)
   }
 
   /**
@@ -58,7 +57,6 @@ export class Bubble extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1 - (passes || 0)) {
-
       if (left > right) {
         array = this.swap(array, index, index + 1)
         this.array = [...array]

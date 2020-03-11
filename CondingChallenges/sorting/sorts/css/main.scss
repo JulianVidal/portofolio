@@ -14,7 +14,7 @@ $Big-trans: 500ms;
 
 $nav-bg-color: #1B1D40;
 $nav-height-min: 40px;
-$nav-height-max: 60px;
+$nav-height-max: 55px;
 $nav-trans: $UI-trans;
 
 $sidebar-bg-color: #172DA6;
@@ -90,6 +90,8 @@ nav {
 
   position: fixed;
   z-index: 1;
+
+  box-shadow: 0 8px 6px -6px #999;
 }
 
 nav:hover {
@@ -218,8 +220,6 @@ canvas {
   grid-area: sidebar;
   place-self: center stretch;
 
-  padding-right: 15px;
-
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
@@ -231,7 +231,7 @@ canvas {
     'color color'
     'track track'
     'swap count';
-}
+  }
 
 button {
   outline: none;

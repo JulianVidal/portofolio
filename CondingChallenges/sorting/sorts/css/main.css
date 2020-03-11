@@ -4,63 +4,92 @@ html {
 
 body {
   background-color: #F2F2F2;
+  -webkit-transition: 500ms ease-out;
   transition: 500ms ease-out;
   padding: 0;
   margin: 0;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 15px auto 303px 15px;
-  grid-template-rows: 40px auto;
-  grid-template-areas: "nav nav nav nav" ". canvas sidebar .";
+  -ms-grid-columns: 15px auto 303px 15px;
+      grid-template-columns: 15px auto 303px 15px;
+  -ms-grid-rows: 40px auto;
+      grid-template-rows: 40px auto;
+      grid-template-areas: 'nav nav nav nav' '. canvas sidebar .';
   grid-row-gap: 20px;
   grid-column-gap: 15px;
   opacity: 0;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @media screen and (max-width: 635px) {
   body {
     background-color: #F2F2F2;
+    -webkit-transition: 500ms ease-out;
     transition: 500ms ease-out;
     padding: 0;
     margin: 0;
+    display: -ms-grid;
     display: grid;
-    grid-template-columns: 15px auto 303px 15px;
-    grid-template-rows: 40px auto auto;
-    grid-template-areas: "nav nav nav nav" ". canvas canvas ." ". sidebar sidebar .";
+    -ms-grid-columns: 15px auto 303px 15px;
+        grid-template-columns: 15px auto 303px 15px;
+    -ms-grid-rows: 40px auto auto;
+        grid-template-rows: 40px auto auto;
+        grid-template-areas: 'nav nav nav nav' '. canvas canvas .' '. sidebar sidebar .';
     grid-row-gap: 20px;
     grid-column-gap: 15px;
     opacity: 0;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
+
 nav {
   height: 40px;
   width: 100%;
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
   grid-area: nav;
   position: fixed;
   z-index: 1;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+          box-shadow: 0 8px 6px -6px #999;
 }
 
 nav:hover {
-  grid-template-rows: 60px 300px;
-  height: 60px;
+  -ms-grid-rows: 55px 300px;
+      grid-template-rows: 55px 300px;
+  height: 55px;
 }
+
 nav:hover li {
-  transform: translateY(10px);
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
 }
+
 nav:hover #home svg {
   width: 35px;
   height: 35px;
 }
+
 nav:hover #options svg {
   width: 39px;
   height: 39px;
 }
 
 ul {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   list-style-type: none;
   background-color: #1B1D40;
@@ -68,17 +97,27 @@ ul {
   padding: 0;
   width: 100%;
   height: 100%;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(6, 130px) auto 45px 10px;
-  grid-template-rows: 40px;
-  grid-template-areas: "home selection merge quick insertion bubble . options .";
+  -ms-grid-columns: (130px)[6] auto 45px 10px;
+      grid-template-columns: repeat(6, 130px) auto 45px 10px;
+  -ms-grid-rows: 40px;
+      grid-template-rows: 40px;
+      grid-template-areas: 'home selection merge quick insertion bubble . options .';
 }
 
 li {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: #f7f9fb;
   background-color: #1B1D40;
   font-size: 16px;
@@ -89,6 +128,7 @@ li:hover {
   background-color: #F2F2F2;
   color: #2F6CD0;
 }
+
 li:hover svg {
   fill: #1B1D40;
 }
@@ -97,31 +137,44 @@ li:active {
   background-color: #1B1D40;
   color: #F2F2F2;
 }
+
 li:active svg {
   fill: #F2F2F2;
 }
 
 #home {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: home;
 }
 
 #Selection-sort {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: selection;
 }
 
 #Merge-sort {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
   grid-area: merge;
 }
 
 #Quick-sort {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
   grid-area: quick;
 }
 
 #Insertion-sort {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
   grid-area: insertion;
 }
 
 #options {
+  -ms-grid-row: 1;
+  -ms-grid-column: 8;
   grid-area: options;
   display: inline-block;
   padding-top: 3px;
@@ -132,11 +185,16 @@ li:active svg {
 }
 
 #Bubble-sort {
+  -ms-grid-row: 1;
+  -ms-grid-column: 6;
   grid-area: bubble;
 }
 
 canvas {
+  -webkit-transition: 500ms ease-out;
   transition: 500ms ease-out;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
   grid-area: canvas;
   opacity: 0;
 }
@@ -147,17 +205,22 @@ canvas {
 }
 
 #sidebar {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
   grid-area: sidebar;
   place-self: center stretch;
-  padding-right: 15px;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
-  grid-template-areas: "shuffle sort" "reset reset" "speed speed" "size size" "color color" "track track" "swap count";
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+  -ms-grid-rows: (50px)[2] (60px)[2] (50px)[3];
+      grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
+      grid-template-areas: 'shuffle sort' 'reset reset' 'speed speed' 'size size' 'color color' 'track track' 'swap count';
 }
 
 button {
   outline: none;
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   border: none;
   border-color: #172DA6;
@@ -174,12 +237,15 @@ button:hover {
   background-color: #f7f9fb;
   color: #172DA6;
 }
+
 button:hover .triangle {
   border-left: 24px solid #172DA6;
 }
+
 button:hover .square {
   background-color: #172DA6;
 }
+
 button:hover svg {
   padding-top: 0;
   fill: #172DA6;
@@ -189,17 +255,21 @@ button:active {
   background-color: #172DA6;
   color: #f7f9fb;
 }
+
 button:active .triangle {
   border-left: 24px solid #F2F2F2;
 }
+
 button:active .square {
   background-color: #F2F2F2;
 }
+
 button:active svg {
   fill: #F2F2F2;
 }
 
-input[type=range] {
+input[type="range"] {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -216,6 +286,7 @@ input:hover {
 }
 
 input::-webkit-slider-thumb {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -236,9 +307,15 @@ input::-webkit-slider-thumb:hover {
 
 label {
   height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .slider {
@@ -249,10 +326,14 @@ label {
 }
 
 #shuffle-btn {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   grid-area: shuffle;
 }
 
 #sort-btn {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: sort;
 }
 
@@ -265,60 +346,100 @@ label {
 }
 
 #speed-sld {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: speed;
 }
 
 #size-sld {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: size;
 }
 
 #reset-btn {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: reset;
 }
 
 #reset-btn:hover svg {
-  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
+
 #reset-btn:hover:active svg {
-  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 
 #color {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: color;
 }
 
 #track {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: track;
 }
 
 #swap {
+  -ms-grid-row: 7;
+  -ms-grid-column: 1;
   grid-area: swap;
   background-color: #172DA6;
   color: #f7f9fb;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #swap-counter {
+  -ms-grid-row: 7;
+  -ms-grid-column: 2;
   grid-area: count;
   background-color: #172DA6;
   color: #f7f9fb;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 16px;
 }
 
 .checkbox {
   background-color: #172DA6;
   color: #f7f9fb;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -331,7 +452,8 @@ input[type=checkbox] {
   opacity: 0.8;
 }
 
-input[type=checkbox]::before {
+input[type="checkbox"]::before {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   display: inline-block;
   content: "";
@@ -342,16 +464,18 @@ input[type=checkbox]::before {
   border-style: solid;
   border-color: #f7f9fb;
   border-width: 2px;
-  transform: translateX(0);
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 
-input[type=checkbox]:hover {
+input[type="checkbox"]:hover {
   opacity: 1;
 }
 
-input[type=checkbox]:checked:before {
+input[type="checkbox"]:checked:before {
   display: inline-block;
-  transform: translateX(30px);
+  -webkit-transform: translateX(30px);
+          transform: translateX(30px);
 }
 
 .triangle {
@@ -371,8 +495,8 @@ input[type=checkbox]:checked:before {
 }
 
 svg {
+  -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
   fill: #f7f9fb;
 }
-
 /*# sourceMappingURL=main.css.map */
