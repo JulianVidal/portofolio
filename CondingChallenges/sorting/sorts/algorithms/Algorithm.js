@@ -12,7 +12,7 @@ export class Algorithm {
    * @returns Number[] shuffled array
    */
   shuffle (arr) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     for (let index = 0; index < array.length; index++) {
       const randomIndex = Math.round(Math.random() * (array.length - 1))
@@ -28,7 +28,7 @@ export class Algorithm {
    * @returns Number[] partially shuffled array
    */
   async animateShuffle (arr) {
-    let array = [...arr]
+    let array = [].concat(arr)
     this.jIndex = -1
     for (this.index = 0; this.index < array.length; this.index++) {
       const randomIndex = Math.round(Math.random() * (array.length - 1))
@@ -46,7 +46,7 @@ export class Algorithm {
    * @returns Number[] array with the swap
    */
   swap (arr, i, j) {
-    const array = [...arr]
+    const array = [].concat(arr)
 
     const value1 = array[i]
     array[i] = array[j]
@@ -61,7 +61,7 @@ export class Algorithm {
    * @returns A boolean that is true when the array is sorted
    */
   isSorted (arr) {
-    const array = [...arr]
+    const array = [].concat(arr)
     let inOrder = true
 
     array.forEach((element, i) => {

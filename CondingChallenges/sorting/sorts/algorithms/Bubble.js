@@ -9,7 +9,7 @@ export class Bubble extends Algorithm {
   sort (arr, passes) {
     // Copies the array to make function more pure
 
-    let array = [...arr] // The arrays won't be references to each other
+    let array = [].concat(arr) // The arrays won't be references to each other
 
     // Checks if the array is sorted
     if (this.isSorted(array)) return array
@@ -45,7 +45,7 @@ export class Bubble extends Algorithm {
    * @returns Number[] partially sorted array
    */
   async animateSort (arr, passes) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     if (this.isSorted(array)) {
       this.done = true

@@ -7,7 +7,7 @@ export class Merge extends Algorithm {
    * @returns Number[] sorted array
    */
   sort (arr) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     if (array.length !== 1) {
       let left = this.sort(array.slice(0, Math.round(array.length / 2)))
@@ -53,8 +53,8 @@ export class Merge extends Algorithm {
 
 
   async animateCombine (arr1, arr2, relI, relJ) {
-    let array1 = [...arr1]
-    let array2 = [...arr2]
+    let array1 = [].concat(arr1)
+    let array2 = [].concat(arr2)
     let array3 = []
 
     let i = 0
@@ -102,7 +102,7 @@ export class Merge extends Algorithm {
     this.done = false
 
     if (!relJ) {
-      this.array = [...array3]
+      this.array = [].concat(array3)
       this.sleep(100)
       this.done = true
     }
@@ -118,7 +118,7 @@ export class Merge extends Algorithm {
    * @returns Number[] sorted array
    */
   async animateSort (arr, i = 0, j) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     // Checks if the array is sorted
     if (this.isSorted(array)) {

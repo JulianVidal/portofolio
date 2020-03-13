@@ -8,7 +8,7 @@ export class Insertion extends Algorithm {
    */
   sort (arr) {
     // Copies the array to make function more pure
-    let array = [...arr] // The arrays won't be references to each other
+    let array = [].concat(arr) // The arrays won't be references to each other
 
     let index = 0 // Starts at the beginning of the array
 
@@ -58,7 +58,7 @@ export class Insertion extends Algorithm {
    * @returns Number[] partially sorted array
    */
   async animateSort (arr) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     if (this.isSorted(array)) {
       this.done = true

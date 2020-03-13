@@ -9,7 +9,7 @@ export class Selection extends Algorithm {
    */
   sort (arr, passes = 0) {
     // Copies the array to make function more pure
-    let array = [...arr] // The arrays won't be references to each other
+    let array = [].concat(arr) // The arrays won't be references to each other
 
     // Checks if the array is sorted
     if (this.isSorted(array)) return array
@@ -49,7 +49,7 @@ export class Selection extends Algorithm {
    */
   async animateSort (arr, passes = 0) {
     // Copies the array to make function more pure
-    let array = [...arr] // The arrays won't be references to each other
+    let array = [].concat(arr) // The arrays won't be references to each other
 
     // Checks if the array is sorted
     if (this.isSorted(array)) {

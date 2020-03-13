@@ -1,7 +1,6 @@
-import { Algorithm } from "./Algorithm.js";
+import { Algorithm } from './Algorithm.js'
 
 export class Quick extends Algorithm {
-
   /**
    * Sorts the array with quick sort
    * @param  {Array<Number>} arr The array that is going to be sorted
@@ -10,7 +9,7 @@ export class Quick extends Algorithm {
    * @returns Number[] sorted array
    */
   sort (arr, index, jIndex) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     if (this.isSorted(array)) return array
 
@@ -51,7 +50,6 @@ export class Quick extends Algorithm {
         pivotIndex = array.length - 1
       }
 
-
       const leftArray = this.sort(array.slice(0, pivotIndex)) // Left side
       const rightArray = this.sort(array.slice(pivotIndex + 1)) // Right side
 
@@ -65,7 +63,6 @@ export class Quick extends Algorithm {
     return this.sort(array, i, j)
   }
 
-
   /**
    * It does the first or next step for sorting (Used when drawing)
    * @param  {Array<Number>} arr The array that is going to be partially sorted
@@ -76,7 +73,7 @@ export class Quick extends Algorithm {
    * @returns Number[] partially sorted array
    */
   async animateSort (arr, relI = 0, i, j) {
-    let array = [...arr]
+    let array = [].concat(arr)
 
     if (this.isSorted(array)) {
       this.done = true
@@ -113,8 +110,10 @@ export class Quick extends Algorithm {
       pivotIndex = jIndex
 
       const leftArray = await this.animateSort(array.slice(0, pivotIndex), relI) // Left side
-      const rightArray = await this.animateSort(array.slice(pivotIndex + 1), pivotIndex + 1 + relI) // Right side
-
+      const rightArray = await this.animateSort(
+        array.slice(pivotIndex + 1),
+        pivotIndex + 1 + relI
+      ) // Right side
 
       return leftArray.concat(array[pivotIndex]).concat(rightArray)
     } else if (index === jIndex) {
@@ -123,14 +122,20 @@ export class Quick extends Algorithm {
       // Switch it to the last index of the array
       if (pivot > left) {
         array = this.swap(array, pivotIndex, array.length - 1)
-        this.array = this.swap(this.array, pivotIndex + relI, array.length - 1 + relI)
+        this.array = this.swap(
+          this.array,
+          pivotIndex + relI,
+          array.length - 1 + relI
+        )
         await this.sleep(this.speed)
         pivotIndex = array.length - 1
       }
 
       const leftArray = await this.animateSort(array.slice(0, pivotIndex), relI) // Left side
-      const rightArray = await this.animateSort(array.slice(pivotIndex + 1), pivotIndex + 1 + relI) // Right side
-
+      const rightArray = await this.animateSort(
+        array.slice(pivotIndex + 1),
+        pivotIndex + 1 + relI
+      ) // Right side
 
       return leftArray.concat(array[pivotIndex]).concat(rightArray)
     }
@@ -141,6 +146,70 @@ export class Quick extends Algorithm {
       await this.sleep(this.speed)
     }
 
-    return this.animateSort(array, relI, index, jIndex);
+    return this.animateSort(array, relI, index, jIndex)
+  }
+
+  eSort (arr, start, end, index, jIndex) {
+
+    if (start >= end) return arr
+    if (this.isSorted(arr)) return arr
+
+    let array = arr
+
+    let pivotIndex = start || 0
+
+    const pivot = array[pivotIndex]
+
+    let i = index || pivotIndex + 1
+    let j = jIndex || (end || array.length - 1)
+
+    let left = array[i]
+    let right = array[j]
+
+    while (left < pivot && i < end) {
+      i++
+      left = array[i]
+    }
+
+    while (right > pivot && j > start + 1) {
+      j--
+      right = array[j]
+    }
+
+    if (i > j) {
+      array = this.swap(array, pivotIndex, j)
+      pivotIndex = j
+
+      const leftArray = this.eSort(array, start, pivotIndex - 1)
+      const rightArray = this.eSort(leftArray, pivotIndex + 1, end)
+
+      return rightArray
+    } else if (i === j) {
+
+      if (pivot > left) {
+        array = this.swap(array, pivotIndex, end)
+        pivotIndex = end
+      }
+
+      let leftArray = array
+
+      if (pivotIndex !== start) {
+        leftArray = this.eSort(array, start, pivotIndex - 1)
+      }
+
+      let rightArray = leftArray
+
+      if (pivotIndex !== end) {
+        rightArray = this.eSort(leftArray, pivotIndex + 1, end)
+      }
+
+      return rightArray
+    }
+
+    if (left > pivot && right < pivot) {
+      array = this.swap(array, i, j)
+    }
+
+    return this.eSort(array, start, end, i, j)
   }
 }

@@ -7,14 +7,33 @@ Seacrh trends
  */
 
 import { Visualize } from './Visualize.js'
+import * as Algorithms from '../algorithms/Algorithms.js'
 
-const algorithm = 'Bubble'
+const algorithm = 'Quick'
 
 const visualize = new Visualize(algorithm)
 visualize.algorithm.array = visualize.algorithm.shuffle(visualize.algorithm.array)
 
 visualize.state()
 console.log(visualize.algorithm.array)
+
+const array = []
+
+for (let i = 1; i <= 10; i++) {
+  array.push(i)
+}
+
+console.log(array)
+
+const quick = new Algorithms.Quick()
+
+// console.log(quick.eSort(array))
+
+// console.log(quick.eSort(array, 0, array.length - 1))
+
+// console.time('sort')
+// console.log(quick.sort(array, 0, array.length - 1))
+// console.timeEnd('sort')
 
 const actives = [...document.getElementsByClassName('nav-active')]
 actives.forEach(element => {
@@ -66,7 +85,11 @@ function handleClick ({ target }) {
       visualize.shuffling()
       break
     case 'sort-btn':
-      visualize.sorting()
+      // visualize.sorting()
+      console.time('sort')
+      console.log(visualize.algorithm.sort(visualize.algorithm.array, 0, visualize.algorithm.array.length - 1))
+      console.timeEnd('sort')
+      visualize.state()
       break
     case 'rainbow':
       visualize.state()
