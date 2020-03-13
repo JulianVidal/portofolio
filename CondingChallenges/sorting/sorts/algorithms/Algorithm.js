@@ -76,6 +76,11 @@ export class Algorithm {
     return inOrder
   }
 
+  /**
+   *
+   * @param {Number} ms The amount of time the function should stop, ms
+   * @returns Resolved Promise
+   */
   sleep (ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   }

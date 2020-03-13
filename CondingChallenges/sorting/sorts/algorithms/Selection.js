@@ -4,7 +4,7 @@ export class Selection extends Algorithm {
   /**
    * Sorts the array with merge sort
    * @param  {Array<Number>} arr The array that is going to be sorted
-   * @param passes
+   * @param {Number} passes The times the function has ran, for recursion
    * @returns Number[] sorted array
    */
   sort (arr, passes = 0) {
@@ -44,7 +44,7 @@ export class Selection extends Algorithm {
   /**
    * Sorts the array with merge sort
    * @param  {Array<Number>} arr The array that is going to be sorted
-   * @param passes
+   * @param {Number} passes The times the function has ran, for recursion
    * @returns Number[] sorted array
    */
   async animateSort (arr, passes = 0) {

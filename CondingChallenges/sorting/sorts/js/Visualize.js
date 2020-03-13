@@ -9,9 +9,10 @@ export class Visualize {
    * @param array The array to be visualised
    */
   constructor (algorithm, array) {
-    this.bgColor = '#F2F2F2'
-    this.barColor = '#172DA6'
+    this.bgColor = '#F2F2F2' // Background color
+    this.barColor = '#172DA6' // Bar color
 
+    // Canvas size based on the window's width
     if (window.innerWidth > 635) {
       this.canvas = new Canvas(window.innerWidth - 333, 370)
     } else {
@@ -20,14 +21,17 @@ export class Visualize {
     this.canvas.background(this.bgColor)
     this.canvas.canvasElement.style.opacity = '1'
 
+    // Calculates width and height of bars
     this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = 370 / ((this.canvas.width) / this.barWidth)
 
+    // Sets up algorithm that will be used
     this.algorithm = new Algorithms[algorithm]()
     this.algorithm.array = array
     this.algorithm.speed = 1 / parseInt(document.getElementById('speed').value) * 1000
     this.algorithmName = algorithm
 
+    // Creates the array that will be sorted
     if (array === undefined) {
       this.algorithm.array = []
       for (let i = 1; i < Math.floor(this.canvas.width / this.barWidth) + 1; i++) {
@@ -35,6 +39,7 @@ export class Visualize {
       }
     }
 
+    // Booleans for animation
     this.isSorting = false
     this.isShuffling = false
     this.isStopped = false
@@ -116,10 +121,6 @@ export class Visualize {
       if (this.algorithm.jIndex === index && track) {
         color = '#f00'
       }
-
-      // if ((this.algorithm.rIndex === index || this.algorithm.index === index || this.algorithm.jIndex === index) && track){
-      //   color = '#f00'
-      // }
 
       let x = index * this.barWidth
       let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
