@@ -38,7 +38,6 @@ export class Quick extends Algorithm {
 
     // If index > Jindex then the partitioning is done
     if (index > jIndex) {
-
       // Swaps jIndex with pivot
       array = this.swap(array, pivotIndex, jIndex)
       pivotIndex = jIndex
@@ -122,7 +121,6 @@ export class Quick extends Algorithm {
 
     // If index > Jindex then the partitioning is done
     if (index > jIndex) {
-
       // Swaps jIndex with pivot
       array = this.swap(array, pivotIndex, jIndex)
 

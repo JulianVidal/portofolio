@@ -7,18 +7,16 @@ export class Merge extends Algorithm {
    * @returns Number[] sorted array
    */
   sort (arr) {
-    let array = [].concat(arr)
+    const array = [].concat(arr)
 
     if (array.length !== 1) {
-
       // Separates the array into two halves and sorts them separately
-      let left = this.sort(array.slice(0, Math.round(array.length / 2)))
-      let right = this.sort(array.slice(Math.round(array.length / 2)))
+      const left = this.sort(array.slice(0, Math.round(array.length / 2)))
+      const right = this.sort(array.slice(Math.round(array.length / 2)))
 
       // Combines the left and right arrays
       return this.combine(left, right)
     } else {
-
       // If the array only has one element then return the array
       return array
     }
@@ -26,8 +24,8 @@ export class Merge extends Algorithm {
 
   combine (arr1, arr2) {
     // Initialises all arrays to remove references
-    let array1 =  [].concat(arr1)
-    let array2 = [].concat(arr2)
+    const array1 = [].concat(arr1)
+    const array2 = [].concat(arr2)
     let array3 = []
 
     // Starts that the beginning of both arrays
@@ -40,15 +38,14 @@ export class Merge extends Algorithm {
 
     // While i and j are within their array length
     while (i < array1.length && j < array2.length) {
-
       if (value1 < value2) {
         array3.push(value1) // Pushes the smaller value
         i++ // Next element
         value1 = array1[i] // Updates value
       } else {
         array3.push(value2) // Pushes the smaller value
-        j++  // Next element
-        value2 = array2[j]  // Updates value
+        j++ // Next element
+        value2 = array2[j] // Updates value
       }
     }
 
@@ -62,10 +59,9 @@ export class Merge extends Algorithm {
     return array3
   }
 
-
   async animateCombine (arr1, arr2, relI, relJ) {
-    let array1 = [].concat(arr1)
-    let array2 = [].concat(arr2)
+    const array1 = [].concat(arr1)
+    const array2 = [].concat(arr2)
     let array3 = []
 
     // Starts that the beginning of both arrays
@@ -78,15 +74,14 @@ export class Merge extends Algorithm {
 
     // While i and j are within their array length
     while (i < array1.length && j < array2.length) {
-
       if (value1 < value2) {
         array3.push(value1) // Pushes the smaller value
         i++ // Next element
         value1 = array1[i] // Updates value
       } else {
         array3.push(value2) // Pushes the smaller value
-        j++  // Next element
-        value2 = array2[j]  // Updates value
+        j++ // Next element
+        value2 = array2[j] // Updates value
       }
 
       // Updates this.array
@@ -136,7 +131,7 @@ export class Merge extends Algorithm {
    * @returns Number[] sorted array
    */
   async animateSort (arr, i = 0, j) {
-    let array = [].concat(arr)
+    const array = [].concat(arr)
 
     // Checks if the array is sorted
     if (this.isSorted(array)) {
@@ -152,14 +147,12 @@ export class Merge extends Algorithm {
       // Separates the array into two halves and sorts them separately
       left = await this.animateSort(array.slice(0, Math.round(halfIndex)), i, Math.round(halfIndex) - 1 + i)
       right = await this.animateSort(array.slice(Math.round(halfIndex)), Math.round(halfIndex) + i, j || array.length - 1)
-
     } else {
-
       // If the array only has one element then return the array
       return array
     }
 
     // Combines the left and right arrays
-    return await this.animateCombine(left, right, i, j)
+    return this.animateCombine(left, right, i, j)
   }
 }

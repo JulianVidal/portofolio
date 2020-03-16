@@ -7,7 +7,7 @@ export class Bubble extends Algorithm {
    * @param {Number} passes The amount of times the function has been called, for recursion
    * @returns Number[] sorted array
    */
-  sort (arr, passes= 0) {
+  sort (arr, passes = 0) {
     // Copies the array to make function more pure
 
     let array = [].concat(arr) // The arrays won't be references to each other
@@ -47,7 +47,6 @@ export class Bubble extends Algorithm {
    * @returns Number[] partially sorted array
    */
   async animateSort (arr, passes = 0) {
-
     let array = [].concat(arr) // The arrays won't be references to each other
 
     // Checks if the array is sorted
@@ -65,7 +64,6 @@ export class Bubble extends Algorithm {
     // While index hasn't gone outside the array length + one
     // because of right needs the next index
     while (index < array.length - 1 - (passes || 0)) {
-
       // If the left value is bigger than the right value
       if (left > right) {
         array = this.swap(array, index, index + 1)

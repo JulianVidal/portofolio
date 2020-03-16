@@ -73,7 +73,6 @@ export class Insertion extends Algorithm {
     let right = array[index + 1]
 
     while (index < array.length - 1) {
-
       // If the left value is bigger than the right value
       if (left > right) {
         array = this.swap(array, index, index + 1) // Swap left and right

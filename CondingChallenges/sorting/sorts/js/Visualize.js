@@ -62,7 +62,7 @@ export class Visualize {
       this.isShuffling = false
       this.isStopped = false
     } else {
-      requestAnimationFrame((function (self) {
+      window.requestAnimationFrame((function (self) {
         return function () {
           self.shuffling()
         }
@@ -88,7 +88,7 @@ export class Visualize {
       this.isSorting = false
       this.isStopped = false
     } else {
-      requestAnimationFrame((function (self) {
+      window.requestAnimationFrame((function (self) {
         return function () {
           self.sorting()
         }
@@ -122,10 +122,10 @@ export class Visualize {
         color = '#f00'
       }
 
-      let x = index * this.barWidth
-      let y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
-      let width = rainbow ? this.barWidth : this.barWidth / 1.1
-      let height = rainbow ? this.canvas.height : this.barHeight * element
+      const x = index * this.barWidth
+      const y = rainbow ? 0 : this.canvas.height - (this.barHeight * element)
+      const width = rainbow ? this.barWidth : this.barWidth / 1.1
+      const height = rainbow ? this.canvas.height : this.barHeight * element
       Bar.draw(x, y, width, height, color, this.canvas)
     })
   }
