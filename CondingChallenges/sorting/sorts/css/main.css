@@ -3,8 +3,8 @@ html {
 }
 
 body {
-  background-color: #f7f9fb;
-  transition: 500ms;
+  background-color: #F2F2F2;
+  transition: 500ms ease-out;
   padding: 0;
   margin: 0;
   display: grid;
@@ -20,8 +20,8 @@ body {
 
 @media screen and (max-width: 635px) {
   body {
-    background-color: #f7f9fb;
-    transition: 500ms;
+    background-color: #F2F2F2;
+    transition: 500ms ease-out;
     padding: 0;
     margin: 0;
     display: grid;
@@ -38,15 +38,16 @@ body {
 nav {
   height: 40px;
   width: 100%;
-  transition: 400ms;
+  transition: 300ms ease-out;
   grid-area: nav;
   position: fixed;
   z-index: 1;
+  box-shadow: 0 8px 6px -6px #999;
 }
 
 nav:hover {
-  grid-template-rows: 60px 300px;
-  height: 60px;
+  grid-template-rows: 55px 300px;
+  height: 55px;
 }
 nav:hover li {
   transform: translateY(10px);
@@ -61,48 +62,52 @@ nav:hover #options svg {
 }
 
 ul {
-  transition: 400ms;
+  transition: 300ms ease-out;
   list-style-type: none;
-  background-color: #5889DA;
+  background-color: #1B1D40;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 130px) auto 45px 10px;
+  grid-template-columns: repeat(6, 130px) auto 45px 10px;
   grid-template-rows: 40px;
-  grid-template-areas: "home merge quick insertion bubble . options .";
+  grid-template-areas: "home selection merge quick insertion bubble . options .";
 }
 
 li {
-  transition: 400ms;
+  transition: 300ms ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f7f9fb;
-  background-color: #5889DA;
+  background-color: #1B1D40;
   font-size: 16px;
   cursor: default;
 }
 
 li:hover {
-  background-color: #f7f9fb;
+  background-color: #F2F2F2;
   color: #2F6CD0;
 }
 li:hover svg {
-  fill: #5889DA;
+  fill: #1B1D40;
 }
 
 li:active {
-  background-color: #2F6CD0;
-  color: #f7f9fb;
+  background-color: #1B1D40;
+  color: #F2F2F2;
 }
 li:active svg {
-  fill: #f7f9fb;
+  fill: #F2F2F2;
 }
 
 #home {
   grid-area: home;
+}
+
+#Selection-sort {
+  grid-area: selection;
 }
 
 #Merge-sort {
@@ -132,35 +137,33 @@ li:active svg {
 }
 
 canvas {
-  transition: 600ms;
+  transition: 500ms ease-out;
   grid-area: canvas;
   opacity: 0;
 }
 
 .nav-active {
-  background-color: #f7f9fb;
+  background-color: #F2F2F2;
   color: #2F6CD0;
 }
 
 #sidebar {
   grid-area: sidebar;
-  padding-right: 15px;
+  place-self: center stretch;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
-  grid-template-areas: "shuffle sort" "start stop" "speed speed" "size size" "color color" "track track" "reset reset";
-  align-content: center;
-  justify-content: stretch;
+  grid-template-areas: "shuffle sort" "reset reset" "speed speed" "size size" "color color" "track track" "swap count";
 }
 
 button {
   outline: none;
-  transition: 500ms;
+  transition: 300ms ease-out;
   border: none;
-  border-color: #2F6CD0;
+  border-color: #172DA6;
   border-width: 4px;
   border-style: solid;
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   color: #f7f9fb;
   width: 100%;
   height: 50px;
@@ -169,35 +172,35 @@ button {
 
 button:hover {
   background-color: #f7f9fb;
-  color: #2F6CD0;
+  color: #172DA6;
 }
 button:hover .triangle {
-  border-left: 24px solid #2F6CD0;
+  border-left: 24px solid #172DA6;
 }
 button:hover .square {
-  background-color: #2F6CD0;
+  background-color: #172DA6;
 }
 button:hover svg {
   padding-top: 0;
-  fill: #2F6CD0;
+  fill: #172DA6;
 }
 
 button:active {
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   color: #f7f9fb;
 }
 button:active .triangle {
-  border-left: 24px solid #f7f9fb;
+  border-left: 24px solid #F2F2F2;
 }
 button:active .square {
-  background-color: #f7f9fb;
+  background-color: #F2F2F2;
 }
 button:active svg {
-  fill: #f7f9fb;
+  fill: #F2F2F2;
 }
 
 input[type=range] {
-  transition: 300ms;
+  transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -213,11 +216,11 @@ input:hover {
 }
 
 input::-webkit-slider-thumb {
-  transition: 100ms;
+  transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   width: 20px;
   height: 20px;
   border-style: solid;
@@ -240,7 +243,7 @@ label {
 
 .slider {
   padding: 5px 5px;
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   color: #f7f9fb;
   text-align: center;
 }
@@ -273,6 +276,13 @@ label {
   grid-area: reset;
 }
 
+#reset-btn:hover svg {
+  transform: rotate(180deg);
+}
+#reset-btn:hover:active svg {
+  transform: rotate(360deg);
+}
+
 #color {
   grid-area: color;
 }
@@ -281,15 +291,35 @@ label {
   grid-area: track;
 }
 
+#swap {
+  grid-area: swap;
+  background-color: #172DA6;
+  color: #f7f9fb;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#swap-counter {
+  grid-area: count;
+  background-color: #172DA6;
+  color: #f7f9fb;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 16px;
+}
+
 .checkbox {
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   color: #f7f9fb;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 input[type=checkbox] {
-  transition: 500ms;
+  transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -302,13 +332,13 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]::before {
-  transition: 300ms;
+  transition: 300ms ease-out;
   display: inline-block;
   content: "";
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  background-color: #2F6CD0;
+  background-color: #172DA6;
   border-style: solid;
   border-color: #f7f9fb;
   border-width: 2px;
@@ -341,23 +371,8 @@ input[type=checkbox]:checked:before {
 }
 
 svg {
-  transition: 400ms;
+  transition: 300ms ease-out;
   fill: #f7f9fb;
-}
-
-#options-dropdown {
-  transition: 300ms;
-  height: 0px;
-  width: 160px;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-  overflow: hidden;
-  background-color: #2F6CD0;
-}
-
-.dropdown-text {
-  height: 100px;
 }
 
 /*# sourceMappingURL=main.css.map */
