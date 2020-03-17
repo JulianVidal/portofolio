@@ -1,0 +1,215 @@
+@import '../imports';
+
+$sidebar-bg-color: $color-8;
+$sidebar-tx-color: $tx-color;
+
+$sidebar-tx-size: $tx-size;
+
+$sidebar-tr-dur: $tr-dur;
+$sidebar-tr-func: $tr-func;
+
+
+$sidebar-btn-width: 50px;
+$sidebar-sld-height: 20px;
+$sidebar-sld-lbl-height: 20px;
+$sidebar-chk-height: 20px;
+$sidebar-chk-width: 50px;
+
+$sidebar-sld-bg-color: #f7f9fb;
+$sidebar-chk-bg-color: $tx-color;
+
+#sidebar {
+  grid-area: sidebar;
+
+  background-color: $sidebar-bg-color;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+
+  padding: 5px;
+
+  button {
+    outline: none;
+    transition: $sidebar-tr-dur $sidebar-tr-func;
+
+    border:none;
+
+    background-color:  $sidebar-bg-color;
+    color: $sidebar-tx-color;
+
+    width: 100%;
+    height: $sidebar-btn-width;
+
+    font-size: $sidebar-tx-size;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  button:hover {
+    background-color:  $tx-color;
+    color: $sidebar-bg-color;
+
+    .triangle {
+      border-left: 24px solid $sidebar-bg-color;
+    }
+
+    .square {
+      background-color: $sidebar-bg-color;
+    }
+
+    svg {
+      padding-top: 0;
+      fill: $sidebar-bg-color;
+    }
+  }
+
+  button:active {
+    background-color: $sidebar-bg-color;
+    color: $tx-color;
+
+    .triangle {
+      border-left: 24px solid $bg-color;
+    }
+
+    .square {
+      background-color: $bg-color;
+    }
+
+    svg {
+      fill: $bg-color;
+    }
+  }
+
+  #reset-btn:hover {
+    svg {
+      transform: rotate(180deg);
+    }
+
+    &:active {
+      svg {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  label {
+    height: $sidebar-sld-lbl-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slider {
+    height: 50px;
+    padding: 5px 5px;
+    background-color:  $sidebar-bg-color;
+    color: $tx-color;
+    text-align: center;
+  }
+
+  input[type="range"] {
+    transition: $sidebar-tr-dur $sidebar-tr-func;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    margin: 0;
+
+    height: $sidebar-sld-height;
+    width: 100%;
+
+    background-color: $sidebar-sld-bg-color;
+    opacity: 0.8;
+  }
+
+  input:hover {
+    opacity: 1;
+  }
+
+  input::-webkit-slider-thumb {
+    transition: $sidebar-tr-dur $sidebar-tr-func;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: $sidebar-bg-color;
+
+    width: $sidebar-sld-height;
+    height: $sidebar-sld-height;
+
+    border-style: solid;
+    border-color: $sidebar-tx-color;
+    border-width: 3px;
+  }
+
+  input::-webkit-slider-thumb:hover {
+    border-style: solid;
+    border-color:  $sidebar-sld-bg-color;
+    border-width: 0;
+  }
+
+  .checkbox {
+    height: 50px;
+    background-color: $sidebar-bg-color;
+    color: $sidebar-tx-color;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  input[type="checkbox"] {
+    transition: $sidebar-tr-dur $sidebar-tr-func;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    width: $sidebar-chk-width;
+    height: $sidebar-chk-height;
+
+    background-color: $sidebar-chk-bg-color;
+
+    border-radius: 20px;
+
+    opacity: 0.7;
+  }
+
+  input[type="checkbox"]::before {
+    transition: $sidebar-tr-dur $sidebar-tr-func;
+
+    display: inline-block;
+    content: "";
+    width: $sidebar-chk-height - 4px;
+    height: $sidebar-chk-height - 4px;
+
+    border-radius: 100%;
+
+    background-color: $sidebar-bg-color;
+
+    border-style: solid;
+    border-color: $sidebar-tx-color;
+    border-width: 2px;
+
+    transform: translateX(0);
+  }
+
+  input[type="checkbox"]:hover {
+    opacity: 1;
+  }
+
+  input[type="checkbox"]:checked {
+    &:before {
+      display: inline-block;
+      transform: translateX(30px);
+    }
+  }
+
+
+}

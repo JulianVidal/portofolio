@@ -23,7 +23,7 @@ export class Visualize {
 
     // Calculates width and height of bars
     this.barWidth = parseInt(document.getElementById('size').value)
-    this.barHeight = 370 / ((this.canvas.width) / this.barWidth)
+    this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
 
     // Sets up algorithm that will be used
     this.algorithm = new Algorithms[algorithm]()
@@ -146,9 +146,8 @@ export class Visualize {
     this.algorithm = new Algorithms[this.algorithmName]()
 
     this.algorithm.array = []
-
-    for (let index = 1; index < Math.floor(this.canvas.width / this.barWidth) + 1; index++) {
-      this.algorithm.array.push(index)
+    for (let i = 1; i < Math.floor(this.canvas.width / this.barWidth) + 1; i++) {
+      this.algorithm.array.push(i)
     }
 
     this.state()

@@ -1,34 +1,4 @@
-@import 'imports/colors';
-$bg-color: $background;
-$pr-color: #2F6CD0;
-$sc-color: #5889DA;
-$tr-color: #a80038;
-
-$tx-color: #f7f9fb;
-$tx-size: 16px;
-
-$UI-ease: ease-out;
-$UI-trans: 300ms;
-
-$Big-trans: 500ms;
-
-$nav-bg-color: #1B1D40;
-$nav-height-min: 40px;
-$nav-height-max: 55px;
-$nav-trans: $UI-trans;
-
-$sidebar-bg-color: #172DA6;
-$sidebar-tx-color: #f7f9fb;
-
-$sld-rg-color: #404040;
-$sld-th-color: $tr-color;
-$sld-bg-color: $sidebar-tx-color;
-$sld-height: 20px;
-$sld-txt-height: 30px;
-
-$btn-bg-color: $sidebar-bg-color;
-
-$chk-bg-color: $tx-color;
+@import 'elements/nav', 'elements/sidebar';
 
 html {
   font-family: sans-serif;
@@ -37,18 +7,18 @@ html {
 body {
   background-color: $bg-color;
 
-  transition: $Big-trans $UI-ease;
+  transition: $tr-long-dur $tr-func;
 
   padding: 0;
   margin: 0;
 
   display: grid;
   grid-template-columns: 15px auto 303px 15px;
-  grid-template-rows: $nav-height-min auto;
+  grid-template-rows: $nav-height auto;
   grid-template-areas:
     'nav nav nav nav'
     '. canvas sidebar .';
-  grid-row-gap: 20px;
+  grid-row-gap: 15px;
   grid-column-gap: 15px;
   opacity: 0;
   align-items: center;
@@ -59,14 +29,14 @@ body {
   body {
     background-color: $bg-color;
 
-    transition: $Big-trans $UI-ease;
+    transition: $tr-long-dur $tr-func;
 
     padding: 0;
     margin: 0;
 
     display: grid;
     grid-template-columns: 15px auto 303px 15px;
-    grid-template-rows: $nav-height-min auto auto;
+    grid-template-rows: $nav-height auto auto;
     grid-template-areas:
             'nav nav nav nav'
             '. canvas canvas .'
@@ -79,347 +49,16 @@ body {
   }
 }
 
-
-nav {
-  height: $nav-height-min;
-  width: 100%;
-
-  transition: $nav-trans $UI-ease;
-
-  grid-area: nav;
-
-  position: fixed;
-  z-index: 1;
-
-  box-shadow: 0 8px 6px -6px #999;
-}
-
-nav:hover {
-  grid-template-rows: $nav-height-max 300px;
-  height: $nav-height-max;
-
-  #home {
-    svg {
-      width: 35px;
-      height: 35px;
-    }
-  }
-
-  #options {
-    svg {
-      width: 39px;
-      height: 39px;
-    }
-  }
-}
-
-
-ul {
-  transition: $nav-trans $UI-ease;
-
-  list-style-type: none;
-
-  background-color: $nav-bg-color;
-
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.nav-element {
-  transition: $nav-trans $UI-ease;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: $tx-color;
-  background-color: $nav-bg-color;
-  font-size: $tx-size;
-
-  width: 130px;
-
-  cursor: default;
-}
-
-.nav-element:hover {
-  background-color: $bg-color;
-  color: $pr-color;
-
-  svg {
-    fill: $nav-bg-color;
-  }
-}
-
-.nav-element:active {
-  background-color: $nav-bg-color;
-  color: $bg-color;
-
-  svg {
-    fill: $bg-color;
-  }
-}
-
-#options {
-  grid-area: options;
-  display: inline-block;
-  padding-top: 3px;
-}
-
-#options:hover {
-  #options-dropdown {
-    height: auto;
-  }
-}
-
-#Bubble-sort {
-  grid-area: bubble;
-}
-
 canvas {
-  transition: $Big-trans $UI-ease;
+  transition: $tr-long-dur $tr-func;
   grid-area: canvas;
   opacity: 0;
 }
 
-.nav-active {
-  background-color: $bg-color;
-  color: $pr-color;
-}
-
-#sidebar {
-  grid-area: sidebar;
-  background-color: $sidebar-bg-color;
-  justify-content: center;
-  align-content: space-between;
-  padding: 5px;
-}
-
-button {
-  outline: none;
-  transition: $UI-trans $UI-ease;
-
-  border: none;
-  border-color: $sidebar-bg-color;
-  border-width: 4px;
-  border-style: solid;
-
-  background-color:  $sidebar-bg-color;
-  color: $sidebar-tx-color;
-
-  width: 100%;
-  height: 50px;
-
-  font-size: $tx-size;
-
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-button:hover {
-  background-color:  $sidebar-tx-color;
-  color: $sidebar-bg-color;
-
-  .triangle {
-    border-left: 24px solid $sidebar-bg-color;
-  }
-
-  .square {
-    background-color: $sidebar-bg-color;
-  }
-
-  svg {
-    padding-top: 0;
-    fill: $sidebar-bg-color;
-  }
-}
-
-button:active {
-  background-color: $sidebar-bg-color;
-  color: $tx-color;
-
-  .triangle {
-    border-left: 24px solid $bg-color;
-  }
-
-  .square {
-    background-color: $bg-color;
-  }
-
-  svg {
-    fill: $bg-color;
-  }
-}
-
-input[type="range"] {
-  transition: $UI-trans $UI-ease;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  margin: 0;
-
-  height: $sld-height;
-  width: 100%;
-
-  background-color: $sld-bg-color;
-  opacity: 0.8;
-
-}
-
-input:hover {
-  opacity: 1;
-}
-
-input::-webkit-slider-thumb {
-  transition: $UI-trans $UI-ease;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  background-color: $sidebar-bg-color;
-
-  width: $sld-height;
-  height: $sld-height;
-
-  border-style: solid;
-  border-color: $sidebar-tx-color;
-  border-width: 2px;
-}
-
-input::-webkit-slider-thumb:hover {
-  border-style: solid;
-  border-color:  $sidebar-tx-color;
-  border-width: 0px;
-}
-
-label {
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slider {
-  height: 50px;
-  padding: 5px 5px;
-  background-color:  $sidebar-bg-color;
-  color: $tx-color;
-  text-align: center;
-}
-
-#reset-btn:hover {
-  svg {
-    transform: rotate(180deg);
-  }
-
-  &:active {
-    svg {
-      transform: rotate(360deg);
-    }
-  }
-}
-
-#swap {
-  grid-area: swap;
-  background-color: $sidebar-bg-color;
-  color: $sidebar-tx-color;
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-#swap-counter {
-  grid-area: count;
-  background-color: $sidebar-bg-color;
-  color: $sidebar-tx-color;
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-size: $tx-size;
-}
-
-.checkbox {
-  height: 50px;
-  background-color: $sidebar-bg-color;
-  color: $sidebar-tx-color;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-input[type="checkbox"] {
-  transition: $UI-trans $UI-ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  width: 50px;
-  height: 20px;
-
-  background-color: $chk-bg-color;
-
-  border-radius: 20px;
-
-  opacity: 0.8;
-}
-
-input[type="checkbox"]::before {
-  transition: $UI-trans $UI-ease;
-  display: inline-block;
-  content: "";
-  width: 16px;
-  height: 16px;
-
-  border-radius: 100%;
-
-  background-color: $sidebar-bg-color;
-
-  border-style: solid;
-  border-color: $sidebar-tx-color;
-  border-width: 2px;
-
-  transform: translateX(0);
-}
-
-input[type="checkbox"]:hover {
-  opacity: 1;
-}
-
-input[type="checkbox"]:checked {
-  &:before {
-    display: inline-block;
-    transform: translateX(30px);
-  }
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-top: 12px solid transparent;
-  border-left: 24px solid $sidebar-tx-color;
-  border-bottom: 12px solid transparent;
-  margin: auto;
-}
-
-.square {
-  height: 24px;
-  width: 24px;
-  background-color: $sidebar-tx-color;
-  margin: auto;
-}
-
 svg {
-  transition: $UI-trans $UI-ease;
-  fill: $sidebar-tx-color;
-}
+  transition: $tr-dur $tr-func;
+   fill: $sidebar-tx-color;
+ }
 
 .row {
   display: flex;

@@ -1,0 +1,76 @@
+@import '../imports';
+
+$nav-bg-color: $color-10;
+$nav-tx-color: $tx-color;
+
+$nav-height: 45px;
+$nav-width: 130px;
+
+$nav-tx-size: $tx-size;
+
+$nav-tr-dur: $tr-dur;
+$nav-tr-func: $tr-func;
+
+nav {
+  height: $nav-height;
+  width: 100%;
+
+  transition: $nav-tr-dur $nav-tr-func;
+
+  position: fixed;
+
+  box-shadow: 0 8px 6px -6px #999;
+
+  ul {
+    transition: $nav-tr-dur $nav-tr-func;
+
+    list-style-type: none;
+
+    background-color: $nav-bg-color;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    li {
+      transition: $nav-tr-dur $nav-tr-func;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: $nav-tx-color;
+      background-color: $nav-bg-color;
+      font-size: $nav-tx-size;
+
+      width: $nav-width;
+
+      cursor: default;
+    }
+
+    li:hover {
+      background-color: $nav-tx-color;
+      color: $nav-bg-color;
+
+      svg {
+        fill: $nav-bg-color;
+      }
+    }
+
+    li:active {
+      background-color: $nav-bg-color;
+      color: $nav-tx-color;
+
+      svg {
+        fill: $nav-tx-color;
+      }
+    }
+
+    .nav-active {
+      background-color: $nav-tx-color;
+      color: $nav-bg-color;
+    }
+  }
+
+}
