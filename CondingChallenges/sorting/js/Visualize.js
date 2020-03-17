@@ -1,5 +1,5 @@
 import * as Algorithms from '../algorithms/Algorithms.js'
-import { Canvas } from '../../lib/Canvas.js'
+import { Canvas } from '../lib/Canvas.js'
 import { Bar } from './Bar.js'
 
 export class Visualize {

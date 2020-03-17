@@ -1,5 +1,5 @@
-// https://colorhunt.co/palette/131842
-$bg-color: #F2F2F2;
+@import 'imports/colors';
+$bg-color: $background;
 $pr-color: #2F6CD0;
 $sc-color: #5889DA;
 $tr-color: #a80038;
@@ -98,10 +98,6 @@ nav:hover {
   grid-template-rows: $nav-height-max 300px;
   height: $nav-height-max;
 
-  li {
-    transform: translateY(10px);
-  }
-
   #home {
     svg {
       width: 35px;
@@ -129,15 +125,9 @@ ul {
   padding: 0;
   width: 100%;
   height: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(6, 130px) auto 45px 10px;
-  grid-template-rows: $nav-height-min;
-  grid-template-areas:
-    'home selection merge quick insertion bubble . options .';
 }
 
-li {
+.nav-element {
   transition: $nav-trans $UI-ease;
 
   display: flex;
@@ -148,10 +138,12 @@ li {
   background-color: $nav-bg-color;
   font-size: $tx-size;
 
+  width: 130px;
+
   cursor: default;
 }
 
-li:hover {
+.nav-element:hover {
   background-color: $bg-color;
   color: $pr-color;
 
@@ -160,33 +152,13 @@ li:hover {
   }
 }
 
-li:active {
+.nav-element:active {
   background-color: $nav-bg-color;
   color: $bg-color;
 
   svg {
     fill: $bg-color;
   }
-}
-
-#home {
-  grid-area: home;
-}
-
-#Selection-sort {
-  grid-area: selection;
-}
-
-#Merge-sort {
-  grid-area: merge;
-}
-
-#Quick-sort {
-  grid-area: quick;
-}
-
-#Insertion-sort {
-  grid-area: insertion;
 }
 
 #options {
@@ -218,20 +190,11 @@ canvas {
 
 #sidebar {
   grid-area: sidebar;
-  place-self: center stretch;
-
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(2, 50px) repeat(2, 60px) repeat(3, 50px);
-  grid-template-areas:
-    'shuffle sort'
-    'reset reset'
-    'speed speed'
-    'size size'
-    'color color'
-    'track track'
-    'swap count';
-  }
+  background-color: $sidebar-bg-color;
+  justify-content: center;
+  align-content: space-between;
+  padding: 5px;
+}
 
 button {
   outline: none;
@@ -249,6 +212,10 @@ button {
   height: 50px;
 
   font-size: $tx-size;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 button:hover {
@@ -338,38 +305,11 @@ label {
 }
 
 .slider {
+  height: 50px;
   padding: 5px 5px;
   background-color:  $sidebar-bg-color;
   color: $tx-color;
   text-align: center;
-}
-
-#shuffle-btn {
-  grid-area: shuffle;
-}
-
-#sort-btn {
-  grid-area: sort;
-}
-
-#start-btn {
-  grid-area: start;
-}
-
-#stop-btn {
-  grid-area: stop;
-}
-
-#speed-sld {
-  grid-area: speed;
-}
-
-#size-sld {
-  grid-area: size;
-}
-
-#reset-btn {
-  grid-area: reset;
 }
 
 #reset-btn:hover {
@@ -382,14 +322,6 @@ label {
       transform: rotate(360deg);
     }
   }
-}
-
-#color {
-  grid-area: color;
-}
-
-#track {
-  grid-area: track;
 }
 
 #swap {
@@ -414,6 +346,7 @@ label {
 }
 
 .checkbox {
+  height: 50px;
   background-color: $sidebar-bg-color;
   color: $sidebar-tx-color;
 
@@ -486,4 +419,19 @@ input[type="checkbox"]:checked {
 svg {
   transition: $UI-trans $UI-ease;
   fill: $sidebar-tx-color;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }

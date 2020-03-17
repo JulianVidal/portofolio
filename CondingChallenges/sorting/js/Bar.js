@@ -1,4 +1,4 @@
-import { Vector } from '../../lib/Vector.js'
+import { Vector } from '../lib/Vector.js'
 
 export class Bar extends Vector {
   /**
