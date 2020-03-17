@@ -8,7 +8,7 @@ nav {
 nav ul {
   transition: 300ms ease-out;
   list-style-type: none;
-  background-color: #311B92;
+  background-color: #3f1dcb;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -20,20 +20,20 @@ nav ul li {
   justify-content: center;
   align-items: center;
   color: #f7f9fb;
-  background-color: #311B92;
+  background-color: #3f1dcb;
   font-size: 16px;
   width: 130px;
   cursor: default;
 }
 nav ul li:hover {
   background-color: #f7f9fb;
-  color: #311B92;
+  color: #3f1dcb;
 }
 nav ul li:hover svg {
-  fill: #311B92;
+  fill: #3f1dcb;
 }
 nav ul li:active {
-  background-color: #311B92;
+  background-color: #3f1dcb;
   color: #f7f9fb;
 }
 nav ul li:active svg {
@@ -41,12 +41,12 @@ nav ul li:active svg {
 }
 nav ul .nav-active {
   background-color: #f7f9fb;
-  color: #311B92;
+  color: #3f1dcb;
 }
 
 #sidebar {
   grid-area: sidebar;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,7 @@ nav ul .nav-active {
   outline: none;
   transition: 300ms ease-out;
   border: none;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   color: #f7f9fb;
   width: 100%;
   height: 50px;
@@ -68,30 +68,30 @@ nav ul .nav-active {
 }
 #sidebar button:hover {
   background-color: #f7f9fb;
-  color: #512DA8;
+  color: #7c4dff;
 }
 #sidebar button:hover .triangle {
-  border-left: 24px solid #512DA8;
+  border-left: 24px solid #7c4dff;
 }
 #sidebar button:hover .square {
-  background-color: #512DA8;
+  background-color: #7c4dff;
 }
 #sidebar button:hover svg {
   padding-top: 0;
-  fill: #512DA8;
+  fill: #7c4dff;
 }
 #sidebar button:active {
-  background-color: #512DA8;
+  background-color: #7c4dff;
   color: #f7f9fb;
 }
 #sidebar button:active .triangle {
-  border-left: 24px solid #F2F2F2;
+  border-left: 24px solid #EEE;
 }
 #sidebar button:active .square {
-  background-color: #F2F2F2;
+  background-color: #EEE;
 }
 #sidebar button:active svg {
-  fill: #F2F2F2;
+  fill: #EEE;
 }
 #sidebar #reset-btn:hover svg {
   transform: rotate(180deg);
@@ -108,7 +108,7 @@ nav ul .nav-active {
 #sidebar .slider {
   height: 50px;
   padding: 5px 5px;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   color: #f7f9fb;
   text-align: center;
 }
@@ -131,7 +131,7 @@ nav ul .nav-active {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   width: 20px;
   height: 20px;
   border-style: solid;
@@ -145,7 +145,7 @@ nav ul .nav-active {
 }
 #sidebar .checkbox {
   height: 50px;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   color: #f7f9fb;
   display: flex;
   justify-content: space-around;
@@ -170,7 +170,7 @@ nav ul .nav-active {
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  background-color: #512DA8;
+  background-color: #7c4dff;
   border-style: solid;
   border-color: #f7f9fb;
   border-width: 2px;
@@ -189,7 +189,7 @@ html {
 }
 
 body {
-  background-color: #F2F2F2;
+  background-color: #EEE;
   transition: 500ms ease-out;
   padding: 0;
   margin: 0;
@@ -206,7 +206,7 @@ body {
 
 @media screen and (max-width: 635px) {
   body {
-    background-color: #F2F2F2;
+    background-color: #EEE;
     transition: 500ms ease-out;
     padding: 0;
     margin: 0;
