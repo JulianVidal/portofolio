@@ -13,11 +13,8 @@ export class Visualize {
     this.barColor = '#7c4dff' // Bar color
 
     // Canvas size based on the window's width
-    if (window.innerWidth > 635) {
-      this.canvas = new Canvas(window.innerWidth - 333, 370)
-    } else {
-      this.canvas = new Canvas(303, 370)
-    }
+    this.canvas = new Canvas(window.innerWidth, window.innerHeight - 40)
+
     this.canvas.background(this.bgColor)
     this.canvas.canvasElement.style.opacity = '1'
 
@@ -34,7 +31,7 @@ export class Visualize {
     // Creates the array that will be sorted
     if (array === undefined) {
       this.algorithm.array = []
-      for (let i = 1; i < Math.floor(this.canvas.width / this.barWidth) + 1; i++) {
+      for (let i = 1; i < (this.canvas.width / this.barWidth) + 1; i++) {
         this.algorithm.array.push(i)
       }
     }
@@ -140,13 +137,14 @@ export class Visualize {
     this.isShuffling = false
     this.isSorting = false
 
+    // Calculates width and height of bars
     this.barWidth = parseInt(document.getElementById('size').value)
     this.barHeight = (this.canvas.height - 10) / ((this.canvas.width / this.barWidth))
 
     this.algorithm = new Algorithms[this.algorithmName]()
 
     this.algorithm.array = []
-    for (let i = 1; i < Math.floor(this.canvas.width / this.barWidth) + 1; i++) {
+    for (let i = 1; i < (this.canvas.width / this.barWidth) + 1; i++) {
       this.algorithm.array.push(i)
     }
 

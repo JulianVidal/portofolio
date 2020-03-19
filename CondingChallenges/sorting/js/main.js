@@ -20,12 +20,16 @@ actives.forEach(element => {
 })
 document.getElementById(algorithm + '-sort').classList.add('nav-active')
 
+document.getElementsByClassName('dropdown-title')[0].innerHTML = document.getElementById(algorithm + '-sort').innerHTML
+
 function changeAlgorithm (algorithm) {
   const actives = [...document.getElementsByClassName('nav-active')]
   actives.forEach(element => {
     element.classList.remove('nav-active')
   })
   document.getElementById(algorithm + '-sort').classList.add('nav-active')
+
+  document.getElementsByClassName('dropdown-title')[0].innerHTML = document.getElementById(algorithm + '-sort').innerHTML
 
   document.getElementsByTagName('canvas')[0].style.opacity = '0'
 
@@ -42,11 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.onresize = () => {
-  if (window.innerWidth > 635) {
-    visualize.canvas.setSize(window.innerWidth - 333, visualize.canvas.height)
-  } else {
-    visualize.canvas.setSize(303, visualize.canvas.height)
-  }
+    visualize.canvas.setSize(window.innerWidth, window.innerHeight - 40)
 
   visualize.reset()
 }
@@ -58,7 +58,6 @@ function handleClick ({ target }) {
     element = element.parentNode
     if (element === null) return
   }
-
   switch (element.id) {
     case 'shuffle-btn':
       visualize.shuffling()
@@ -94,6 +93,7 @@ function handleClick ({ target }) {
     case 'Selection-sort':
       if (visualize.algorithmName === 'Selection') break
       changeAlgorithm('Selection')
+      break
   }
 }
 

@@ -3,13 +3,22 @@
 $nav-bg-color: $color-dark;
 $nav-tx-color: $tx-color;
 
-$nav-height: 45px;
+$nav-height: 50px;
 $nav-width: 130px;
 
 $nav-tx-size: $tx-size;
 
 $nav-tr-dur: $tr-dur;
 $nav-tr-func: $tr-func;
+
+$nav-btn-width: 50px;
+$nav-sld-height: 20px;
+$nav-sld-lbl-height: 20px;
+$nav-chk-height: 20px;
+$nav-chk-width: 50px;
+
+$nav-sld-bg-color: #f7f9fb;
+$nav-chk-bg-color: $tx-color;
 
 nav {
   height: $nav-height;
@@ -21,9 +30,10 @@ nav {
 
   box-shadow: 0 8px 6px -6px #999;
 
+  z-index: 2;
+
   ul {
     transition: $nav-tr-dur $nav-tr-func;
-
     list-style-type: none;
 
     background-color: $nav-bg-color;
@@ -36,6 +46,8 @@ nav {
     li {
       transition: $nav-tr-dur $nav-tr-func;
 
+      float: left;
+
       display: flex;
       justify-content: center;
       align-items: center;
@@ -44,33 +56,238 @@ nav {
       background-color: $nav-bg-color;
       font-size: $nav-tx-size;
 
+      height: $nav-height;
       width: $nav-width;
 
       cursor: default;
-    }
 
-    li:hover {
-      background-color: $nav-tx-color;
-      color: $nav-bg-color;
 
-      svg {
-        fill: $nav-bg-color;
+      &:hover {
+        background-color: $nav-tx-color;
+        color: $nav-bg-color;
+
+        svg {
+          padding-top: 0;
+          fill: $nav-bg-color;
+        }
+
+        input[type="checkbox"] {
+          background-color: $nav-tx-color;
+          color: $nav-bg-color;
+        }
+      }
+
+      &:active {
+        background-color: $nav-bg-color;
+        color: $nav-tx-color;
+
+        svg {
+          fill: $nav-tx-color;
+        }
+
+        input[type="checkbox"] {
+          background-color: $nav-bg-color;
+          color: $nav-tx-color;
+        }
+      }
+
+      .slider-container {
+        height: $nav-height;
+        width: $nav-width * 2;
+
+        position: relative;
+        left: (-($nav-width) / 2) - (($nav-width - 50) / 2) + 6;
+
+        background-color:  $nav-bg-color;
+        color: $tx-color;
+
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+
+        padding: 0 10px;
+      }
+
+      input[type="range"] {
+        transition: $nav-tr-dur $nav-tr-func;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        margin: 0;
+
+        height: $nav-sld-height;
+        width: 100%;
+
+        background-color: $nav-sld-bg-color;
+        opacity: 0.8;
+      }
+
+      input:hover {
+        opacity: 1;
+      }
+
+      input::-webkit-slider-thumb {
+        transition: 50ms $nav-tr-func;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        background-color: $nav-bg-color;
+
+        width: $nav-sld-height;
+        height: $nav-sld-height;
+
+        border-style: solid;
+        border-color: $nav-tx-color;
+        border-width: 3px;
+      }
+
+      input::-webkit-slider-thumb:hover {
+        border-style: solid;
+        border-color:  $nav-sld-bg-color;
+        border-width: 0;
+      }
+
+      label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type="checkbox"] {
+        transition: $nav-tr-dur $nav-tr-func;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+
+        width: $nav-width;
+        height: $nav-height;
+
+        margin: 0;
+
+        background-color: $nav-bg-color;
+      }
+
+      input[type="checkbox"]:checked {
+        background-color: $nav-tx-color;
+        color: $nav-bg-color;
+
+        &:checked + label {
+          color: $nav-bg-color;
+
+          svg {
+            fill: $nav-bg-color;
+          }
+
+        }
+
+        &:active  {
+          background-color: $nav-bg-color;
+          & + label {
+            svg {
+              fill: $nav-tx-color;
+            }
+          }
+
+        }
       }
     }
 
-    li:active {
+    #reset-btn:hover {
+      svg {
+        transform: rotate(180deg);
+      }
+
+      &:active {
+        svg {
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    .nav-width-short {
+      width: $nav-width - 30;
+    }
+
+
+    .dropdown {
+      transition: $nav-tr-dur $nav-tr-func;
+      position: relative;
+      display: inline-block;
+
+
+      .dropdown-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 100%;
+        height: $nav-height;
+      }
+
+      .dropdown-content {
+        transition: inherit;
+        display: block;
+        position: absolute;
+        background-color: $nav-bg-color;
+
+        height: 0;
+        overflow: hidden;
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: $nav-width;
+          height: $nav-height;
+
+          color: $nav-tx-color;
+          text-decoration: none;
+        }
+
+      }
+
+      .nav-active {
+        background-color: $nav-tx-color;
+        color: $nav-bg-color !important;
+      }
+
+    }
+
+    .dropdown:hover {
       background-color: $nav-bg-color;
       color: $nav-tx-color;
 
-      svg {
-        fill: $nav-tx-color;
+      .sort {
+        height: $nav-height * 5;
       }
+
+      .slider-container {
+        height: $nav-height;
+      }
+
+      a:hover {
+        background-color: $nav-tx-color;
+        color: $nav-bg-color;
+      }
+
+      span {
+        background-color: $nav-tx-color;
+        color: $nav-bg-color;
+
+        svg {
+          fill: $nav-bg-color;
+        }
+      }
+
     }
 
-    .nav-active {
-      background-color: $nav-tx-color;
-      color: $nav-bg-color;
-    }
   }
 
 }

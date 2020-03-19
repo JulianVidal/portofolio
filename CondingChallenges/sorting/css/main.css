@@ -1,9 +1,10 @@
 nav {
-  height: 45px;
+  height: 50px;
   width: 100%;
   transition: 300ms ease-out;
   position: fixed;
   box-shadow: 0 8px 6px -6px #999;
+  z-index: 2;
 }
 nav ul {
   transition: 300ms ease-out;
@@ -16,12 +17,14 @@ nav ul {
 }
 nav ul li {
   transition: 300ms ease-out;
+  float: left;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f7f9fb;
   background-color: #3f1dcb;
   font-size: 16px;
+  height: 50px;
   width: 130px;
   cursor: default;
 }
@@ -30,7 +33,12 @@ nav ul li:hover {
   color: #3f1dcb;
 }
 nav ul li:hover svg {
+  padding-top: 0;
   fill: #3f1dcb;
+}
+nav ul li:hover input[type=checkbox] {
+  background-color: #f7f9fb;
+  color: #3f1dcb;
 }
 nav ul li:active {
   background-color: #3f1dcb;
@@ -39,80 +47,23 @@ nav ul li:active {
 nav ul li:active svg {
   fill: #f7f9fb;
 }
-nav ul .nav-active {
-  background-color: #f7f9fb;
-  color: #3f1dcb;
-}
-
-#sidebar {
-  grid-area: sidebar;
-  background-color: #7c4dff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: space-between;
-  padding: 5px;
-}
-#sidebar button {
-  outline: none;
-  transition: 300ms ease-out;
-  border: none;
-  background-color: #7c4dff;
+nav ul li:active input[type=checkbox] {
+  background-color: #3f1dcb;
   color: #f7f9fb;
-  width: 100%;
+}
+nav ul li .slider-container {
   height: 50px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-#sidebar button:hover {
-  background-color: #f7f9fb;
-  color: #7c4dff;
-}
-#sidebar button:hover .triangle {
-  border-left: 24px solid #7c4dff;
-}
-#sidebar button:hover .square {
-  background-color: #7c4dff;
-}
-#sidebar button:hover svg {
-  padding-top: 0;
-  fill: #7c4dff;
-}
-#sidebar button:active {
-  background-color: #7c4dff;
+  width: 260px;
+  position: relative;
+  left: -99px;
+  background-color: #3f1dcb;
   color: #f7f9fb;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 10px;
 }
-#sidebar button:active .triangle {
-  border-left: 24px solid #EEE;
-}
-#sidebar button:active .square {
-  background-color: #EEE;
-}
-#sidebar button:active svg {
-  fill: #EEE;
-}
-#sidebar #reset-btn:hover svg {
-  transform: rotate(180deg);
-}
-#sidebar #reset-btn:hover:active svg {
-  transform: rotate(360deg);
-}
-#sidebar label {
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#sidebar .slider {
-  height: 50px;
-  padding: 5px 5px;
-  background-color: #7c4dff;
-  color: #f7f9fb;
-  text-align: center;
-}
-#sidebar input[type=range] {
+nav ul li input[type=range] {
   transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -123,69 +74,127 @@ nav ul .nav-active {
   background-color: #f7f9fb;
   opacity: 0.8;
 }
-#sidebar input:hover {
+nav ul li input:hover {
   opacity: 1;
 }
-#sidebar input::-webkit-slider-thumb {
-  transition: 300ms ease-out;
+nav ul li input::-webkit-slider-thumb {
+  transition: 50ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #7c4dff;
+  background-color: #3f1dcb;
   width: 20px;
   height: 20px;
   border-style: solid;
   border-color: #f7f9fb;
   border-width: 3px;
 }
-#sidebar input::-webkit-slider-thumb:hover {
+nav ul li input::-webkit-slider-thumb:hover {
   border-style: solid;
   border-color: #f7f9fb;
   border-width: 0;
 }
-#sidebar .checkbox {
-  height: 50px;
-  background-color: #7c4dff;
-  color: #f7f9fb;
+nav ul li label {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
-#sidebar input[type=checkbox] {
+nav ul li input[type=checkbox] {
   transition: 300ms ease-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   outline: none;
-  width: 50px;
-  height: 20px;
+  width: 130px;
+  height: 50px;
+  margin: 0;
+  background-color: #3f1dcb;
+}
+nav ul li input[type=checkbox]:checked {
   background-color: #f7f9fb;
-  border-radius: 20px;
-  opacity: 0.7;
+  color: #3f1dcb;
 }
-#sidebar input[type=checkbox]::before {
+nav ul li input[type=checkbox]:checked:checked + label {
+  color: #3f1dcb;
+}
+nav ul li input[type=checkbox]:checked:checked + label svg {
+  fill: #3f1dcb;
+}
+nav ul li input[type=checkbox]:checked:active {
+  background-color: #3f1dcb;
+}
+nav ul li input[type=checkbox]:checked:active + label svg {
+  fill: #f7f9fb;
+}
+nav ul #reset-btn:hover svg {
+  transform: rotate(180deg);
+}
+nav ul #reset-btn:hover:active svg {
+  transform: rotate(360deg);
+}
+nav ul .nav-width-short {
+  width: 100px;
+}
+nav ul .dropdown {
   transition: 300ms ease-out;
+  position: relative;
   display: inline-block;
-  content: "";
-  width: 16px;
-  height: 16px;
-  border-radius: 100%;
-  background-color: #7c4dff;
-  border-style: solid;
-  border-color: #f7f9fb;
-  border-width: 2px;
-  transform: translateX(0);
 }
-#sidebar input[type=checkbox]:hover {
-  opacity: 1;
+nav ul .dropdown .dropdown-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  height: 50px;
 }
-#sidebar input[type=checkbox]:checked:before {
-  display: inline-block;
-  transform: translateX(30px);
+nav ul .dropdown .dropdown-content {
+  transition: inherit;
+  display: block;
+  position: absolute;
+  background-color: #3f1dcb;
+  height: 0;
+  overflow: hidden;
+}
+nav ul .dropdown .dropdown-content a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 50px;
+  color: #f7f9fb;
+  text-decoration: none;
+}
+nav ul .dropdown .nav-active {
+  background-color: #f7f9fb;
+  color: #3f1dcb !important;
+}
+nav ul .dropdown:hover {
+  background-color: #3f1dcb;
+  color: #f7f9fb;
+}
+nav ul .dropdown:hover .sort {
+  height: 250px;
+}
+nav ul .dropdown:hover .slider-container {
+  height: 50px;
+}
+nav ul .dropdown:hover a:hover {
+  background-color: #f7f9fb;
+  color: #3f1dcb;
+}
+nav ul .dropdown:hover span {
+  background-color: #f7f9fb;
+  color: #3f1dcb;
+}
+nav ul .dropdown:hover span svg {
+  fill: #3f1dcb;
 }
 
 html {
   font-family: sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -193,37 +202,15 @@ body {
   transition: 500ms ease-out;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: 15px auto 303px 15px;
-  grid-template-rows: 45px auto;
-  grid-template-areas: "nav nav nav nav" ". canvas sidebar .";
-  grid-row-gap: 15px;
-  grid-column-gap: 15px;
-  opacity: 0;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
-@media screen and (max-width: 635px) {
-  body {
-    background-color: #EEE;
-    transition: 500ms ease-out;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 15px auto 303px 15px;
-    grid-template-rows: 45px auto auto;
-    grid-template-areas: "nav nav nav nav" ". canvas canvas ." ". sidebar sidebar .";
-    grid-row-gap: 20px;
-    grid-column-gap: 15px;
-    opacity: 0;
-    align-items: center;
-    justify-content: center;
-  }
-}
 canvas {
   transition: 500ms ease-out;
-  grid-area: canvas;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   opacity: 0;
 }
 
