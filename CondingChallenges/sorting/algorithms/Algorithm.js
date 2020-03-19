@@ -34,7 +34,7 @@ export class Algorithm {
       const randomIndex = Math.round(Math.random() * (array.length - 1))
       array = this.swap(array, this.index, randomIndex)
       this.array = [...array]
-      await this.sleep(this.speed)
+      await this.sleep(0)
     }
   }
 
