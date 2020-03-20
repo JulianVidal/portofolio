@@ -227,7 +227,7 @@ class Game {
 
         if (this.gunFrame === 3) {
             if (player.gun === "pistol") {
-                document.getElementById("pistolShot").cloneNode(true).play(); 
+                // document.getElementById("pistolShot").cloneNode(true).play();
                 player.ammo--;
 
                 const playerX = player.pos.x / scale;
@@ -245,7 +245,7 @@ class Game {
                     }
                 }
             }
-            if (player.gun === "knife") document.getElementById("knifeSwing").cloneNode(true).play(); 
+            // if (player.gun === "knife") document.getElementById("knifeSwing").cloneNode(true).play();
 
             player.shoot();
             HUD.draw();
@@ -255,7 +255,7 @@ class Game {
 
     smgAnimationInitial(loop) {
         if (this.gunFrame === 3) {
-            document.getElementById("smgShot").cloneNode(true).play(); 
+            // document.getElementById("smgShot").cloneNode(true).play();
             player.ammo--;
             player.shoot();
             HUD.draw();
@@ -271,7 +271,7 @@ class Game {
 
     smgAnimationDuring(loop) {
         if (this.gunFrame === 3) {
-            document.getElementById("smgShot").cloneNode(true).play(); 
+            // document.getElementById("smgShot").cloneNode(true).play();
             player.ammo--;
             player.shoot();
             HUD.draw();
@@ -286,7 +286,7 @@ class Game {
 
     smgAnimationLast(loop) {
         if (this.gunFrame === 3) {
-            document.getElementById("smgShot").cloneNode(true).play(); 
+            // document.getElementById("smgShot").cloneNode(true).play();
             player.ammo--;
             player.shoot();
             HUD.draw();

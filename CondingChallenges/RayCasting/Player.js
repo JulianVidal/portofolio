@@ -11,7 +11,7 @@ class Player {
     this.rayAmount = Gamewidth / resolution
     this.rays = []
 
-    this.rot = (0 * Math.PI) / 2
+    this.rot = Math.PI
 
     for (
       let i = -this.FOV / 2 + this.rot;
@@ -251,10 +251,10 @@ class Player {
         ray.distance()[0] < 2 &&
         Doors[ray.distance()[2].y][ray.distance()[2].x] === 1
       ) {
-        document
-          .getElementById('doorOpen')
-          .cloneNode(true)
-          .play()
+        // document
+        //   .getElementById('doorOpen')
+        //   .cloneNode(true)
+        //   .play()
         const x = ray.distance()[2].x
         const y = ray.distance()[2].y
         const loop = setInterval(() => {
@@ -293,10 +293,10 @@ class Player {
             Push[ray.distance()[2].y][ray.distance()[2].x][0] <
               Push[ray.distance()[2].y][ray.distance()[2].x][1]
           ) {
-            document
-              .getElementById('secretPush')
-              .cloneNode(true)
-              .play()
+            // document
+            //   .getElementById('secretPush')
+            //   .cloneNode(true)
+            //   .play()
             const x = ray.distance()[2].x
             const y = ray.distance()[2].y
             const loop = setInterval(() => {
@@ -332,18 +332,20 @@ class Player {
 
       if (player.gun === 'knife' && shootable[0][1] < 3) {
         enemy.health--
-        if (enemy.type === 'guard')
-          document
-            .getElementById('guardPaint')
-            .cloneNode(true)
-            .play()
+        if (enemy.type === 'guard') {}
+          // document
+          //   .getElementById('guardPaint')
+          //   .cloneNode(true)
+          //   .play()
       } else if (player.gun !== 'knife') {
         enemy.health--
-        if (enemy.type === 'guard')
-          document
-            .getElementById('guardPaint')
-            .cloneNode(true)
-            .play()
+        if (enemy.type === 'guard') {
+          // document
+          //   .getElementById('guardPaint')
+          //   .cloneNode(true)
+          //   .play()
+        }
+
       }
 
       if (enemy.health <= 0) {
@@ -373,7 +375,7 @@ class Player {
     }
 
     if (enemy.deathFrame === 2) {
-      enemy.deathSound.play()
+      // enemy.deathSound.play()
       player.score += 100
     }
   }
@@ -389,10 +391,10 @@ class Player {
         World[ray.distance()[2].y][ray.distance()[2].x] === 5 &&
         ray.distance()[0] < 2
       ) {
-        document
-          .getElementById('flipSwitch')
-          .cloneNode(true)
-          .play()
+        // document
+        //   .getElementById('flipSwitch')
+        //   .cloneNode(true)
+        //   .play()
         World[ray.distance()[2].y][ray.distance()[2].x] = 51
         const loop = setInterval(() => fadeBlack(loop), 1000 / fps)
       }

@@ -180,7 +180,7 @@ class Enemy {
         if (this.inSight()) {
             this.patrolling = false;
             this.searching = true;
-            this.sound.play();
+            // this.sound.play();
         }
     }
 
@@ -252,16 +252,16 @@ class Enemy {
     shot(loop) {
         this.id = this.type + "Shoot_" + this.shotFrame;
 
-        if (this.shotFrame === 3 && this.type === 'guard') document.getElementById("pistolShot").cloneNode(true).play(); 
+        // if (this.shotFrame === 3 && this.type === 'guard') document.getElementById("pistolShot").cloneNode(true).play();
         if (this.shotFrame === this.lastShootFrame) {
 
             if (this.inSight()) {
-                document.getElementById("playerPain").cloneNode(true).play();
+                // document.getElementById("playerPain").cloneNode(true).play();
                 player.health -= 10;
                 console.log("hit");
 
                 if (player.health <= 0) {
-                    document.getElementById("playerDeath").cloneNode(true).play();
+                    // document.getElementById("playerDeath").cloneNode(true).play();
                     const loop = setInterval( () => fadeBlack(loop), 1000 /fps );
                 }
             }
@@ -280,7 +280,7 @@ class Enemy {
     }
 
     open(y, x) {
-        document.getElementById("doorOpen").cloneNode(true).play();
+        // document.getElementById("doorOpen").cloneNode(true).play();
         this.doorOpening = true;
         const loop = setInterval(() => {
                 this.opening(y, x, loop)

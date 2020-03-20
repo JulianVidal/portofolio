@@ -133,7 +133,7 @@ function setup() {
 function draw() {
 
     if (frames === 0) {
-        document.getElementById("backgroundMusic").play();
+        // document.getElementById("backgroundMusic").play();
 
     }
 
@@ -329,7 +329,7 @@ function passable(sprite, enemy) {
             if (player.health < 100 && !enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -343,7 +343,7 @@ function passable(sprite, enemy) {
             if (player.ammo < 99 && !enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -363,7 +363,7 @@ function passable(sprite, enemy) {
             if (player.health < 100 && !enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();                
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -378,7 +378,7 @@ function passable(sprite, enemy) {
             if (player.health < 100 && !enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();                
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -393,7 +393,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -409,7 +409,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();                
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -425,7 +425,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -441,7 +441,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -461,7 +461,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();                
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
@@ -478,7 +478,7 @@ function passable(sprite, enemy) {
             if (!enemy) {
                 document.getElementById("pickup").pause();
                 document.getElementById("pickup").currentTime = 0;
-                document.getElementById("pickup").play();                
+                // document.getElementById("pickup").play();
                 const loop = setInterval(() => {
                     flashing(loop);
                 }, 1000 / fps);
