@@ -22,18 +22,18 @@ const LEFT = {
 export class Maze {
   constructor(width, height) {
     this.scale = 10
-    this.height = height
-    this.width = width
+    this.height = height - 1
+    this.width = width - 1
 
     this.maze = []
     this.walls = []
     this.frontiers = []
 
-    for (let y = 0; y < height; y++) {
+    for (let y = 0; y < this.height; y++) {
       this.maze[y] = []
 
-      for (let x = 0; x < width; x++) {
-        this.maze[y][x] = 0
+      for (let x = 0; x < this.width; x++) {
+        this.maze[y][x] = 1
       }
 
     }
@@ -50,13 +50,13 @@ export class Maze {
       for (let x = 0; x < this.width; x++) {
         switch (this.maze[y][x]) {
           case 1:
-            this.canvas.color = "#0f0"
+            this.canvas.color = "#f00"
             break
           case 2:
             this.canvas.color = "#00f"
             break
           default:
-            this.canvas.color = "#f00"
+            this.canvas.color = "#000"
             break
         }
 
@@ -77,7 +77,22 @@ export class Maze {
     }
   }
 
-  async generate() {
+  generate(array) {
+    let maze
+    if (!array) {
+      maze = []
+      for (let y = 0; y < this.height; y++) {
+        maze[y] = []
+
+        for (let x = 0; x < this.width; x++) {
+          maze[y][x] = 1
+        }
+
+      }
+    } else {
+      maze = JSON.parse(JSON.stringify(array))
+    }
+
     // Start at the top left
     const startCell = {
       x: 0,
@@ -85,73 +100,112 @@ export class Maze {
     }
 
     // Updates the cell in maze
-    this.maze[startCell.y][startCell.x] = 1
+    maze[startCell.y][startCell.x] = 0
+
+    // Array containing the frontiers
+    const frontiers = []
+
+    // Frontiers of the cell
+    for (const direction of this.directions) {
+      const y = startCell.y + direction.y * 2
+      const x = startCell.x + direction.x * 2
+      if ((maze[y] || [])[x] === 1) {
+        maze[y][x] = 2
+        frontiers.push({x, y})
+      }
+    }
+
+    while (frontiers.length > 0) {
+      // Pick a random frontier
+      const frontier = frontiers.splice(Math.floor(Math.random() * frontiers.length), 1)[0]
+      maze[frontier.y][frontier.x] = 0
+
+      const neighbors = []
+      for (const direction of this.directions) {
+        const y = frontier.y + direction.y * 2
+        const x = frontier.x + direction.x * 2
+
+        if ((maze[y] || [])[x] === 0) {
+          neighbors.push({x,y})
+        }
+      }
+
+      // console.log(JSON.stringify(neighbors))
+      const neighbor =  neighbors.splice(Math.floor(Math.random() * neighbors.length), 1)[0]
+      // console.log(JSON.stringify(neighbor), JSON.stringify(frontier))
+
+      maze[frontier.y + (neighbor.y - frontier.y) / 2][frontier.x + (neighbor.x - frontier.x) / 2] = 0
+
+      for (const direction of this.directions) {
+        const y = frontier.y + direction.y * 2
+        const x = frontier.x + direction.x * 2
+        if ((maze[y] || [])[x] === 1) {
+          maze[y][x] = 2
+          frontiers.push({x, y})
+        }
+      }
+    }
+
+    return maze
+  }
+
+  async animateGenerate() {
+    // Start at the top left
+    const startCell = {
+      x: 0,
+      y: 0
+    }
+
+    // Updates the cell in maze
+    this.maze[startCell.y][startCell.x] = 0
 
     // Array containing the frontiers
     this.frontiers = []
 
     // Frontiers of the cell
     for (const direction of this.directions) {
-      const y = startCell.y + direction.y
-      const x = startCell.x + direction.x
-      if ((this.maze[y] || [])[x] === 0) {
+      const y = startCell.y + direction.y * 2
+      const x = startCell.x + direction.x * 2
+      if ((this.maze[y] || [])[x] === 1) {
         this.maze[y][x] = 2
         this.frontiers.push({x, y})
       }
     }
 
-
     while ( this.frontiers.length > 0) {
       // Pick a random frontier
-      const cell = this.frontiers.splice(Math.floor(Math.random() * this.frontiers.length), 1)[0]
-      this.maze[cell.y][cell.x] = 1
+      const frontier = this.frontiers.splice(Math.floor(Math.random() * this.frontiers.length), 1)[0]
+      this.maze[frontier.y][frontier.x] = 0
 
-      const inMazeFrontiers = []
+      const neighbors = []
       for (const direction of this.directions) {
-        const y = cell.y + direction.y
-        const x = cell.x + direction.x
+        const y = frontier.y + direction.y * 2
+        const x = frontier.x + direction.x * 2
 
         if ((this.maze[y] || [])[x] === 0) {
-          this.frontiers.push({x,y})
+          neighbors.push({x,y})
+        }
+      }
+
+      // console.log(JSON.stringify(neighbors))
+      const neighbor =  neighbors.splice(Math.floor(Math.random() * neighbors.length), 1)[0]
+      // console.log(JSON.stringify(neighbor), JSON.stringify(frontier))
+
+      this.maze[frontier.y + (neighbor.y - frontier.y) / 2][frontier.x + (neighbor.x - frontier.x) / 2] = 0
+
+      for (const direction of this.directions) {
+        const y = frontier.y + direction.y * 2
+        const x = frontier.x + direction.x * 2
+        if ((this.maze[y] || [])[x] === 1) {
           this.maze[y][x] = 2
-
-        } else if ((this.maze[y] || [])[x] === 1) {
-          inMazeFrontiers.push({x, y})
+          this.frontiers.push({x, y})
         }
       }
 
-      if (inMazeFrontiers.length > 1) {
-        const inMazeFrontier = inMazeFrontiers[Math.floor(Math.random() * inMazeFrontiers.length)]
-        const p1 = JSON.parse(JSON.stringify(inMazeFrontier))
-        const p2 = JSON.parse(JSON.stringify(inMazeFrontier))
-
-        if (p1.x - cell.x < 0) {
-          p1.x++
-
-          p2.x++
-          p2.y++
-        } else if (p1.x - cell.x > 0) {
-          p2.y++
-        } else if (p1.y - cell.y < 0) {
-          p1.y++
-
-          p2.y++
-          p2.x++
-        } else if (p1.y - cell.y > 0) {
-          p2.x++
-        }
-
-        this.walls.push({p1, p2})
-      }
 
       this.draw()
       await this.sleep(0)
     }
-
-
-
-
-    this.draw()
   }
 
   /**
