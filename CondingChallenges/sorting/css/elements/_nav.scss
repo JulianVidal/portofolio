@@ -36,10 +36,12 @@ nav {
     transition: $nav-tr-dur $nav-tr-func;
     list-style-type: none;
 
+    display: inline-block;
+
     background-color: $nav-bg-color;
 
     margin: 0;
-    padding: 0;
+    padding: 0 0;
     width: 100%;
     height: 100%;
 
